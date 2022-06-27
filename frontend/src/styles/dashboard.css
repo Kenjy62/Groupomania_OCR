@@ -1,0 +1,166 @@
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #52556b;
+    position: fixed;
+    box-shadow: 0px 0px 10px 3px #00000038;
+    display: flex;
+    justify-content: space-between;
+}
+
+header > .logo {
+    height: 80px;
+    display: flex;
+    margin-left: 25px;
+}
+
+header > .logo > img {
+    height: 45px;
+    margin: auto;
+}
+
+.user {
+    height: 80px;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.user > a > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.user > a > img:hover {
+    border: 2px #FFD7D7 solid;
+}
+
+main {
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    padding: 30px;
+}
+
+/* */
+
+#wrapper {
+    padding: 10px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post--write {
+    border-radius: 10px;
+}
+
+.post--write > form {
+    margin: 0;
+    padding: 0;
+    display: block;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+textarea {
+    max-height: 130px;
+    width: 100%;
+    resize: none;
+    border-radius: 10px;
+    display: flex;
+    border: 1px black solid;
+}
+
+textarea:focus {
+    background-color: #FFD7D7;
+    color: black;
+}
+
+.post--details {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post--details--image {
+    width: 150px;
+    height: 150px;
+}
+
+.post--details--image > img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.post--details--action {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 150px;
+}
+
+.post--details--action > label {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+
+#post--feed {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#post {
+    display: flex;
+    padding: 15px;
+    box-shadow: 0px 0px 10px 3px #00000038;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    flex-direction: row;
+}
+
+.post--user--infos {
+    display: flex;
+    width: 100px;
+    padding: 5px;
+}
+
+.post--user--infos > img {
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.post--content {
+    display: flex;
+    color: white;
+    width: calc(100% - 100px);
+    padding: 5px;
+    flex-direction: column;
+}
+
+.post--content--infos--image > div > img  {
+    width: 250px;
+    height: 250px;
+}
+
+.post--content--actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: right;
+}
+
+.post--content--actions > span {
+    margin-left: 10px;
+    cursor: pointer;
+}

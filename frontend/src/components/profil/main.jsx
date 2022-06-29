@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import PostList from '../dashboard/Post/items';
 
 function Main() {
 
@@ -46,10 +47,12 @@ function Main() {
                 if(res.status === 200){
                     const data = res.json()
                     data.then(data => {
+                        console.log(data)
                         if(data.post != 'Aucun post pour le moment'){
-                            console.log(data)
+                            setPost(data.post)
+                            console.log(post)
                         } else {
-                            console.log('rien')
+                            console.log('error')
                         }
                     })
                 }
@@ -60,6 +63,7 @@ function Main() {
     return (
         <main>
             {!user? <h1>load</h1> : <h1>{user.lastName} {user.name}'s Profil</h1>}
+            {!post? 'Aucun post pour le moment' : <PostList key={Math.random()} item={post} data={user}/>}
         </main>
      );
 }

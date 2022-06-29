@@ -112,8 +112,8 @@ function PostActions(props) {
                     {setAction(alreadyDisliked == 1? 0 : -1); 
                     setPostId(post._id)}}> {alreadyDisliked == 1? <i style={{color: 'red'}} className="fa-solid fa-thumbs-down"></i> : <i style={{color: 'red'}} className="fa-regular fa-thumbs-down"></i>} ({countDislikes})
                 </span>
-                {props.user? post.author == props.user.name? <span><i onClick={() => props.editFunc(post)} class="fa-solid fa-pen"></i></span> : null : <span>Loading</span>}
-                {props.user? post.author == props.user.name? <span onClick={() => postDelete(post._id)}><i class="fa-solid fa-trash"></i></span> : null : <span>Loading</span>}                   
+                {props.user? post.author == props.user.name || props.user.admin == true? <span><i onClick={() => props.editFunc(post)} class="fa-solid fa-pen"></i></span> : null : <span>Loading</span>}
+                {props.user? post.author == props.user.name || props.user.admin == true? <span onClick={() => postDelete(post._id)}><i class="fa-solid fa-trash"></i></span> : null : <span>Loading</span>}                   
         </div>
         </>
     )

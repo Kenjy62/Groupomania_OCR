@@ -3,6 +3,9 @@ import PostActions from "./actions";
 import { Link } from 'react-router-dom'
 
 const PostList = (props) => {
+
+    console.log(props)
+
     if(props.item.length === 0){
         return (<h1>test</h1>)
     } else {

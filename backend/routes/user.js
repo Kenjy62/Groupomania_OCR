@@ -17,5 +17,8 @@ router.post('/login', userController.login)
 // Get
 router.get('/user/:token', auth, userController.getData)
 
+// Profil 
+router.get('/profil/:username', auth, userController.getProfil)
+
 // EXPORTS
 module.exports = router

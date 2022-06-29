@@ -1,7 +1,10 @@
 const Post = require('../models/post')
+const PostHistory = require('../models/post_history')
 const fs = require('fs')
+
 // Functions
 exports.add = (req, res, next) => {
+    console.log(req.body)
     const post = new Post({
         ...req.body,
         imageUrl: req.file? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : '',
@@ -10,7 +13,8 @@ exports.add = (req, res, next) => {
         dislikes: 0,
         usersLiked: [],
         usersDisliked: [],
-        comments: []
+        comments: [],
+        history: [],
     }) 
     post.save()
     .then(() => res.status(201).json({message : 'Post Create', imageUrl: req.file? `${req.file.filename}` : ''}))
@@ -58,4 +62,59 @@ exports.setReaction = (req, res, next) => {
                 .catch((error) => res.status(400).json({error: error}))
         break;
     }    
+}
+
+exports.delete = (req, res, next) => {
+    let postId = req.params.postId
+    
+    Post.findOne({_id: postId})
+        .then((post) => {
+            Post.deleteOne({_id: postId})
+                .then(() => res.status(200).json({message: 'Post delete!'}))
+                .catch((error) => res.status(400).json({error: error}))
+        .catch((error) => res.status(400).json({error: error}))
+        })
+}
+
+exports.update = (req, res, next) => {
+    console.log(req.body)
+
+    let postId = req.params.postId
+
+    const Obj = req.file? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : {...req.body, imageUrl: ''}
+
+   Post.findOne({_id: postId})
+    .then(post => {
+        let postBackup = post
+            Post.updateOne({_id: postId}, {...Obj, _id: postId})
+                .then(() => {
+                    const postsave = new PostHistory({
+                        originalId: postBackup._id,
+                        text: postBackup.text,
+                        imageUrl: postBackup.imageUrl,
+                        updateAt : Date()
+                    })
+                    postsave.save()
+                        .then(() => res.status(200).json({message: 'Update'}))
+                        .catch((error) => {res.status(400).json({error: error}); console.log(error)})
+                })
+                .catch((error) => res.status(400).json({error: error}))
+    })
+}
+
+exports.getPostByUser = (req, res, next) => {
+    let user = req.params.username
+
+    Post.find({author: user})
+        .then(post => {
+            if(post.length > 0){
+                res.status(200).json({post: post})
+            } else {
+                res.status(200).json({post: 'Aucun post pour le moment'})
+            }
+        })
+        .catch((error) => res.status(400).json({error: error}))
 }

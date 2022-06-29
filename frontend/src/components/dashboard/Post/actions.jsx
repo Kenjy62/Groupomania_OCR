@@ -2,7 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 
-function PostActions(props, user) {
+import Edit from './edit'
+
+function PostActions(props) {
     let post = props.props
 
     const [action, setAction] = useState()
@@ -14,12 +16,15 @@ function PostActions(props, user) {
 
     // Verify if already reaction by user
     useEffect(() => {
-        let alreadyLiked = post.usersLiked.indexOf('test') > -1
-        let alreadyDisliked = post.usersDisliked.indexOf('test') > -1
-        if(alreadyLiked === true){
-            setAlreadyLiked(1)
-        } else if(alreadyDisliked === true) {
-            setAlreadyDisliked(1)
+
+        if(props.user){
+            let alreadyLiked = post.usersLiked.indexOf(props.user.name) > -1
+            let alreadyDisliked = post.usersDisliked.indexOf(props.user.name) > -1
+            if(alreadyLiked === true){
+                setAlreadyLiked(1)
+            } else if(alreadyDisliked === true) {
+                setAlreadyDisliked(1)
+            }
         }
     }, [])
 
@@ -75,18 +80,40 @@ function PostActions(props, user) {
     }, [postId, action])
 
 
+    function postDelete(postId) {
+        fetch('http://localhost:3000/api/post/' + postId + '/delete', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              },
+        }).then((res) => {
+            if(res.status === 200){
+                console.log('delete')
+                let div = document.getElementById(postId).parentElement.parentElement
+                div.style.display = 'none'
+            } else {
+                console.log('error')
+            }
+        })
+    }
 
     return (
         <>
+            <div id="test"></div>
             <div id={post._id} className="post--details--content--actions">
-                <span>Commenter</span>
-                <span>Commentaires ({post.comments.length})</span>
+                <span><i class="fa-solid fa-comment"></i></span>
+                <span><i class="fa-solid fa-comments"></i> ({post.comments.length})</span>
                 <span value={alreadyLiked == 1? '0' : '1'} onClick={() => 
                     {setAction(alreadyLiked == 1? 0 : 1); 
-                    setPostId(post._id)}}> {alreadyLiked == 1? <i className="fa-solid fa-thumbs-up" style={{color: 'green'}}></i> : <i className="fa-regular fa-thumbs-up" style={{color: 'green'}}></i>} ({countLikes})</span>
-                <span value={alreadyDisliked == 1? '0' : '-1'}onClick={() => 
+                    setPostId(post._id)}}> {alreadyLiked == 1? <i className="fa-solid fa-thumbs-up" style={{color: 'green'}}></i> : <i className="fa-regular fa-thumbs-up" style={{color: 'green'}}></i>} ({countLikes})
+                </span>
+                <span value={alreadyDisliked == 1? '0' : '-1'} onClick={() => 
                     {setAction(alreadyDisliked == 1? 0 : -1); 
-                    setPostId(post._id)}}> {alreadyDisliked == 1? <i style={{color: 'red'}} className="fa-solid fa-thumbs-down"></i> : <i style={{color: 'red'}} className="fa-regular fa-thumbs-down"></i>} ({countDislikes})</span>
+                    setPostId(post._id)}}> {alreadyDisliked == 1? <i style={{color: 'red'}} className="fa-solid fa-thumbs-down"></i> : <i style={{color: 'red'}} className="fa-regular fa-thumbs-down"></i>} ({countDislikes})
+                </span>
+                {props.user? post.author == props.user.name? <span><i onClick={() => props.editFunc(post)} class="fa-solid fa-pen"></i></span> : null : <span>Loading</span>}
+                {props.user? post.author == props.user.name? <span onClick={() => postDelete(post._id)}><i class="fa-solid fa-trash"></i></span> : null : <span>Loading</span>}                   
         </div>
         </>
     )

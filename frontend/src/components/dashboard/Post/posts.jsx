@@ -5,9 +5,14 @@ import ReactDOM from 'react-dom';
 import PostList from './items';
 
 function Posts(props) {
+
   const user = props.data
   const [skip, setSkip] = useState(0);
   const [postFeed, setPostFeed] = useState();
+  
+  useEffect(() => {
+    console.log('ok from post')
+  },[props.parentState])
 
   const test = () => {
     setSkip(skip + 10)
@@ -31,12 +36,12 @@ function Posts(props) {
         }
     )}
     })
-  }, [skip])
+  }, [skip, props.parentState])
 
   return (
     <>
         <div id="post--feed">
-           {postFeed? <PostList key={Math.random()} item={postFeed} data={user}/> : 'load'}
+           {postFeed? <PostList key={Math.random()} item={postFeed} data={user} EditFunc={props.editFunc}/> : 'load'}
         </div>
         <button onClick={() => test()}>More</button>
     </>

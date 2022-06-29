@@ -164,3 +164,30 @@ textarea:focus {
     margin-left: 10px;
     cursor: pointer;
 }
+
+#voiler {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000007a;
+    overflow: hidden;
+    display: none;
+}
+
+.postEdit {
+    width: 700px;
+    padding: 10px;
+    margin: auto;
+    background-color: white;
+}
+
+.postImage {
+    height: 150px;
+    width: 150px;
+}
+
+.postImage > img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}

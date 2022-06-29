@@ -67,3 +67,18 @@ exports.getData = (req, res, next) => {
         return res.status(200).json({data})
     }).catch(error => { return res.status(400).json({error})})
 }
+
+exports.getProfil = (req, res, next) => {
+
+    User.findOne({name: req.params.username})
+        .then(user => {
+            if(req.userId == user._id){
+                res.status(200).json({message: user})
+            } else {
+                user._id = null,
+                user.password = null,
+                user.admin = null,
+                res.status(200).json({message: user})
+            }
+        })
+}

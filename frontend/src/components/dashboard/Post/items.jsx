@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom'
 
 const PostList = (props) => {
 
+    const showResponse = (postId) => {
+        let div = document.querySelector("[post-id='" + postId + "']")
+        div.style.display = 'flex'
+        console.log(div)
+    }
+
     console.log(props)
 
     if(props.item.length === 0){
@@ -20,8 +26,12 @@ const PostList = (props) => {
                             <div className="post--details--content">
                                 <div className="post--details--content--text">{post.text}</div>
                                 {post.imageUrl != ''? <div className="post--details--content--image"><img src={post.imageUrl}></img></div> : null}
-                                <PostActions props={post} user={props.data} key={key} editFunc={props.EditFunc}/>
+                                <PostActions props={post} user={props.data} key={key} editFunc={props.EditFunc} showResponse={showResponse}/>
                             </div>
+                        </div>
+                        <div className="post--details--comments" post-id={post._id}>
+                            <div><form><input type="text" placeholder="Votre réponse..."></input></form>
+                            <button type="submit">Répondre</button></div>
                         </div>
                     </>
                 )

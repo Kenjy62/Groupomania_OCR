@@ -102,7 +102,7 @@ function PostActions(props) {
         <>
             <div id="test"></div>
             <div id={post._id} className="post--details--content--actions">
-                <span><i class="fa-solid fa-comment"></i></span>
+                <span onClick={() => props.showResponse(post._id)}><i class="fa-solid fa-comment"></i></span>
                 <span><i class="fa-solid fa-comments"></i> ({post.comments.length})</span>
                 <span value={alreadyLiked == 1? '0' : '1'} onClick={() => 
                     {setAction(alreadyLiked == 1? 0 : 1); 

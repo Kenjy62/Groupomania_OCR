@@ -27,7 +27,7 @@ html, body {
     width: 300px;
 }
 
-form {
+.wrapper_content > form {
     margin-top: 40px;
     padding: 40px;
     border-radius: 10px;

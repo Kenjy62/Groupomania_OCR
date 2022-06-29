@@ -108,7 +108,7 @@ exports.update = (req, res, next) => {
 exports.getPostByUser = (req, res, next) => {
     let user = req.params.username
 
-    Post.find({author: user})
+    Post.find({author: user}).sort({createAt : -1})
         .then(post => {
             if(post.length > 0){
                 res.status(200).json({post: post})

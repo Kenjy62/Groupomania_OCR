@@ -75,3 +75,23 @@
     color: white;
     cursor: pointer;
 }
+
+.post--details--comments {
+    margin-top: 5px;
+    width: 100%;
+    display: none;
+}
+
+.post--details--comments > div {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+}
+
+.post--details--comments > div > form {
+    flex: 2
+}
+
+.post--details--comments > div > form > input {
+    width: 95%;
+}

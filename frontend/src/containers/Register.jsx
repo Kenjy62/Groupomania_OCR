@@ -78,7 +78,7 @@ function Register() {
       <Link to="/"><div class="success" style={{display: success? 'block' : 'none'}}>{success}</div></Link>
       <div class="error" style={{display: error? 'block' : 'none'}}>{error}</div>
       
-      <form onSubmit={handleSubmit}>
+      <form id="register" onSubmit={handleSubmit}>
         <label for="name">Prénom :</label>
         <input type="text" placeholder='Doe' name="name" onChange={e => setName(e.target.value)}></input>
         <label for="lastName">Nom de Famille :</label>

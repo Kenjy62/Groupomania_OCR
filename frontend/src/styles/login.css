@@ -1,6 +1,5 @@
 html, body {
     background-color: #4E5166;
-    height: 100%;
     width: 100%;
     display: flex;
     font-family: 'Lato';
@@ -38,7 +37,12 @@ html, body {
     box-shadow: 0px 0px 10px 3px #00000038;
 }
 
-form > input {
+form#login, form#register {
+    display: flex;
+    flex-direction: column;
+}
+
+form#login > input, form#register > input {
     border: none;
     padding: 5px;
     margin-top: 10px;
@@ -46,27 +50,13 @@ form > input {
     height: 30px;
     border-radius: 10px;
     background-color: #FFD7D7;
+    display: block;
+    width: 100%;
 }
+
+
 
 input::placeholder {
     color: black;
 }
 
-button {
-    transition-duration: 200ms;
-    cursor: pointer;
-    margin-top: 20px;
-    border: none;
-    background-color: #FFD7D7;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 15px;
-    padding-left: 15px;
-    border-radius: 10px;
-}
-
-button:hover {
-    transition-duration: 200ms;
-    color: white;
-    background-color: #FD2D01;
-}

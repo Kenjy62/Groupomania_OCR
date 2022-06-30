@@ -10,11 +10,11 @@ var postSchema = new mongoose.Schema({
     dislikes:{ type: Number, required: true },
     usersLiked: { type: [String], required: true },
     usersDisliked: { type: [String], required: true },
-    comments: {type: [String], required: true},
-    history: {type: [{
-        text: {type: String, required: true},
-        date: {type: Date, required: true}
-    }], required: true}
+    comments: {type: [{
+        author: {type: String},
+        text: {type: String},
+        createAt: {type:Date}        
+    }], required: true},
 });
 
 //Export the model

@@ -51,7 +51,7 @@ function Login() {
       
         <div class="error" style={{display : error? 'block' : 'none'}}>{error}</div>
       
-        <form onSubmit={handleSubmit}>
+        <form id="login" onSubmit={handleSubmit}>
           <label for="email">Votre Email d'entreprise</label>
           <input type="text" placeholder='@groupomania.com' name="email" onChange={e => setEmail(e.target.value)}></input>
           <label for="password">Votre mot de passe</label>

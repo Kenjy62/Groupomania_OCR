@@ -2,9 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 
-import Edit from './edit'
-
 function PostActions(props) {
+
     let post = props.props
 
     const [action, setAction] = useState()
@@ -106,11 +105,11 @@ function PostActions(props) {
                 <span><i class="fa-solid fa-comments"></i> ({post.comments.length})</span>
                 <span value={alreadyLiked == 1? '0' : '1'} onClick={() => 
                     {setAction(alreadyLiked == 1? 0 : 1); 
-                    setPostId(post._id)}}> {alreadyLiked == 1? <i className="fa-solid fa-thumbs-up" style={{color: 'green'}}></i> : <i className="fa-regular fa-thumbs-up" style={{color: 'green'}}></i>} ({countLikes})
+                    setPostId(post._id)}}> {alreadyLiked == 1? <i className="fa-solid fa-heart" style={{color: 'green'}}></i> : <i className="fa-regular fa-heart"></i>} ({countLikes})
                 </span>
                 <span value={alreadyDisliked == 1? '0' : '-1'} onClick={() => 
                     {setAction(alreadyDisliked == 1? 0 : -1); 
-                    setPostId(post._id)}}> {alreadyDisliked == 1? <i style={{color: 'red'}} className="fa-solid fa-thumbs-down"></i> : <i style={{color: 'red'}} className="fa-regular fa-thumbs-down"></i>} ({countDislikes})
+                    setPostId(post._id)}}> {alreadyDisliked == 1? <i style={{color: 'red'}} className="fa-solid fa-heart-crack"></i> : <i className="fa-solid fa-heart-crack"></i>} ({countDislikes})
                 </span>
                 {props.user? post.author == props.user.name || props.user.admin == true? <span><i onClick={() => props.editFunc(post)} class="fa-solid fa-pen"></i></span> : null : <span>Loading</span>}
                 {props.user? post.author == props.user.name || props.user.admin == true? <span onClick={() => postDelete(post._id)}><i class="fa-solid fa-trash"></i></span> : null : <span>Loading</span>}                   

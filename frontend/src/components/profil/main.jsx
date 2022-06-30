@@ -13,6 +13,8 @@ function Main() {
     const [user, setUser] = useState()
     const [post, setPost] = useState()
 
+    const [isLoading, setIsLoading] = useState(false)
+
     // Fetch UserData
     useEffect(()=> {
         if(!user){
@@ -50,20 +52,27 @@ function Main() {
                         console.log(data)
                         if(data.post != 'Aucun post pour le moment'){
                             setPost(data.post)
+                        } else if(data.post == 'Aucun post pour le moment') {
+                            setPost(false)                            
+                        }
+
+                        if(!user && !post){
+                            console.log(user)
                             console.log(post)
-                        } else {
-                            console.log('error')
+                            setIsLoading(true)
                         }
                     })
                 }
             })
         }
+        console.log(post)
     }, [])
     
     return (
         <main>
-            {!user? <h1>load</h1> : <h1>{user.lastName} {user.name}'s Profil</h1>}
-            {!post? 'Aucun post pour le moment' : <PostList key={Math.random()} item={post} data={user}/>}
+            <div id="wrapper">
+               {isLoading == false? <div style={{display: 'flex', justifyContent: 'center'}}><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : <>{!user? null : <h1>{user.name} {user.lastName}'s Profil</h1>} {post === false? 'Aucun post pour le moment...' : <PostList key={Math.random()} item={post} data={user}/>} </>}
+            </div>
         </main>
      );
 }

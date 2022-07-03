@@ -11,22 +11,41 @@ import '../styles/post.css'
 import Header from '../components/global/header'
 import Main from '../components/profil/main'
 
-function App() {
+function App(props) {
     let navigate = useNavigate()
-     // Fetch UserData
-    useEffect(()=> {
-        if(localStorage.getItem('token')){
+    
+    const [user, setUser] = useState()
+    const token = localStorage.getItem('token')
 
-        } else {
-            navigate('/')
-        }
+    // Fetch UserData
+    useEffect(()=> {
+      if(!user){
+        fetch('http://localhost:3000/api/auth/user/' + token, {
+          method: 'GET', 
+          headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+          }).then(res => {
+            if(res.status === 200){
+              const data = res.json()
+              data.then(json => {
+                let dataParse = json.data
+                setUser(dataParse)
+              })
+            } else {
+              navigate('/')
+            }
+          })
+      }
     }, [])
+
 
   // Render Page
   return (
     <>
-      <Header />
-      <Main/>
+      <Header option={props.option}/>
+      <Main data={user}/>
     </>
   )
 }

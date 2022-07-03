@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Posts from '../dashboard/Post/posts';
 import PostList from '../dashboard/Post/items';
+import Topbar from '../global/topbar';
+import Left from './left';
 
-function Main() {
+function Main(props) {
 
     // Convert URL for getting user profil name
     var url = window.location.href
@@ -12,7 +15,6 @@ function Main() {
     const token = localStorage.getItem('token')
     const [user, setUser] = useState()
     const [post, setPost] = useState()
-
     const [isLoading, setIsLoading] = useState(false)
 
     // Fetch UserData
@@ -29,7 +31,6 @@ function Main() {
                 const data = res.json()
                 data.then(json => {
                 let dataParse = json.message
-                console.log(dataParse)
                 setUser(dataParse)
                 })
             }
@@ -57,21 +58,52 @@ function Main() {
                         }
 
                         if(!user && !post){
-                            console.log(user)
-                            console.log(post)
                             setIsLoading(true)
                         }
                     })
                 }
             })
         }
-        console.log(post)
     }, [])
     
     return (
         <main>
+            <Topbar user={props.data}/>
             <div id="wrapper">
-               {isLoading == false? <div style={{display: 'flex', justifyContent: 'center'}}><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div> : <>{!user? null : <h1>{user.name} {user.lastName}'s Profil</h1>} {post === false? 'Aucun post pour le moment...' : <PostList key={Math.random()} item={post} data={user}/>} </>}
+                <div id="main--container">
+                    <div className="left">
+                        <div className="blocks">
+                            <div className="blocks--user--infos">
+                                <img src={user? user.avatar : null}/>
+                                <span>{user? user.name + ' ' + user.lastName : null}</span>
+                                <span>{!user? null : user.admin === true? 'Vous êtes admin': null}</span>
+                                <span style={{color: 'grey'}}>@andersonN</span>
+                                <span>Lille, France</span>
+                            </div>
+                            <div className="blocks--user--stats">
+                                <span style={{color: 'grey'}}>Posts <br/> <font style={{color: 'white'}}>147</font></span>
+                                <span style={{color: 'grey'}}>Abonnés <br/> <font style={{color: 'white'}}>5</font></span>
+                                <span style={{color: 'grey'}}>Abonnement <br/> <font style={{color: 'white'}}>15</font></span>
+                            </div>
+                        </div>
+                        
+                        {user && props.data?
+                        <div className='blocks'>
+                            {props.data.name === user.name || props.data.admin === true?  <button style={{width: '100%', marginBottom: 15}}>Modifier le profil</button> : null}
+                            {props.data.admin === true? <><button style={{width: '100%', marginBottom: 15}}>Supprimer l'utilisateur</button><button style={{width: '100%', marginBottom: 15}}>Promouvoir Admin</button></> : null}
+                        </div> : null
+                        }
+                       
+                    </div>
+            <div className="center">
+                <div className="blocks">
+                    <Posts option={'profil'} data={props.data} post={post} editFunc={props.editFunc} updateFunc={props.updateFunc} cancelFunc={props.cancelFunc}/>
+                </div>
+            </div>
+            <div className="right">
+                <div className="blocks"></div>
+            </div>
+                </div>
             </div>
         </main>
      );

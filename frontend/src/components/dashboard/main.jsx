@@ -5,15 +5,26 @@ import { useRef } from 'react';
 
 // Components
 import Edit from './Post/edit';
+import Create from './Post/create'
 import Global from '../../containers/global';
+import Topbar from '../global/topbar'
 
 function Main(props) {
+
+    console.log(props)
 
     const [editPost, setEditPost] = useState();
     const [originalPost, setOriginalPost] = useState()
     const [updatePost, setUpdatePost] = useState(null)
+    const [createPost, setCreatePost] = useState(null)
     
     const [isUpdate, setIsUpdate] = useState()
+
+    useEffect(() => {
+        if(props.callOpenCreatePost){
+            setCreatePost(true)
+        }   
+    }, [props.callOpenCreatePost])
 
     const isUpdateFunc = (data) => {
         console.log('test')
@@ -22,6 +33,7 @@ function Main(props) {
 
     const cancelUpdateFunc = () => {
         setOriginalPost(undefined)
+        setCreatePost(undefined)
     }
 
     function PostEdit(data){
@@ -51,22 +63,22 @@ function Main(props) {
         }
     },[originalPost])
 
+    useEffect(() => {
+        if(isLoad.current){
+            isLoad.current = false
+            return;
+        }
+        if(createPost != null){
+            document.getElementById('voiler').style.display = 'flex'
+        }
+    }, [createPost])
+
     return (<>
         
         {originalPost?  <div id='voiler'><Edit originalPost={originalPost} sendUpdate={sendUpdate}  cancelFunc={cancelUpdateFunc}/></div> : null}
-        
+        {createPost? <div id='voiler'><Create user={props.data} cancelFunc={cancelUpdateFunc} sendUpdate={sendUpdate}></Create></div> : null}
         <main>
-            <div className='topBar'>
-                <div className='topBar--links'></div>
-                <div className='topBar--search'>
-                    <div className='topBar--search--icon'><i class="fa-solid fa-magnifying-glass"></i></div>
-                    <input className='topBar--search--input' type="text" placeholder='Recherche une personne'></input>
-                </div>
-                <div className='topBar--user'>
-                    <span>Hey, Nathan!</span>
-                    <img src="https://i.picsum.photos/id/343/200/300.jpg?hmac=_7ttvLezG-XONDvp0ILwQCv50ivQa_oewm7m6xV2uZA"></img>
-                </div>
-            </div>
+            <Topbar user={props.data}/>
             <Global data={props.data} editFunc={PostEdit} updateFunc={isUpdate}/>
         </main></>
      );

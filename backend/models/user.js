@@ -23,6 +23,10 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    avatar: {
+        type: String,
+        required: true,
+    },
     admin:{
         type:Boolean,
         required: true,

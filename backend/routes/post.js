@@ -16,6 +16,11 @@ router.post('/test/:postId', postController.setReaction)
 router.post('/:postId/delete', auth, postController.delete)
 router.post('/:postId/update', auth, multer, postController.update)
 
+// Comments
+router.post('/comments/add', auth, postController.addComment)
+
+router.get('/:postId', auth, postController.getDetails)
+
 // Find User Post for Profil
 
 router.get('/:username', postController.getPostByUser)

@@ -3,16 +3,18 @@ import '../../../styles/dashboard.css'
 import ReactDOM from 'react-dom';
 
 import PostList from './items';
+import PostDetails from '../../post_details/post-details';
 
 function Posts(props) {
+
   console.log(props)
+
   const user = props.data
   const [skip, setSkip] = useState(0);
   const [postFeed, setPostFeed] = useState();
   const [isEdited, setPostEdited] = useState(null)
 
   useEffect(() => {
-    console.log('ok from post')
     setPostEdited(props.updateFunc)
   },[props.updateFunc])
 
@@ -51,14 +53,18 @@ function Posts(props) {
 
   return (
     <>
-        <div id="post--feed">
-           {postFeed? 
-            <PostList key={Math.random()} item={postFeed} data={user} EditFunc={props.editFunc} UpdateFunc={test2}/> : 
-            <div style={{display: 'flex', justifyContent: 'center'}}><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
+      <div id="post--feed">
+        {postFeed? 
+          props.option == 'profil'? <PostList key={Math.random()} item={props.post} data={user} EditFunc={props.editFunc} UpdateFunc={test2}/> : 
+          props.option == 'details'? <PostDetails data={user}/> : <PostList key={Math.random()} item={postFeed} data={user} EditFunc={props.editFunc} UpdateFunc={test2}/> : 
+          <div style={{display: 'flex', justifyContent: 'center'}}><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+        }
         </div>
-        <div id="post--feed--bottom">
-          <button className="seeMorePost" onClick={() => test()}>Voir plus d'ancien post</button>
-        </div>
+        {props.option != 'details'? 
+          <div id="post--feed--bottom">
+            <button className="seeMorePost" onClick={() => test()}>Voir plus d'ancien post</button>
+          </div> : null  
+        }
     </>
   )
 }

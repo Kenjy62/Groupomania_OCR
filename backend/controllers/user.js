@@ -14,6 +14,7 @@ exports.signup = (req, res, next) => {
         console.log(hash)
         const user = new User({
             ...req.body,
+            avatar: null,
             password: hash,
             admin: false,
         })

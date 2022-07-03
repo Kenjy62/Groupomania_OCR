@@ -11,7 +11,14 @@ import '../styles/post.css'
 import Header from '../components/global/header'
 import Main from '../components/dashboard/main'
 
+
 function App() {
+
+  const [callOpenCreatePost, setcallOpenCreatePost] = useState()
+
+  const openCreatePost = () => {
+    setcallOpenCreatePost(true)
+  }
 
   const token = localStorage.getItem('token')
 
@@ -48,8 +55,8 @@ function App() {
   // Render Page
   return (
     <>
-      <Header />
-      <Main data={user}/>
+      <Header user={user} openCreatePost={openCreatePost} option='home'/>
+      <Main data={user} callOpenCreatePost={callOpenCreatePost}/>
     </>
   )
 }

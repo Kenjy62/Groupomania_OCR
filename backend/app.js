@@ -40,8 +40,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use('/api/auth', userRoads)
 app.use('/api/post', postRoads)
 
-
-
 /* app.post('/api/login', function(req, res){
   User.findOne({name: req.body.email}).then(result => {
     if(!result){

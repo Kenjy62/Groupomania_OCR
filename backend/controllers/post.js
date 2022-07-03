@@ -118,3 +118,29 @@ exports.getPostByUser = (req, res, next) => {
         })
         .catch((error) => res.status(400).json({error: error}))
 }
+
+exports.addComment = (req, res, next) => {
+    console.log(req.body)
+
+    Post.find({_id: req.body.postId})
+        .then(post => {
+            if(post.length > 0){
+                Post.updateOne({_id: req.body.postId}, {$push: {'comments': {author: req.body.author, text: req.body.text, createAt: Date()}}})
+                .then(() => res.status(200).json({message: 'Add comments'}))
+                .catch((error) => res.status(400).json({error: error}))
+            }
+        })
+        .catch(error => console.log(error))
+}
+
+exports.getDetails = (req, res, next) => {
+    const postId = req.params.postId
+
+    Post.findOne({_id: postId})
+        .then(post => {
+            if(post){
+                res.status(200).json({data: post})
+            }
+        })
+        .catch(error => console.log(error))
+}

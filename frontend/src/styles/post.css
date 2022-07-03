@@ -126,3 +126,46 @@
 #post--feed--bottom > button {
     width: 100%;
 }
+
+.post--response {
+    margin-top: 15px;
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: none;
+}
+
+.post--response > input {
+    flex: 2;
+    margin-right: 15px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+}
+
+.post--details--comments--list {
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #4b4d61;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.post--details--comments--list--user {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.post--details--comments--list--user > img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.post--details--comments--list--content {
+    width: calc(100% - 80px);
+    padding: 10px;
+}

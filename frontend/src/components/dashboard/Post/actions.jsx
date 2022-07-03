@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 function PostActions(props) {
 
@@ -101,8 +102,8 @@ function PostActions(props) {
         <>
             <div id="test"></div>
             <div id={post._id} className="post--details--content--actions">
-                <span onClick={() => props.showResponse(post._id)}><i class="fa-solid fa-comment"></i></span>
-                <span><i class="fa-solid fa-comments"></i> ({post.comments.length})</span>
+                <span onClick={() => props.isVisible(post._id)}><i class="fa-solid fa-comment"></i></span>
+                <Link to={'/post/'+post._id}><span><i class="fa-solid fa-comments"></i> ({post.comments.length})</span></Link>
                 <span value={alreadyLiked == 1? '0' : '1'} onClick={() => 
                     {setAction(alreadyLiked == 1? 0 : 1); 
                     setPostId(post._id)}}> {alreadyLiked == 1? <i className="fa-solid fa-heart" style={{color: 'green'}}></i> : <i className="fa-regular fa-heart"></i>} ({countLikes})

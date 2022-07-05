@@ -1,5 +1,4 @@
 export function postPreview(data){
-    console.log(data)
     let html = `<div id="post">
     <div class='post--user--infos'>
       <img src='https://picsum.photos/id/237/200/300'></img>

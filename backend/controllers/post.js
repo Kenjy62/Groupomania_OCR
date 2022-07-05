@@ -84,7 +84,12 @@ exports.update = (req, res, next) => {
     const Obj = req.file? {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : {...req.body, imageUrl: ''}
+    } : req.body.image === ''? {
+        ...req.body,
+        imageUrl : ''
+    } : {
+        ...req.body
+    }
 
    Post.findOne({_id: postId})
     .then(post => {

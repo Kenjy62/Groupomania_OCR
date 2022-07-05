@@ -1,95 +1,40 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
+import React from "react";
+import { useContext } from "react";
 
 // Components
-import Edit from './Post/edit';
-import Create from './Post/create'
-import Global from '../../containers/global';
-import Topbar from '../global/topbar'
+import Edit from "./Post/edit";
+import Create from "./Post/create";
+import Global from "../../containers/global";
+import Topbar from "../global/topbar";
+import EditProfil from "../profil/edit";
+
+// Provider
+import { PopupContext } from "../../utils/context/popup";
 
 function Main(props) {
+  // Popup Toggle Context
+  const { isOpen, option, data } = useContext(PopupContext);
 
-    console.log(props)
+  return (
+    <>
+      {isOpen ? (
+        <div id="voiler" style={{ display: isOpen ? "flex" : "none" }}>
+          {option === "create" ? (
+            <Create user={props.user} />
+          ) : option === "edit_post" ? (
+            <Edit originalPost={data} />
+          ) : option === "edit_profil" ? (
+            <EditProfil user={data} />
+          ) : null}
+        </div>
+      ) : null}
 
-    const [editPost, setEditPost] = useState();
-    const [originalPost, setOriginalPost] = useState()
-    const [updatePost, setUpdatePost] = useState(null)
-    const [createPost, setCreatePost] = useState(null)
-    
-    const [isUpdate, setIsUpdate] = useState()
-
-    useEffect(() => {
-        if(props.callOpenCreatePost){
-            setCreatePost(true)
-        }   
-    }, [props.callOpenCreatePost])
-
-    const isUpdateFunc = (data) => {
-        console.log('test')
-        setIsUpdate(data)
-    }
-
-    const cancelUpdateFunc = () => {
-        setOriginalPost(undefined)
-        setCreatePost(undefined)
-    }
-
-    function PostEdit(data){
-        setOriginalPost(data)
-    }
-
-    const sendUpdate = (data) => {
-       if(sendUpdate == false){
-
-       } else {
-        console.log('A post edited')
-        isUpdateFunc(data)
-        setOriginalPost(undefined) 
-       }
-    }
-
-    const isLoad = useRef(true)
-
-    useEffect(() => {
-        if(isLoad.current){
-            isLoad.current = false
-            return;
-        }
-        if(originalPost != null){
-            document.getElementById('voiler').style.display = 'flex'
-            setEditPost(originalPost)
-        }
-    },[originalPost])
-
-    useEffect(() => {
-        if(isLoad.current){
-            isLoad.current = false
-            return;
-        }
-        if(createPost != null){
-            document.getElementById('voiler').style.display = 'flex'
-        }
-    }, [createPost])
-
-    return (<>
-        
-        {originalPost?  <div id='voiler'><Edit originalPost={originalPost} sendUpdate={sendUpdate}  cancelFunc={cancelUpdateFunc}/></div> : null}
-        {createPost? <div id='voiler'><Create user={props.data} cancelFunc={cancelUpdateFunc} sendUpdate={sendUpdate}></Create></div> : null}
-        <main>
-            <Topbar user={props.data}/>
-            <Global data={props.data} editFunc={PostEdit} updateFunc={isUpdate}/>
-        </main></>
-     );
+      <main>
+        <Topbar user={props.user} />
+        {props.user ? <Global option={props.option} user={props.user} /> : null}
+      </main>
+    </>
+  );
 }
 
 export default Main;
-
-// Add Footer after Post
-
-/* 
-
-<Form data={props.data}/>
-            <Post data={props.data} editFunc={PostEdit} parentState={updatePost}/>
-*/

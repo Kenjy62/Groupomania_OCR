@@ -25,7 +25,11 @@ var userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        required: true,
+        required: false,
+    },
+    cover: {
+        type: String,
+        required: false,
     },
     admin:{
         type:Boolean,

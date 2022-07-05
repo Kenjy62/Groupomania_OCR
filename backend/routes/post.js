@@ -19,7 +19,7 @@ router.post('/:postId/update', auth, multer, postController.update)
 // Comments
 router.post('/comments/add', auth, postController.addComment)
 
-router.get('/:postId', auth, postController.getDetails)
+router.get('/test2/details/:postId', auth, postController.getDetails)
 
 // Find User Post for Profil
 

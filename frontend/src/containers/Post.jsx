@@ -1,64 +1,37 @@
 // Import dependances
 
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useContext } from "react";
+
+// Provider
+
+import { UserContext } from "../utils/context/user";
 
 // Style
-import '../styles/dashboard.css'
-import '../styles/post.css'
+import "../styles/dashboard.css";
+import "../styles/post.css";
 
 // Components
-import Header from '../components/global/header'
-import Main from '../components/post_details/main'
+import Header from "../components/global/header";
+import Main from "../components/dashboard/main";
 
+function Post(props) {
+  // Token
+  const token = localStorage.getItem("token");
 
-function Post() {
-
-  const [callOpenCreatePost, setcallOpenCreatePost] = useState()
-
-  const openCreatePost = () => {
-    setcallOpenCreatePost(true)
-  }
-
-  const token = localStorage.getItem('token')
-
-  // Initialize Navigate
-  let navigate = useNavigate()
-  
-  // Sate
-  const [user, setUser] = useState();
+  const { loadUser, user } = useContext(UserContext);
 
   // Fetch UserData
-  useEffect(()=> {
-    console.log(token)
-    if(!user){
-      fetch('http://localhost:3000/api/auth/user/' + token, {
-        method: 'GET', 
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
-        }).then(res => {
-          if(res.status === 200){
-            const data = res.json()
-            data.then(json => {
-              let dataParse = json.data
-              setUser(dataParse)
-            })
-          } else {
-            navigate('/')
-          }
-        })
-    }
-  }, [])
-  
+  useEffect(() => {
+    loadUser();
+  }, []);
+
   // Render Page
   return (
     <>
-      <Header user={user} openCreatePost={openCreatePost} option='home'/>
-      <Main data={user} callOpenCreatePost={callOpenCreatePost}/>
+      <Header user={user} option="home" />
+      <Main user={user} option={props.option} />
     </>
-  )
+  );
 }
-  
+
 export default Post;

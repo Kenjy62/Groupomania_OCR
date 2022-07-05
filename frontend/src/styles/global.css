@@ -235,7 +235,7 @@ ul {
   color: white;
 }
 
-nav > ul > li {
+nav > ul > a > li {
   padding: 20px;
   cursor: pointer;
   margin-left: 15px;
@@ -243,21 +243,21 @@ nav > ul > li {
   border-bottom-left-radius: 20px;
 }
 
-nav > ul > li:hover {
+nav > ul > a > li:hover {
   background-color: #f5c2c793;
   color: black;
 }
 
-nav > ul > li.active {
+nav > ul > a > li.active {
   border-right: 2px solid #FFD7D7;
   color: #FFD7D7;
 }
 
-nav > ul > li.active > i {
+nav > ul > a > li.active > i {
   color: #FFD7D7;
 }
 
-nav > ul > li > i {
+nav > ul > a > li > i {
   margin-right: 25px;
 }
 

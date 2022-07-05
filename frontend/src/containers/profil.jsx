@@ -1,53 +1,36 @@
 // Import dependances
 
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useEffect } from "react";
 
 // Style
-import '../styles/dashboard.css'
-import '../styles/post.css'
+import "../styles/dashboard.css";
+import "../styles/post.css";
 
 // Components
-import Header from '../components/global/header'
-import Main from '../components/profil/main'
+import Header from "../components/global/header";
+import Main from "../components/dashboard/main";
+
+// Provider
+import { UserContext } from "../utils/context/user";
 
 function App(props) {
-    let navigate = useNavigate()
-    
-    const [user, setUser] = useState()
-    const token = localStorage.getItem('token')
+  // Tokenn
+  const token = localStorage.getItem("token");
 
-    // Fetch UserData
-    useEffect(()=> {
-      if(!user){
-        fetch('http://localhost:3000/api/auth/user/' + token, {
-          method: 'GET', 
-          headers: {
-            'content-type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          },
-          }).then(res => {
-            if(res.status === 200){
-              const data = res.json()
-              data.then(json => {
-                let dataParse = json.data
-                setUser(dataParse)
-              })
-            } else {
-              navigate('/')
-            }
-          })
-      }
-    }, [])
+  const { loadUser, user } = useContext(UserContext);
 
+  // Fetch UserData
+  useEffect(() => {
+    loadUser(token);
+  }, []);
 
   // Render Page
   return (
     <>
-      <Header option={props.option}/>
-      <Main data={user}/>
+      <Header option={props.option} user={user} />
+      <Main option={props.option} user={user} />
     </>
-  )
+  );
 }
-  
+
 export default App;

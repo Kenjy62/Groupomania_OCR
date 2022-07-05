@@ -14,14 +14,15 @@ exports.signup = (req, res, next) => {
         console.log(hash)
         const user = new User({
             ...req.body,
-            avatar: null,
+            avatar: 'http://localhost:3000/images/default.png',
+            cover: 'http://localhost:3000/images/default.png',
             password: hash,
             admin: false,
         })
 
         user.save()
             .then(() => res.status(201).json({message: 'User Created'}))
-            .catch(error => res.status(400).json({error: `Problème d'inscription, contacter l'administrateur`}))
+            .catch(error => {res.status(400).json({error: `Problème d'inscription, contacter l'administrateur`}); console.log(error)})
         .catch(error => res.status(500).json({error: `Erreur d'encryptage du mot de passe, contacter l'administrateur`}))
     })
 }

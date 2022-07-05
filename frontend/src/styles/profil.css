@@ -1,0 +1,55 @@
+/* Edit Profil */
+
+.editProfil {
+    width: 600px;
+    padding: 10px;
+    background-color: #4b4d61;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.editProfil--background--image {
+    height: 200px;
+    background-color: red;
+    border-radius: 10px;
+    z-index: 9997;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editProfil--background--image > img {
+    width: 100%;
+    object-fit: cover;
+    height: 200px;
+    border-radius: 10px;
+    z-index: 9998;
+    position: relative;
+}
+
+.editProfil--background--image > .editProfil--background--image--actions {
+    position: absolute;
+    z-index: 9999999;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.editProfil--avatar {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    background-color: white;
+    margin-top: -50px;
+    z-index: 9999;
+    border-radius: 10px;
+}
+
+.editProfil--avatar > img {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+

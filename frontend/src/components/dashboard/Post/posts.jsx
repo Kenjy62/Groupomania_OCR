@@ -1,72 +1,57 @@
-import { useEffect, useState } from 'react'
-import '../../../styles/dashboard.css'
-import ReactDOM from 'react-dom';
+import { useEffect, useState, useContext } from "react";
+import "../../../styles/dashboard.css";
 
-import PostList from './items';
-import PostDetails from '../../post_details/post-details';
+// Context
+import { PopupContext } from "../../../utils/context/popup";
+import { PostContext } from "../../../utils/context/post";
+
+// Components
+import PostList from "./items";
+import PostDetails from "../../post_details/post-details";
+import Loader from "../../global/loader";
 
 function Posts(props) {
+  // Context
+  const { update } = useContext(PopupContext);
+  const { LoadAllPost, feed } = useContext(PostContext);
 
-  console.log(props)
-
-  const user = props.data
+  // State
   const [skip, setSkip] = useState(0);
-  const [postFeed, setPostFeed] = useState();
-  const [isEdited, setPostEdited] = useState(null)
 
+  // Load Feed (10 by 10)
   useEffect(() => {
-    setPostEdited(props.updateFunc)
-  },[props.updateFunc])
-
-  
-  const test2 = () => {
-    console.log('ok')
-  }
-
-  const test = () => {
-    setSkip(skip + 10)
-  }
-
-  useEffect(() => {
-      fetch('http://localhost:3000/api/post/' + skip + '/10', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      if(res.status === 200){
-        const postList = res.json()
-        postList.then(post => {
-          if(post.length > 0){
-            if(skip > 0){
-              setPostFeed(postFeed => [...postFeed, ...post])
-            } else if(skip === 0){
-              setPostFeed(post)
-            }
-          } else {
-            document.querySelector('button.seeMorePost').textContent = `Fin de l'historique`
-          } 
-        }
-    )}
-    })
-  }, [skip, isEdited])
+    LoadAllPost(skip);
+  }, [skip, update]);
 
   return (
     <>
       <div id="post--feed">
-        {postFeed? 
-          props.option == 'profil'? <PostList key={Math.random()} item={props.post} data={user} EditFunc={props.editFunc} UpdateFunc={test2}/> : 
-          props.option == 'details'? <PostDetails data={user}/> : <PostList key={Math.random()} item={postFeed} data={user} EditFunc={props.editFunc} UpdateFunc={test2}/> : 
-          <div style={{display: 'flex', justifyContent: 'center'}}><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-        }
+        {feed ? (
+          props.option == "profil" ? (
+            <PostList key={Math.random()} item={props.post} user={props.user} />
+          ) : props.option == "details" ? (
+            <PostDetails user={props.user} />
+          ) : (
+            <PostList key={Math.random()} item={feed} user={props.user} />
+          )
+        ) : (
+          <Loader />
+        )}
+      </div>
+      {props.option != "details" ? (
+        <div id="post--feed--bottom">
+          <button
+            className="seeMorePost"
+            onClick={() => {
+              setSkip(skip + 10);
+            }}
+          >
+            Voir plus d'ancien post
+          </button>
         </div>
-        {props.option != 'details'? 
-          <div id="post--feed--bottom">
-            <button className="seeMorePost" onClick={() => test()}>Voir plus d'ancien post</button>
-          </div> : null  
-        }
+      ) : null}
     </>
-  )
+  );
 }
-  
+
 export default Posts;

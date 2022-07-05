@@ -2,7 +2,6 @@ import {Link} from 'react-router-dom'
 
 export function AddPost(item){
     if(item.imageUrl !== ''){
-        console.log('here')
         let html = `
         <div id="post" postId="${item._id}">
             <div class='post--user--infos'>

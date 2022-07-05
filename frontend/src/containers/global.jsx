@@ -1,36 +1,58 @@
 import React from "react";
+import { useEffect, useContext } from "react";
 
+// Components
 import Posts from "../components/dashboard/Post/posts";
+import Left from "../components/profil/left";
 
-function Global(props){
-    return (
-        <div id="main--container">
-            <div className="left">
-                <div className="blocks">
-                    <div className="blocks--user--infos">
-                        <img src={props.data? props.data.avatar : null}/>
-                        <span>{props.data? props.data.name + ' ' + props.data.lastName : null}</span>
-                        <span>{!props.data? null : props.data.admin === true? 'Vous êtes admin': null}</span>
-                        <span style={{color: 'grey'}}>@andersonN</span>
-                        <span>Lille, France</span>
-                    </div>
-                    <div className="blocks--user--stats">
-                        <span style={{color: 'grey'}}>Posts <br/> <font style={{color: 'white'}}>147</font></span>
-                        <span style={{color: 'grey'}}>Abonnés <br/> <font style={{color: 'white'}}>5</font></span>
-                        <span style={{color: 'grey'}}>Abonnement <br/> <font style={{color: 'white'}}>15</font></span>
-                    </div>
-                </div>
-            </div>
-            <div className="center">
-                <div className="blocks">
-                    {props.option === 'details'? <Posts data={props.data} editFunc={props.editFunc} updateFunc={props.updateFunc} cancelFunc={props.cancelFunc} option='details'/> : <Posts data={props.data} editFunc={props.editFunc} updateFunc={props.updateFunc} cancelFunc={props.cancelFunc} option='feed'/>}
-                </div>
-            </div>
-            <div className="right">
-                <div className="blocks"></div>
-            </div>
+// Context
+import { UserContext } from "../utils/context/user";
+
+function Global(props) {
+  const { LoadProfil, userProfil, userPost } = useContext(UserContext);
+
+  // Convert URL for getting user profil name
+  var url = window.location.href;
+  url = url.split("/");
+  url = url[4];
+
+  // Token
+  const token = localStorage.getItem("token");
+
+  // Fetch UserData
+  useEffect(() => {
+    if (props.option === "profil") {
+      LoadProfil(token, url);
+    }
+  }, []);
+
+  return (
+    <div id="main--container">
+      <div className="left">
+        {props.option === "profil" && userProfil && props.user ? (
+          <Left me={props.user} user={userProfil} option={props.option} />
+        ) : props.option === "feed" ? (
+          <Left option={props.option} me={props.user} user={props.user} />
+        ) : props.option === "details" ? (
+          <Left option={props.option} me={props.user} user={props.user} />
+        ) : null}
+      </div>
+      <div className="center">
+        <div className="blocks">
+          {props.option === "details" ? (
+            <Posts option="details" user={props.user} />
+          ) : props.option === "profil" ? (
+            <Posts option={"profil"} user={props.user} post={userPost} />
+          ) : props.option === "feed" ? (
+            <Posts option="feed" user={props.user} />
+          ) : null}
         </div>
-    )
+      </div>
+      <div className="right">
+        <div className="blocks"></div>
+      </div>
+    </div>
+  );
 }
 
-export default Global
+export default Global;

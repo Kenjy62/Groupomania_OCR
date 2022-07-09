@@ -455,3 +455,14 @@ textarea:focus-visible {
   top: 15px;
   cursor: pointer;
 }
+
+
+/* Profil Cover */
+
+.profil--cover {
+  height: 400px;
+  background-size: cover;
+  border-Bottom-Left-Radius: 10px;
+  border-Bottom-Right-Radius: 10px;
+  background-Position: center;
+}

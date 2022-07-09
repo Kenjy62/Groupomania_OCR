@@ -2,15 +2,20 @@ import React from "react";
 import { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 
+// Provider
 import { PopupContext } from "../../../utils/context/popup";
 import { InputCommentContext } from "../../../utils/context/input_comment";
+import { PostContext } from "../../../utils/context/post";
 
 function PostActions(props) {
   let post = props.props;
 
-  const { togglePopup, isOpen } = useContext(PopupContext);
+  // Context
+  const { togglePopup } = useContext(PopupContext);
   const { toggleInput } = useContext(InputCommentContext);
+  const { DeletePost } = useContext(PostContext);
 
+  // State
   const [action, setAction] = useState();
   const [alreadyLiked, setAlreadyLiked] = useState(0);
   const [alreadyDisliked, setAlreadyDisliked] = useState(0);
@@ -23,15 +28,15 @@ function PostActions(props) {
     if (props.user) {
       let alreadyLiked = post.usersLiked.indexOf(props.user.name) > -1;
       let alreadyDisliked = post.usersDisliked.indexOf(props.user.name) > -1;
-      if (alreadyLiked === true) {
+      if (alreadyLiked) {
         setAlreadyLiked(1);
-      } else if (alreadyDisliked === true) {
+      } else if (alreadyDisliked) {
         setAlreadyDisliked(1);
       }
     }
   }, []);
 
-  // Post a reaction
+  // Post a reaction (MOVE TO POST CONTEXT)
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
@@ -80,36 +85,24 @@ function PostActions(props) {
     }
   }, [postId, action]);
 
-  function postDelete(postId) {
-    fetch("http://localhost:3000/api/post/" + postId + "/delete", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("delete");
-        let div = document.getElementById(postId).parentElement.parentElement;
-        div.style.display = "none";
-      } else {
-        console.log("error");
-      }
-    });
-  }
-
   return (
     <>
-      <div id="test"></div>
       <div id={post._id} className="post--details--content--actions">
         <span onClick={() => toggleInput(post._id)}>
           <i class="fa-solid fa-comment"></i>
         </span>
-        <Link to={"/post/" + post._id}>
+        {props.option != "details" ? (
+          <Link to={"/post/" + post._id}>
+            <span>
+              <i class="fa-solid fa-comments"></i> ({post.comments.length})
+            </span>
+          </Link>
+        ) : (
           <span>
-            <i class="fa-solid fa-comments"></i> ({post.comments.length})
+            <i class="fa-solid fa-comments" style={{ color: "white" }}></i> (
+            {post.comments.length})
           </span>
-        </Link>
+        )}
         <span
           value={alreadyLiked == 1 ? "0" : "1"}
           onClick={() => {
@@ -154,7 +147,7 @@ function PostActions(props) {
         )}
         {props.user ? (
           post.author == props.user.name || props.user.admin == true ? (
-            <span onClick={() => postDelete(post._id)}>
+            <span onClick={() => DeletePost(post._id)}>
               <i class="fa-solid fa-trash"></i>
             </span>
           ) : null

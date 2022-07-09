@@ -6,30 +6,11 @@ import Moment from "react-moment";
 // Component
 import PostActions from "./actions";
 import CreateComments from "./create-comments";
-
-// Provider
-
-import { InputCommentContext } from "../../../utils/context/input_comment";
+import Loader from "../../global/loader";
 
 const PostList = (props) => {
-  var old = null;
-
-  const visibility = (postId) => {
-    if (old != null) {
-      let div = document.querySelector("[post-id='" + old + "']");
-      div.style.display = "none";
-      let div2 = document.querySelector("[post-id='" + postId + "']");
-      div2.style.display = "flex";
-      old = postId;
-    } else {
-      let div = document.querySelector("[post-id='" + postId + "']");
-      div.style.display = "flex";
-      old = postId;
-    }
-  };
-
   if (!props.item) {
-    return <h1>Aucun post pour le moment</h1>;
+    return <Loader />;
   } else {
     if (props.item.length === 0) {
       return (
@@ -67,12 +48,7 @@ const PostList = (props) => {
                         <img src={post.imageUrl}></img>
                       </div>
                     ) : null}
-                    <PostActions
-                      props={post}
-                      user={props.user}
-                      key={key}
-                      isVisible={visibility}
-                    />
+                    <PostActions props={post} user={props.user} key={key} />
                     <CreateComments post={post} user={props.user} />
                   </div>
                 </div>

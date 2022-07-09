@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { useState, useContext } from "react";
 
@@ -17,10 +18,20 @@ function CreateComments(props) {
 
   return (
     <>
-      <div className="success" style={{ display: !success ? "none" : "block" }}>
+      <div
+        className="success"
+        style={{
+          display: success && postId === props.post._id ? "block" : "none",
+        }}
+      >
         {success}
       </div>
-      <div className="error" style={{ display: !error ? "none" : "block" }}>
+      <div
+        className="error"
+        style={{
+          display: error && postId === props.post._id ? "block" : "none",
+        }}
+      >
         {error}
       </div>
       <div

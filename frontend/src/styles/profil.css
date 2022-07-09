@@ -53,3 +53,20 @@
     border-radius: 10px;
 }
 
+/* Profil Container */
+
+.profil--container {
+    display: flex;
+    justify-Content: space-between;
+    padding: 50px;
+}
+
+/* Left */
+
+.blocks > button {
+    width: 100%;
+}
+
+.blocks > button:not(:last-child){
+    margin-bottom: 15px;
+}

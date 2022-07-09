@@ -14,6 +14,7 @@ import { PostContext } from "../../utils/context/post";
 import { PopupContext } from "../../utils/context/popup";
 
 function PostDetails(props) {
+  // Context
   const { GetComments, post, newComment } = useContext(PostContext);
   const { update } = useContext(PopupContext);
 
@@ -53,10 +54,10 @@ function PostDetails(props) {
               <img src={post.imageUrl}></img>
             </div>
           ) : null}
-          <PostActions props={post} user={props.user} />
+          <PostActions props={post} user={props.user} option={"details"} />
           <CreateComments post={post} user={props.user} />
 
-          {post.comments.reverse().map((data, key) => {
+          {post.comments.reverse().map((data) => {
             return <PostComment post={data} id={post._id} user={props.user} />;
           })}
         </div>

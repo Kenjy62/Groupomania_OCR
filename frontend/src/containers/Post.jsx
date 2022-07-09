@@ -1,9 +1,7 @@
 // Import dependances
-
 import { useEffect, useContext } from "react";
 
 // Provider
-
 import { UserContext } from "../utils/context/user";
 import { PopupContext } from "../utils/context/popup";
 
@@ -16,13 +14,11 @@ import Header from "../components/global/header";
 import Main from "../components/dashboard/main";
 
 function Post(props) {
-  // Token
-  const token = localStorage.getItem("token");
-
+  // Context
   const { loadUser, user } = useContext(UserContext);
   const { update } = useContext(PopupContext);
 
-  // Fetch UserData
+  // Fetch current user data
   useEffect(() => {
     loadUser();
   }, [update]);

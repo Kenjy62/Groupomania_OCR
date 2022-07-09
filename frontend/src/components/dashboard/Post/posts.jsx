@@ -1,4 +1,7 @@
+// Dependencies
 import { useEffect, useState, useContext } from "react";
+
+// Style
 import "../../../styles/dashboard.css";
 
 // Context
@@ -27,17 +30,21 @@ function Posts(props) {
     <>
       <div id="post--feed">
         {feed ? (
+          // If Load Profil
           props.option == "profil" ? (
             <PostList key={Math.random()} item={props.post} user={props.user} />
-          ) : props.option == "details" ? (
+          ) : // If Load Details of Post
+          props.option == "details" ? (
             <PostDetails user={props.user} />
           ) : (
+            // If Load Feed
             <PostList key={Math.random()} item={feed} user={props.user} />
           )
         ) : (
           <Loader />
         )}
       </div>
+
       {props.option != "details" ? (
         <div id="post--feed--bottom">
           <button

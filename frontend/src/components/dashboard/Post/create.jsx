@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 
@@ -5,11 +6,11 @@ import { useState, useEffect, useContext } from "react";
 import { PopupContext } from "../../../utils/context/popup";
 
 function Create(props) {
-  const [error, setError] = useState();
+  const [setError] = useState();
 
   // Close popup
-  const { togglePopup, isOpen } = useContext(PopupContext);
-  const { callUpdate, update } = useContext(PopupContext);
+  const { togglePopup } = useContext(PopupContext);
+  const { callUpdate } = useContext(PopupContext);
 
   // Edit Popup
   const [postUpdate, setPostUpdate] = useState({
@@ -31,7 +32,7 @@ function Create(props) {
     setPostUpdate({ text: postUpdate.text, imageUrl: undefined });
   };
 
-  /* Create Post */
+  /* Create Post (MOVE TO POST CONTE*/
   const handleSubmit = async (e) => {
     e.preventDefault();
     let text = document.getElementById("post--text").value;
@@ -57,12 +58,7 @@ function Create(props) {
       }).then((res) => {
         if (res.status == 201) {
           const data = res.json();
-          data.then((data) => {
-            let toPreview = {
-              name: props.user.name,
-              text: text,
-              imageUrl: data.imageUrl,
-            };
+          data.then(() => {
             togglePopup(false);
             callUpdate(Math.random());
           });

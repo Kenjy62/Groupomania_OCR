@@ -1,12 +1,14 @@
+// Dependencies
 import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 
+// Provider
 import { useContext } from "react";
 import { PostContext } from "../../utils/context/post";
 
 function PostComment(props) {
-  console.log(props);
+  // Context
   const { DeleteComment } = useContext(PostContext);
 
   return (

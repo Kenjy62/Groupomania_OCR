@@ -1,12 +1,14 @@
+// Dependencies
 import React from "react";
 import { useContext } from "react";
+
+// Components
+import Loader from "../global/loader";
 
 // Provider
 import { PopupContext } from "../../utils/context/popup";
 
 function Left(props) {
-  console.log(props);
-
   var url = window.location.href;
   url = url.split("/");
   url = url[4];
@@ -17,7 +19,7 @@ function Left(props) {
     <div className="left">
       <div className="blocks">
         <div className="blocks--user--infos">
-          <img src={props.user ? props.user.avatar : null} />
+          <img src={props.user ? props.user.avatar : <Loader />} />
           <span>
             {props.user ? props.user.name + " " + props.user.lastName : null}
           </span>
@@ -49,19 +51,14 @@ function Left(props) {
         (props.me.admin === true && props.option != "feed") ? (
         <div className="blocks">
           <button
-            style={{ width: "100%", marginBottom: 15 }}
             onClick={() => togglePopup("edit_profil", props.user, props.me)}
           >
             Modifier le profil
           </button>
           {!props.me ? null : props.me.admin === true ? (
             <>
-              <button style={{ width: "100%", marginBottom: 15 }}>
-                Supprimer l'utilisateur
-              </button>
-              <button style={{ width: "100%", marginBottom: 15 }}>
-                Promouvoir Admin
-              </button>
+              <button>Supprimer l'utilisateur</button>
+              <button>Promouvoir Admin</button>
             </>
           ) : null}
         </div>

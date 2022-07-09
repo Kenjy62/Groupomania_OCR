@@ -1,9 +1,14 @@
+// Dependencies
 import React from "react";
 import { useEffect, useContext } from "react";
 
 // Components
 import Posts from "../components/dashboard/Post/posts";
 import Left from "../components/profil/left";
+
+// Style
+
+import "../styles/profil.css";
 
 // Context
 import { UserContext } from "../utils/context/user";
@@ -21,7 +26,7 @@ function Global(props) {
   // Token
   const token = localStorage.getItem("token");
 
-  // Fetch UserData
+  // Fetch current profil user data
   useEffect(() => {
     if (props.option === "profil") {
       LoadProfil(token, url, props.user);
@@ -32,22 +37,16 @@ function Global(props) {
     <div id="main--container">
       {props.option === "profil" ? (
         <div
+          className="profil--cover"
           style={{
-            height: "400px",
             backgroundImage: `url(${userProfil ? userProfil.cover : null})`,
-            backgroundSize: "cover",
-            borderBottomLeftRadius: "10px",
-            borderBottomRightRadius: "10px",
-            backgroundPosition: "center",
           }}
         ></div>
       ) : null}
       <div
+        className="profil--container"
         style={{
-          display: "flex",
-          justifyContent: "space-between",
           marginTop: props.option === "profil" ? "-110px" : "0px",
-          padding: "50px",
         }}
       >
         <div className="left">
@@ -59,6 +58,7 @@ function Global(props) {
             <Left option={props.option} me={props.user} user={props.user} />
           ) : null}
         </div>
+
         <div className="center">
           <div className="blocks">
             {props.option === "details" ? (
@@ -70,6 +70,7 @@ function Global(props) {
             ) : null}
           </div>
         </div>
+
         <div className="right">
           <div className="blocks"></div>
         </div>

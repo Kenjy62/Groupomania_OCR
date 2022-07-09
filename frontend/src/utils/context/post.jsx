@@ -12,6 +12,7 @@ export const PostProvider = ({ children }) => {
   const [post, setPost] = useState();
   const [newComment, setNewComment] = useState();
 
+  // Load Feed
   const LoadAllPost = (skipParams) => {
     fetch("http://localhost:3000/api/post/" + skipParams + "/10", {
       method: "GET",
@@ -40,6 +41,7 @@ export const PostProvider = ({ children }) => {
     });
   };
 
+  // Add a comment
   const AddComment = (postId, user, data, token, avatar) => {
     console.log("here");
     if (!data) {
@@ -69,7 +71,6 @@ export const PostProvider = ({ children }) => {
           let input = document.querySelector("input#response");
           input.value = "";
           setNewComment(Math.random());
-          togglePopup(false);
           setTimeout(() => {
             setSuccess(undefined);
           }, 3000);
@@ -80,6 +81,7 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  // Delete a comments on a post
   const DeleteComment = (postId, token, id) => {
     let data = {
       id: id,
@@ -99,6 +101,7 @@ export const PostProvider = ({ children }) => {
     });
   };
 
+  // Get all comments of a specific post
   const GetComments = (postid, token) => {
     fetch("http://localhost:3000/api/post/test2/details/" + postid, {
       method: "GET",
@@ -117,6 +120,23 @@ export const PostProvider = ({ children }) => {
     });
   };
 
+  // Delete a post (user or admin)
+  const DeletePost = (postId) => {
+    fetch("http://localhost:3000/api/post/" + postId + "/delete", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        callUpdate(Math.random());
+      } else {
+        console.log("error");
+      }
+    });
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -129,6 +149,7 @@ export const PostProvider = ({ children }) => {
         post,
         newComment,
         DeleteComment,
+        DeletePost,
       }}
     >
       {children}

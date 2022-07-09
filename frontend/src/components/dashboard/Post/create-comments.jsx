@@ -38,7 +38,13 @@ function CreateComments(props) {
         />
         <button
           onClick={() =>
-            AddComment(props.post._id, props.user.name, response, token)
+            AddComment(
+              props.post._id,
+              props.user.name,
+              response,
+              token,
+              props.user.avatar
+            )
           }
         >
           Répondre

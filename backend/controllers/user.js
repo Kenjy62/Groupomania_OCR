@@ -1,10 +1,11 @@
 //Models
 const User = require('../models/user')
-
+const Post = require('../models/post')
 // Required
 const bcrypt = require('bcrypt')
 const salt = 10
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 
 
 // Functions
@@ -71,10 +72,9 @@ exports.getData = (req, res, next) => {
 }
 
 exports.getProfil = (req, res, next) => {
-
     User.findOne({name: req.params.username})
         .then(user => {
-            if(req.userId == user._id){
+            if(req.userId == user._id || req.params.admin){
                 res.status(200).json({message: user})
             } else {
                 user._id = null,
@@ -84,3 +84,34 @@ exports.getProfil = (req, res, next) => {
             }
         })
 }
+
+exports.updateProfil = (req, res, next) => { 
+
+    console.log(req.body)
+        
+    User.findOne({_id: mongoose.Types.ObjectId(req.body._id)})
+        .then(user => {
+
+            const Obj = req.files? {
+                avatar: req.files.avatar? `${req.protocol}://${req.get('host')}/images/${req.files.avatar[0].filename}` : user.avatar,
+                cover: req.files.cover? `${req.protocol}://${req.get('host')}/images/${req.files.cover[0].filename}` : user.cover,
+            } : undefined
+
+            if(Obj){
+                User.updateOne({_id: mongoose.Types.ObjectId(req.body._id)}, {...Obj, _id: req.body._id})
+                    .then(() => Post.updateMany({'comments.author': user.name}, {'$set': {'comments.$.avatar': req.files.avatar? `${req.protocol}://${req.get('host')}/images/${req.files.avatar[0].filename}` : user.avatar}}))
+                    .then(() => {
+                       res.status(200).json({message: 'ok'})
+                    })
+                    .catch(error => {
+                        res.status(400).json({error: error});
+                        console.log(error)
+                    })
+                
+                    
+            }
+
+        })
+        .catch(error => {console.log(error); res.status(400).json({error: error})})
+    
+} 

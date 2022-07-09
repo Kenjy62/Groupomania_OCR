@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { PopupContext } from "../../utils/context/popup";
 
 function Left(props) {
+  console.log(props);
+
   var url = window.location.href;
   url = url.split("/");
   url = url[4];
@@ -48,7 +50,7 @@ function Left(props) {
         <div className="blocks">
           <button
             style={{ width: "100%", marginBottom: 15 }}
-            onClick={() => togglePopup("edit_profil", props.user)}
+            onClick={() => togglePopup("edit_profil", props.user, props.me)}
           >
             Modifier le profil
           </button>

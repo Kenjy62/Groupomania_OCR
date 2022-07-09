@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
+const multer = require('../middleware/multer-config')
 
 // Controller Required
 const userController = require('../controllers/user')
@@ -18,7 +19,8 @@ router.post('/login', userController.login)
 router.get('/user/:token', auth, userController.getData)
 
 // Profil 
-router.get('/profil/:username', auth, userController.getProfil)
+router.get('/profil/:username/:admin', auth, userController.getProfil)
+router.post('/profil/:username', auth, multer, userController.updateProfil)
 
 // EXPORTS
 module.exports = router

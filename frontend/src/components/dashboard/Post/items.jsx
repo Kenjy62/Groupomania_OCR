@@ -1,6 +1,7 @@
 // Required
 import React from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 // Component
 import PostActions from "./actions";
@@ -28,10 +29,12 @@ const PostList = (props) => {
   };
 
   if (!props.item) {
-    return <h1>load</h1>;
+    return <h1>Aucun post pour le moment</h1>;
   } else {
     if (props.item.length === 0) {
-      return <h1>test</h1>;
+      return (
+        <h1 style={{ textAlign: "center" }}>Aucun post pour le moment..</h1>
+      );
     } else {
       return (
         <>
@@ -42,7 +45,7 @@ const PostList = (props) => {
                   <div className="post--details--user">
                     <Link to={"/user/" + post.author}>
                       <div className="post--details--user--picture">
-                        <img src="https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is"></img>
+                        <img src={post.userdata[0].avatar}></img>
                       </div>
                     </Link>
                   </div>
@@ -50,7 +53,10 @@ const PostList = (props) => {
                     <div className="post--details--content--details">
                       <span>{post.author}</span>{" "}
                       <span>
-                        <i class="fa-solid fa-hourglass"></i> 3 hours
+                        <i class="fa-solid fa-hourglass"></i>{" "}
+                        <Moment format="DD/MM/YYYY à HH:mm:ss">
+                          {post.createAt}
+                        </Moment>
                       </span>
                     </div>
                     <div className="post--details--content--text">

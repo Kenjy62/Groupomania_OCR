@@ -1,6 +1,6 @@
 export function Logged(){
     let test = localStorage.getItem('token')
-    if(test != null){
+    if(test){
         return true
     } else {
         return false

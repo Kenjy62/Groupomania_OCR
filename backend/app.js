@@ -5,6 +5,7 @@ const port = 3000;
 const express = require('express')
 const app = express();
 const path = require('path')
+const moment = require('moment')
 
 // Roads
 const userRoads = require('./routes/user')
@@ -35,55 +36,13 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
-
-
+// Api Roads
 app.use('/api/auth', userRoads)
 app.use('/api/post', postRoads)
 
-/* app.post('/api/login', function(req, res){
-  User.findOne({name: req.body.email}).then(result => {
-    if(!result){
-      return res.status(401).json({error: 'User not found'})
-    }
-    res.status(200).json({user: result})
-  })
-}) */
-
-// User.find({name: 'test'}).then((result) => console.log(result)).catch((error) => console.log(error))
- /* User.findOneAndUpdate({name: 'Test'}, {name: 'Updated'}).then(result => {
-  if(result == null){
-    return console.log('Not Found')
-  }
-  console.log('Updated')
-  Post.updateMany({author: 'Test'}, {author: 'Updated'}).then(result => {
-    if(result == null){
-      return console.log('not post found')
-    }
-
-    console.log('Post Updated')
-  })
-}).catch(error => console.log(error)) */
-
-/* Post.updateMany({usersLiked: 'test'}, {$set: {'usersLiked.$': 'LOL'}}).then(result => {
-  if(result == null){
-    return console.log('nop')
-  }
-  console.log('ok')
-}) */
-
-/* let post = new Post({
-  author: 'Test15',
-  text: 'test',
-  createAt: Date(),
-  likes: 0,
-  dislikes: 0,
-  usersLiked : [],
-  userDisliked: []
-}) */
-
-// post.save().then(() => console.log('create'))
 
 // App Listen
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(moment().format('DD MMMM HH:mm'))
 });

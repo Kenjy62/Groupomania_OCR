@@ -10,7 +10,7 @@ export const PopupProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [option, setOption] = useState();
   const [data, setData] = useState();
-  const togglePopup = (action, data) => {
+  const togglePopup = (action, data, me) => {
     setOption(action);
     setIsOpen(isOpen === false ? true : false);
 
@@ -24,6 +24,7 @@ export const PopupProvider = ({ children }) => {
   const [update, setUpdate] = useState();
   const callUpdate = (data) => {
     console.log("Update");
+    console.log(data);
     setUpdate(data);
   };
 

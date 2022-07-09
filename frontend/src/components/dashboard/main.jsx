@@ -9,12 +9,12 @@ import Topbar from "../global/topbar";
 import EditProfil from "../profil/edit";
 
 // Provider
-import { PopupContext } from "../../utils/context/popup";
+import { PopupContext, isAdmin } from "../../utils/context/popup";
 
 function Main(props) {
   // Popup Toggle Context
-  const { isOpen, option, data } = useContext(PopupContext);
-
+  const { isOpen, option, data, isAdmin } = useContext(PopupContext);
+  console.log(data);
   return (
     <>
       {isOpen ? (

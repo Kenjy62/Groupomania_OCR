@@ -1,15 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { PopupContext } from "./popup";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const { togglePopup, callUpdate } = useContext(PopupContext);
+
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [userProfil, setUserProfil] = useState();
   const [userPost, setUserPost] = useState();
 
   const loadUser = (token) => {
+    console.log("test");
     fetch("http://localhost:3000/api/auth/user/" + token, {
       method: "GET",
       headers: {
@@ -30,15 +34,18 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const LoadProfil = (token, username) => {
+  const LoadProfil = (token, username, user) => {
     // Fetch UserData
-    fetch("http://localhost:3000/api/auth/profil/" + username, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }).then((res) => {
+    fetch(
+      "http://localhost:3000/api/auth/profil/" + username + "/" + user.admin,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    ).then((res) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((json) => {
@@ -74,13 +81,48 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const UpdateProfil = (user, avatar, cover, password) => {
+  const UpdateProfil = (e, user, token) => {
+    e.preventDefault();
+
+    console.log(user);
+
+    let fileAvatar = document.getElementById("avatarImage");
+    let fileCover = document.getElementById("coverImage");
+
+    // Form Data
+    let formData = new FormData();
+    formData.append(
+      "avatar",
+      fileAvatar.files[0] ? fileAvatar.files[0] : undefined
+    );
+    formData.append(
+      "cover",
+      fileCover.files[0] ? fileCover.files[0] : undefined
+    );
+    formData.append("_id", user._id);
+    formData.append("admin", user.admin);
+
+    fetch("http://localhost:3000/api/auth/profil/" + user.name, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }).then((res) => {
+      if (res.status == 200) {
+        togglePopup(false);
+        callUpdate(Math.random());
+      }
+    });
+  };
+
+  const LoadSpecificData = (user) => {
     console.log(user);
   };
 
   const Logout = () => {
     localStorage.clear();
-    navigate("/", { replace: true });
+    navigate("/register");
   };
 
   return (
@@ -93,6 +135,7 @@ export const UserProvider = ({ children }) => {
         userPost,
         UpdateProfil,
         Logout,
+        LoadSpecificData,
       }}
     >
       {children}

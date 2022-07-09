@@ -1,14 +1,16 @@
 const Post = require('../models/post')
+const User = require('../models/user')
 const PostHistory = require('../models/post_history')
-const fs = require('fs')
+const mongoose = require('mongoose')
+
 
 // Functions
 exports.add = (req, res, next) => {
     console.log(req.body)
     const post = new Post({
         ...req.body,
-        imageUrl: req.file? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : '',
-        createAt: Date(),
+        imageUrl: req.files.image? `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}` : '',
+        createAt: new Date(),
         likes: 0,
         dislikes: 0,
         usersLiked: [],
@@ -22,12 +24,34 @@ exports.add = (req, res, next) => {
 }
 
 exports.getAll = (req, res, next) => {
-    let skip = req.params.skip
-    let limit = req.params.limit
+    let skip = parseInt(req.params.skip)
+    let limit = parseInt(req.params.limit)
+
+    console.log(skip)
+    console.log(limit)
     
-    Post.find().skip(skip).limit(limit).sort({createAt : -1})
-        .then(post => { res.status(200).json(post) })
-        .catch(error => res.status(404).json({error: 'Error'}))
+    Post.aggregate([
+        { $lookup: { 
+            from: 'users', 
+            localField: 'author', 
+            foreignField: 'name', 
+            as :'userdata'},
+        }, 
+        { $project: {
+            userdata: { 
+                _id: 0, 
+                name: 0, 
+                lastName: 0, 
+                password: 0, 
+                admin: 0, 
+                email: 0, 
+                __v: 0 }
+        }
+        }, {$skip: skip}, {$limit: limit}
+    ]).sort({createAt: -1})
+                    .then(post => {
+                        res.status(200).json(post)
+                    })
 }
 
 exports.setReaction = (req, res, next) => {
@@ -76,26 +100,39 @@ exports.delete = (req, res, next) => {
         })
 }
 
+exports.deleteComment = (req, res, next) => {
+    
+    let commentsId = mongoose.Types.ObjectId(req.params.commentsId);
+    let postId = mongoose.Types.ObjectId(req.body.id)
+
+    Post.findByIdAndUpdate({_id: postId}, {$pull: {'comments': {_id: commentsId}}}, {safe: true, multi: true})
+        .then(result => res.status(200).json({message: 'ok'}))
+        .catch((err) => res.status(400).json({err}))
+}
+
 exports.update = (req, res, next) => {
     console.log(req.body)
 
-    let postId = req.params.postId
+    let postId = mongoose.Types.ObjectId(req.params.postId)
 
-    const Obj = req.file? {
+    console.log(postId)
+
+    const Obj = req.files? {
         ...req.body,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
     } : req.body.image === ''? {
         ...req.body,
-        imageUrl : ''
+        imageUrl : '',
     } : {
-        ...req.body
+        ...req.body,
     }
 
    Post.findOne({_id: postId})
     .then(post => {
         let postBackup = post
             Post.updateOne({_id: postId}, {...Obj, _id: postId})
-                .then(() => {
+                .then((result) => {
+                    console.log(result)
                     const postsave = new PostHistory({
                         originalId: postBackup._id,
                         text: postBackup.text,
@@ -113,15 +150,29 @@ exports.update = (req, res, next) => {
 exports.getPostByUser = (req, res, next) => {
     let user = req.params.username
 
-    Post.find({author: user}).sort({createAt : -1})
-        .then(post => {
-            if(post.length > 0){
-                res.status(200).json({post: post})
-            } else {
-                res.status(200).json({post: 'Aucun post pour le moment'})
-            }
-        })
-        .catch((error) => res.status(400).json({error: error}))
+    Post.aggregate([
+        {$match: { author: user}},
+        { $lookup: { 
+            from: 'users', 
+            localField: 'author', 
+            foreignField: 'name', 
+            as :'userdata'},
+        }, 
+        { $project: {
+            userdata: { 
+                _id: 0, 
+                name: 0, 
+                lastName: 0, 
+                password: 0, 
+                admin: 0, 
+                email: 0, 
+                __v: 0 }
+        }
+        }
+    ]).sort({createAt: -1})
+    .then(post => {
+        res.status(200).json({post: post})
+    })
 }
 
 exports.addComment = (req, res, next) => {
@@ -130,7 +181,7 @@ exports.addComment = (req, res, next) => {
     Post.find({_id: req.body.postId})
         .then(post => {
             if(post.length > 0){
-                Post.updateOne({_id: req.body.postId}, {$push: {'comments': {author: req.body.author, text: req.body.text, createAt: Date()}}})
+                Post.updateOne({_id: req.body.postId}, {$push: {'comments': {author: req.body.author, text: req.body.text, createAt: Date(), avatar: req.body.avatar}}})
                 .then(() => res.status(200).json({message: 'Add comments'}))
                 .catch((error) => res.status(400).json({error: error}))
             }
@@ -138,14 +189,21 @@ exports.addComment = (req, res, next) => {
         .catch(error => console.log(error))
 }
 
-exports.getDetails = (req, res, next) => {
+exports.getDetails = async (req, res, next) => {
     const postId = req.params.postId
 
     Post.findOne({_id: postId})
-        .then(post => {
-            if(post){
-                res.status(200).json({data: post})
-            }
+        .then(data => {
+            if(data){
+               User.findOne({name: data.author})
+               .then(user => {
+                   const obj = {
+                        ...data._doc,
+                        avatar: user.avatar
+                    }
+                    res.status(200).json({data: obj})
         })
         .catch(error => console.log(error))
+        }
+    })
 }

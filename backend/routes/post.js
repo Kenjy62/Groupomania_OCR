@@ -18,6 +18,7 @@ router.post('/:postId/update', auth, multer, postController.update)
 
 // Comments
 router.post('/comments/add', auth, postController.addComment)
+router.post('/comments/delete/:commentsId', auth, postController.deleteComment)
 
 router.get('/test2/details/:postId', auth, postController.getDetails)
 

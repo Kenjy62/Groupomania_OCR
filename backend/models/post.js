@@ -13,7 +13,8 @@ var postSchema = new mongoose.Schema({
     comments: {type: [{
         author: {type: String},
         text: {type: String},
-        createAt: {type:Date}        
+        createAt: {type:Date},
+        avatar: '',        
     }], required: true},
 });
 

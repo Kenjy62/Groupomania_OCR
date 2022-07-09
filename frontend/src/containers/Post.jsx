@@ -5,6 +5,7 @@ import { useEffect, useContext } from "react";
 // Provider
 
 import { UserContext } from "../utils/context/user";
+import { PopupContext } from "../utils/context/popup";
 
 // Style
 import "../styles/dashboard.css";
@@ -19,11 +20,12 @@ function Post(props) {
   const token = localStorage.getItem("token");
 
   const { loadUser, user } = useContext(UserContext);
+  const { update } = useContext(PopupContext);
 
   // Fetch UserData
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [update]);
 
   // Render Page
   return (

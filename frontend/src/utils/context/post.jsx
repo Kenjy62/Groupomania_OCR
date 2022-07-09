@@ -1,8 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { PopupContext } from "./popup";
 
 export const PostContext = createContext();
+export const UserContext = createContext();
 
 export const PostProvider = ({ children }) => {
+  const { callUpdate, togglePopup } = useContext(PopupContext);
   const [feed, setFeed] = useState();
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
@@ -37,7 +40,7 @@ export const PostProvider = ({ children }) => {
     });
   };
 
-  const AddComment = (postId, user, data, token) => {
+  const AddComment = (postId, user, data, token, avatar) => {
     console.log("here");
     if (!data) {
       setError(`Impossible d'envoyer un message vide.`);
@@ -49,6 +52,7 @@ export const PostProvider = ({ children }) => {
         postId: postId,
         author: user,
         text: data,
+        avatar: avatar,
       };
 
       fetch("http://localhost:3000/api/post/comments/add", {
@@ -65,6 +69,7 @@ export const PostProvider = ({ children }) => {
           let input = document.querySelector("input#response");
           input.value = "";
           setNewComment(Math.random());
+          togglePopup(false);
           setTimeout(() => {
             setSuccess(undefined);
           }, 3000);
@@ -73,6 +78,25 @@ export const PostProvider = ({ children }) => {
         }
       });
     }
+  };
+
+  const DeleteComment = (postId, token, id) => {
+    let data = {
+      id: id,
+    };
+
+    fetch("http://localhost:3000/api/post/comments/delete/" + postId, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status === 200) {
+        callUpdate(Math.random());
+      }
+    });
   };
 
   const GetComments = (postid, token) => {
@@ -104,6 +128,7 @@ export const PostProvider = ({ children }) => {
         GetComments,
         post,
         newComment,
+        DeleteComment,
       }}
     >
       {children}

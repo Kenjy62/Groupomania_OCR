@@ -159,7 +159,7 @@
     justify-content: center;
 }
 
-.post--details--comments--list--user > img {
+.post--details--comments--list--user > a > img {
     height: 40px;
     width: 40px;
     border-radius: 50%;

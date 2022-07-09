@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 // Components
 import PostActions from "../dashboard/Post/actions";
@@ -34,7 +35,7 @@ function PostDetails(props) {
         <div className="post--details--user">
           <Link to={"/user/" + post.author}>
             <div className="post--details--user--picture">
-              <img src="https://i.picsum.photos/id/599/200/200.jpg?hmac=2WLKs3sxIsaEQ-6WZaa6YMxgl6ZC4cNnid0aqupm2is"></img>
+              <img src={post.avatar}></img>
             </div>
           </Link>
         </div>
@@ -42,7 +43,8 @@ function PostDetails(props) {
           <div className="post--details--content--details">
             <span>{post.author}</span>{" "}
             <span>
-              <i class="fa-solid fa-hourglass"></i> 3 hours
+              <i class="fa-solid fa-hourglass"></i>{" "}
+              <Moment format="DD/MM/YYYY à HH:mm:ss">{post.createAt}</Moment>
             </span>
           </div>
           <div className="post--details--content--text">{post.text}</div>
@@ -54,8 +56,8 @@ function PostDetails(props) {
           <PostActions props={post} user={props.user} />
           <CreateComments post={post} user={props.user} />
 
-          {post.comments.reverse().map((post, key) => {
-            return <PostComment post={post} />;
+          {post.comments.reverse().map((data, key) => {
+            return <PostComment post={data} id={post._id} user={props.user} />;
           })}
         </div>
       </div>

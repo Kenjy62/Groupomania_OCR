@@ -63,7 +63,7 @@ function Create(props) {
               text: text,
               imageUrl: data.imageUrl,
             };
-            document.getElementById("voiler").style.display = "none";
+            togglePopup(false);
             callUpdate(Math.random());
           });
         }

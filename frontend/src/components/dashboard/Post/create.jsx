@@ -4,13 +4,12 @@ import { useState, useEffect, useContext } from "react";
 
 // Provider
 import { PopupContext } from "../../../utils/context/popup";
+import { PostContext } from "../../../utils/context/post";
 
 function Create(props) {
-  const [setError] = useState();
-
   // Close popup
   const { togglePopup } = useContext(PopupContext);
-  const { callUpdate } = useContext(PopupContext);
+  const { CreatePost, error } = useContext(PostContext);
 
   // Edit Popup
   const [postUpdate, setPostUpdate] = useState({
@@ -29,42 +28,9 @@ function Create(props) {
 
   // Delete image
   const deleteImage = () => {
+    let inputFile = document.getElementById("postImageFile");
+    inputFile.value = null;
     setPostUpdate({ text: postUpdate.text, imageUrl: undefined });
-  };
-
-  /* Create Post (MOVE TO POST CONTE*/
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let text = document.getElementById("post--text").value;
-    let file = document.getElementById("postImageFile");
-
-    if (!text) {
-      setError("On ne publie pas de message vide.");
-      setTimeout(() => {
-        setError(undefined);
-      }, 5000);
-    } else {
-      let formData = new FormData();
-      formData.append("author", props.user.name);
-      formData.append("text", text);
-      formData.append("image", file.files[0] ? file.files[0] : null);
-
-      fetch("http://localhost:3000/api/post/add", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }).then((res) => {
-        if (res.status == 201) {
-          const data = res.json();
-          data.then(() => {
-            togglePopup(false);
-            callUpdate(Math.random());
-          });
-        }
-      });
-    }
   };
 
   return (
@@ -78,7 +44,14 @@ function Create(props) {
         >
           <i class="fa-solid fa-xmark"></i>
         </div>
-        <textarea id="post--text" placeholder="Quoi de neuf?"></textarea>
+        <div className="error" style={{ display: error ? "block" : "none" }}>
+          {error}
+        </div>
+        <textarea
+          style={{ marginTop: 15 }}
+          id="post--text"
+          placeholder="Quoi de neuf?"
+        ></textarea>
         <div className="postImage">
           {postUpdate.imageUrl ? (
             <img id="post--edit--preview" src={postUpdate.imageUrl}></img>
@@ -112,7 +85,10 @@ function Create(props) {
             ></input>
           </div>
         </div>
-        <button style={{ marginTop: 15 }} onClick={(e) => handleSubmit(e)}>
+        <button
+          style={{ marginTop: 15 }}
+          onClick={(e) => CreatePost(e, props.user)}
+        >
           Créer le post
         </button>
       </div>

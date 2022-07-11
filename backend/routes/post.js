@@ -22,6 +22,7 @@ router.post('/comments/delete/:commentsId', auth, postController.deleteComment)
 
 router.get('/test2/details/:postId', auth, postController.getDetails)
 
+
 // Find User Post for Profil
 
 router.get('/:username', postController.getPostByUser)

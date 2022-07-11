@@ -19,7 +19,13 @@ function Left(props) {
     <div className="left">
       <div className="blocks">
         <div className="blocks--user--infos">
-          <img src={props.user ? props.user.avatar : <Loader />} />
+          <img
+            src={props.user ? props.user.avatar : <Loader />}
+            onError={(e) => (
+              (e.target.onError = null),
+              (e.target.src = "http://localhost:3000/images/default.png")
+            )}
+          />
           <span>
             {props.user ? props.user.name + " " + props.user.lastName : null}
           </span>

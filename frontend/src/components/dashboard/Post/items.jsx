@@ -2,13 +2,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import { useContext } from "react";
 
 // Component
 import PostActions from "./actions";
 import CreateComments from "./create-comments";
 import Loader from "../../global/loader";
 
+// Provider
+
+import { PopupContext } from "../../../utils/context/popup";
+
 const PostList = (props) => {
+  // Context
+  const { togglePopup } = useContext(PopupContext);
+
   if (!props.item) {
     return <Loader />;
   } else {
@@ -26,7 +34,14 @@ const PostList = (props) => {
                   <div className="post--details--user">
                     <Link to={"/user/" + post.author}>
                       <div className="post--details--user--picture">
-                        <img src={post.userdata[0].avatar}></img>
+                        <img
+                          src={post.userdata[0].avatar}
+                          onError={(e) => (
+                            (e.target.onError = null),
+                            (e.target.src =
+                              "http://localhost:3000/images/default.png")
+                          )}
+                        ></img>
                       </div>
                     </Link>
                   </div>
@@ -50,6 +65,15 @@ const PostList = (props) => {
                     ) : null}
                     <PostActions props={post} user={props.user} key={key} />
                     <CreateComments post={post} user={props.user} />
+                    <div className="post--edit">
+                      {post.edit > 0 ? (
+                        <span
+                          onClick={() => togglePopup("post_history", post._id)}
+                        >
+                          Modifier {post.edit} fois
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </>

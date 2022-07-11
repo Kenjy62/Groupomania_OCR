@@ -2,10 +2,12 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 
 import { PopupContext } from "../../../utils/context/popup";
+import { PostContext } from "../../../utils/context/post";
 
 function Edit(props) {
   // Close popup
-  const { togglePopup, callUpdate } = useContext(PopupContext);
+  const { togglePopup } = useContext(PopupContext);
+  const { EditPost, error } = useContext(PostContext);
 
   // Edit Popup
   const [postUpdate, setPostUpdate] = useState({
@@ -24,58 +26,9 @@ function Edit(props) {
 
   // Delete image
   const deleteImage = () => {
+    let InputFile = document.getElementById("postImageFile");
+    InputFile.value = null;
     setPostUpdate({ text: postUpdate.text, imageUrl: "remove" });
-  };
-
-  const test = () => {
-    if (postUpdate != undefined) {
-      if (
-        postUpdate.text != props.originalPost.text ||
-        postUpdate.imageUrl != props.originalPost.imageUrl
-      ) {
-        if (postUpdate.text != "") {
-          let file = document.getElementById("postImageFile");
-          let formData = new FormData();
-          formData.append("text", postUpdate.text);
-
-          if (postUpdate.imageUrl === "new") {
-            formData.append("image", file.files[0]);
-          } else if (postUpdate.imageUrl === "remove") {
-            formData.append("image", "");
-          }
-
-          // API UPDATE
-          fetch(
-            "http://localhost:3000/api/post/" +
-              props.originalPost._id +
-              "/update",
-            {
-              method: "POST",
-              body: formData,
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          ).then((res) => {
-            if (res.status === 200) {
-              console.log("UPDATE");
-              /* let div = document.getElementById(props.originalPost._id)
-                            div.parentElement.firstChild.textContent = newtext */
-              document.getElementById("voiler").style.display = "none";
-              callUpdate(Math.random());
-            } else {
-              console.log("error");
-            }
-          });
-        } else {
-          console.log("noppppp");
-        }
-      } else {
-        console.log("nnop");
-      }
-    } else {
-      console.log("undefined");
-    }
   };
 
   return (
@@ -89,15 +42,14 @@ function Edit(props) {
         >
           <i class="fa-solid fa-xmark"></i>
         </div>
+        <div className="error" style={{ display: error ? "block" : "none" }}>
+          {error}
+        </div>
         <textarea
+          style={{ marginTop: 15 }}
+          id="textareaPost"
           placeholder={props.originalPost.text}
           defaultValue={props.originalPost.text}
-          onChange={(e) =>
-            setPostUpdate({
-              text: e.target.value,
-              imageUrl: props.originalPost.imageUrl,
-            })
-          }
         ></textarea>
         <div className="postImage">
           {postUpdate.imageUrl ? (
@@ -132,7 +84,12 @@ function Edit(props) {
             ></input>
           </div>
         </div>
-        <button style={{ marginTop: 15 }} onClick={() => test()}>
+        <button
+          style={{ marginTop: 15 }}
+          onClick={() =>
+            EditPost(postUpdate, props.originalPost, props.user.name)
+          }
+        >
           Modifier
         </button>
       </div>

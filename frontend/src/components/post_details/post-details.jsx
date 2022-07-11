@@ -36,7 +36,13 @@ function PostDetails(props) {
         <div className="post--details--user">
           <Link to={"/user/" + post.author}>
             <div className="post--details--user--picture">
-              <img src={post.avatar}></img>
+              <img
+                src={post.avatar}
+                onError={(e) => (
+                  (e.target.onError = null),
+                  (e.target.src = "http://localhost:3000/images/default.png")
+                )}
+              ></img>
             </div>
           </Link>
         </div>

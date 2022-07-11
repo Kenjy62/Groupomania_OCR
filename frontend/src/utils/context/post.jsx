@@ -11,6 +11,7 @@ export const PostProvider = ({ children }) => {
   const [success, setSuccess] = useState();
   const [post, setPost] = useState();
   const [newComment, setNewComment] = useState();
+  const [postHistory, setPostHistory] = useState();
 
   // Load Feed
   const LoadAllPost = (skipParams) => {
@@ -137,6 +138,118 @@ export const PostProvider = ({ children }) => {
     });
   };
 
+  // Create a post
+  const CreatePost = (e, user) => {
+    e.preventDefault();
+
+    let text = document.getElementById("post--text").value;
+    let file = document.getElementById("postImageFile");
+
+    if (!text) {
+      setError("On ne publie pas de message vide.");
+      setTimeout(() => {
+        setError(undefined);
+      }, 5000);
+    } else {
+      let formData = new FormData();
+      formData.append("author", user.name);
+      formData.append("text", text);
+      formData.append("image", file.files[0] ? file.files[0] : null);
+
+      fetch("http://localhost:3000/api/post/add", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }).then((res) => {
+        if (res.status == 201) {
+          const data = res.json();
+          data.then(() => {
+            togglePopup(false);
+            callUpdate(Math.random());
+          });
+        }
+      });
+    }
+  };
+
+  // Edit Post
+  const EditPost = (postUpdate, originalPost, user) => {
+    let textareaPost = document.getElementById("textareaPost");
+    postUpdate.text = textareaPost.value;
+
+    console.log(postUpdate);
+
+    if (postUpdate) {
+      if (
+        postUpdate.text != originalPost.text ||
+        postUpdate.imageUrl != originalPost.imageUrl
+      ) {
+        if (postUpdate.text) {
+          let file = document.getElementById("postImageFile");
+
+          // Form Data
+          let formData = new FormData();
+          formData.append("text", postUpdate.text);
+          formData.append("user", user);
+
+          if (postUpdate.imageUrl === "new") {
+            formData.append("image", file.files[0]);
+          } else if (postUpdate.imageUrl === "remove") {
+            formData.append("imageState", null);
+          } else if (postUpdate.imageUrl === originalPost.imageUrl) {
+            formData.append("imageState", "same");
+          }
+
+          // API UPDATE
+          fetch(
+            "http://localhost:3000/api/post/" + originalPost._id + "/update",
+            {
+              method: "POST",
+              body: formData,
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          ).then((res) => {
+            if (res.status === 200) {
+              togglePopup(false);
+              callUpdate(Math.random());
+            } else {
+              setError("Une erreur est survenue.");
+            }
+          });
+        } else {
+          setError("Il n'y à pas de texte dans le champs correspondant.");
+        }
+      } else {
+        setError("Le poste est identique ");
+      }
+    } else {
+      setError("Le poste est identique ");
+    }
+  };
+
+  // Get History Post
+  const HistoryPost = (postId) => {
+    fetch("http://localhost:3000/api/history/" + postId, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        const data = res.json();
+        data.then((item) => {
+          console.log(item);
+          setPostHistory(item.result);
+          return postHistory;
+        });
+      }
+    });
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -150,6 +263,10 @@ export const PostProvider = ({ children }) => {
         newComment,
         DeleteComment,
         DeletePost,
+        CreatePost,
+        EditPost,
+        postHistory,
+        HistoryPost,
       }}
     >
       {children}

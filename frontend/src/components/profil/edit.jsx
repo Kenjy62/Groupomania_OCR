@@ -7,7 +7,6 @@ import "../../styles/profil.css";
 
 // Provider
 import { UserContext } from "../../utils/context/user";
-import { PopupContext } from "../../utils/context/popup";
 
 function EditProfil(props) {
   console.log(props);
@@ -15,9 +14,10 @@ function EditProfil(props) {
   // Token
   const token = localStorage.getItem("token");
 
+  // Context
   const { UpdateProfil } = useContext(UserContext);
-  const { togglePopup } = useContext(PopupContext);
 
+  // State
   const [avatar, setAvatar] = useState();
   const [cover, setCover] = useState();
 
@@ -35,11 +35,7 @@ function EditProfil(props) {
     <div className="editProfil">
       <div className="editProfil--background--image">
         <div className="postImage--action" style={{ zIndex: "999999" }}>
-          <label
-            style={{ color: "black" }}
-            for="coverImage"
-            className="postImage--action--items"
-          >
+          <label for="coverImage" className="postImage--action--items">
             <i class="fa-solid fa-image"></i>
           </label>
           <label
@@ -55,18 +51,26 @@ function EditProfil(props) {
             onChange={(e) => setCover(e.target.files[0])}
           ></input>
         </div>
-        <img id="cover" src={props.user ? props.user.cover : null}></img>
+        <img
+          id="cover"
+          src={props.user ? props.user.cover : null}
+          onError={(e) => (
+            (e.target.onError = null),
+            (e.target.src = "http://localhost:3000/images/default-cover.jpg")
+          )}
+        ></img>
       </div>
       <div className="editProfil--avatar">
         <div className="postImage--action" style={{ zIndex: "999999" }}>
           <label
-            style={{ color: "black" }}
+            style={{ width: 30, height: 30 }}
             for="avatarImage"
             className="postImage--action--items"
           >
             <i class="fa-solid fa-image"></i>
           </label>
           <label
+            style={{ width: 30, height: 30 }}
             className="postImage--action--items"
             onClick={() => setCover(props.user.cover)}
           >
@@ -79,7 +83,14 @@ function EditProfil(props) {
             onChange={(e) => setAvatar(e.target.files[0])}
           ></input>
         </div>
-        <img id="avatar" src={props.user ? props.user.avatar : null}></img>
+        <img
+          id="avatar"
+          src={props.user ? props.user.avatar : null}
+          onError={(e) => (
+            (e.target.onError = null),
+            (e.target.src = "http://localhost:3000/images/default.png")
+          )}
+        ></img>
       </div>
       <div classNName="editProfil--user--infos"></div>
       <button onClick={(e) => UpdateProfil(e, props.user, token)}>

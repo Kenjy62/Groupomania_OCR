@@ -16,7 +16,7 @@ exports.signup = (req, res, next) => {
         const user = new User({
             ...req.body,
             avatar: 'http://localhost:3000/images/default.png',
-            cover: 'http://localhost:3000/images/default.png',
+            cover: 'http://localhost:3000/images/default-cover.jpg',
             password: hash,
             admin: false,
         })
@@ -80,7 +80,7 @@ exports.getProfil = (req, res, next) => {
                 user._id = null,
                 user.password = null,
                 user.admin = null,
-                res.status(200).json({message: user})
+                res.status(200).json({data: user})
             }
         })
 }

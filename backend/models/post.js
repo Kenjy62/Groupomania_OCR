@@ -10,6 +10,7 @@ var postSchema = new mongoose.Schema({
     dislikes:{ type: Number, required: true },
     usersLiked: { type: [String], required: true },
     usersDisliked: { type: [String], required: true },
+    edit: {type: Number, required: true},
     comments: {type: [{
         author: {type: String},
         text: {type: String},

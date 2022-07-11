@@ -9,6 +9,7 @@ import Global from "../../containers/global";
 import Topbar from "../global/topbar";
 import EditProfil from "../profil/edit";
 import Loader from "../global/loader";
+import History from "./Post/history";
 
 // Provider
 import { PopupContext } from "../../utils/context/popup";
@@ -24,9 +25,11 @@ function Main(props) {
           {option === "create" ? (
             <Create user={props.user} />
           ) : option === "edit_post" ? (
-            <Edit originalPost={data} />
+            <Edit originalPost={data} user={props.user} />
           ) : option === "edit_profil" ? (
             <EditProfil user={data} />
+          ) : option === "post_history" ? (
+            <History />
           ) : null}
         </div>
       ) : null}

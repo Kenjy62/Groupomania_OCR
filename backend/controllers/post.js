@@ -15,6 +15,7 @@ exports.add = (req, res, next) => {
         dislikes: 0,
         usersLiked: [],
         usersDisliked: [],
+        edit: 0,
         comments: [],
         history: [],
     }) 
@@ -111,33 +112,31 @@ exports.deleteComment = (req, res, next) => {
 }
 
 exports.update = (req, res, next) => {
-    console.log(req.body)
 
     let postId = mongoose.Types.ObjectId(req.params.postId)
 
-    console.log(postId)
-
-    const Obj = req.files? {
+    const Obj = req.files && !req.body.imageState? {
         ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.files.image[0].filename}`,
-    } : req.body.image === ''? {
+    } : req.body.imageState === 'null'? {
         ...req.body,
         imageUrl : '',
-    } : {
+    } : req.body.imageState === 'same'? {
         ...req.body,
-    }
+    } : null
 
    Post.findOne({_id: postId})
     .then(post => {
         let postBackup = post
-            Post.updateOne({_id: postId}, {...Obj, _id: postId})
+            Post.updateOne({_id: postId}, {$set: {...Obj, _id: postId}, $inc: {edit: 1}})
                 .then((result) => {
                     console.log(result)
                     const postsave = new PostHistory({
                         originalId: postBackup._id,
                         text: postBackup.text,
                         imageUrl: postBackup.imageUrl,
-                        updateAt : Date()
+                        updateAt : Date(),
+                        updateBy : req.body.user
                     })
                     postsave.save()
                         .then(() => res.status(200).json({message: 'Update'}))
@@ -206,4 +205,10 @@ exports.getDetails = async (req, res, next) => {
         .catch(error => console.log(error))
         }
     })
+}
+
+exports.getHistory = (req, res, next) => {
+    PostHistory.find({originalId: mongoose.Types.ObjectId(req.params.postId)})
+        .then((result) => res.status(200).json({result}))
+        .catch((error) => res.status(400).json({error: error}))
 }

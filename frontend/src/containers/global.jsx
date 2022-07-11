@@ -30,18 +30,26 @@ function Global(props) {
   useEffect(() => {
     if (props.option === "profil") {
       LoadProfil(token, url, props.user);
+      console.log(userProfil);
     }
   }, [update]);
 
   return (
     <div id="main--container">
-      {props.option === "profil" ? (
-        <div
-          className="profil--cover"
-          style={{
-            backgroundImage: `url(${userProfil ? userProfil.cover : null})`,
-          }}
-        ></div>
+      {props.option === "profil" && userProfil ? (
+        <div className="profil--cover">
+          <img
+            src={
+              userProfil
+                ? userProfil.cover
+                : "http://localhost:3000/images/default-cover.jpg"
+            }
+            onError={(e) => (
+              (e.target.onError = null),
+              (e.target.src = "http://localhost:3000/images/default-cover.jpg")
+            )}
+          />
+        </div>
       ) : null}
       <div
         className="profil--container"

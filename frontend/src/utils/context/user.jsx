@@ -35,6 +35,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const LoadProfil = (token, username, user) => {
+    console.log("LOAD PROFIL");
     // Fetch UserData
     fetch(
       "http://localhost:3000/api/auth/profil/" + username + "/" + user.admin,
@@ -51,7 +52,6 @@ export const UserProvider = ({ children }) => {
         data.then((json) => {
           let dataParse = json.message;
           setUserProfil(dataParse);
-          return setUserProfil;
         });
       } else {
         return "error";

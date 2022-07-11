@@ -1,17 +1,23 @@
 import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PopupContext } from "./popup";
+import { ErrorSuccessContext } from "./error-success";
+
+// Hooks
+import Regex from "../regex";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const { togglePopup, callUpdate } = useContext(PopupContext);
-
+  const { error, success, setError, setSuccess } =
+    useContext(ErrorSuccessContext);
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [userProfil, setUserProfil] = useState();
   const [userPost, setUserPost] = useState();
 
+  // Load Current User
   const loadUser = (token) => {
     console.log("test");
     fetch("http://localhost:3000/api/auth/user/" + token, {
@@ -34,6 +40,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  // Load Profil
   const LoadProfil = (token, username, user) => {
     console.log("LOAD PROFIL");
     // Fetch UserData
@@ -81,6 +88,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  // Update Profil
   const UpdateProfil = (e, user, token) => {
     e.preventDefault();
 
@@ -116,13 +124,118 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const LoadSpecificData = (user) => {
-    console.log(user);
+  // Login
+  const Login = (e) => {
+    e.preventDefault();
+
+    // Data
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    let data = {
+      email: email,
+      password: password,
+    };
+
+    const userLogin = fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    userLogin
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data.userId) {
+          localStorage.setItem("token", data.token);
+          navigate("/dashboard", {
+            state: { data },
+          });
+        } else {
+          setError("Erreur dans la combinaison Email/Mot de passe");
+          setTimeout(() => {
+            setError(undefined);
+          }, 3000);
+        }
+      });
   };
 
+  // Register
+  const Register = (e) => {
+    e.preventDefault();
+
+    // Reset Error/Success MessageBox
+    setError(undefined);
+    setSuccess(undefined);
+
+    // Data
+    const name = document.getElementById("name").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    // Verification
+    if (name && lastName && email && password) {
+      if (email.match(Regex.Email)) {
+        if (lastName.match(Regex.lastName)) {
+          if (name.match(Regex.firstName)) {
+            let data = {
+              name: name,
+              lastName: lastName,
+              email: email,
+              password: password,
+            };
+
+            const userRegister = fetch(
+              "http://localhost:3000/api/auth/signup",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              }
+            );
+
+            userRegister.then((response) => {
+              if (response.status === 201) {
+                setSuccess("Vous pouvez maintenant vous connectez.");
+
+                const inputs = document.querySelectorAll(
+                  "#name, #lastName, #password, #email"
+                );
+
+                inputs.forEach((input) => {
+                  input.value = "";
+                });
+              } else if (response.status === 400) {
+                setError(`Une erreur est survenue, contacter l'administrateur`);
+              }
+            });
+          } else {
+            setError("Veuillez entrer un prénom valide.");
+          }
+        } else {
+          setError("Veuillez entrer un nom de famille valide.");
+        }
+      } else {
+        setError(`L'adresse Email n'est pas valide.`);
+      }
+    } else {
+      setError("Veuillez remplir tout le formulaire.");
+    }
+  };
+
+  // Disconnect
   const Logout = () => {
     localStorage.clear();
-    navigate("/register");
+    setTimeout(() => {
+      navigate("/");
+    });
   };
 
   return (
@@ -135,7 +248,8 @@ export const UserProvider = ({ children }) => {
         userPost,
         UpdateProfil,
         Logout,
-        LoadSpecificData,
+        Login,
+        Register,
       }}
     >
       {children}

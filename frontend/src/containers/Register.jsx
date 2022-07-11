@@ -1,80 +1,21 @@
-// TODO Rework Design
-// TODO Move register function into context
-import React, { useState } from "react";
+// Dependencies
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-/* Res */
+// Ressource and Style
 import Logo from "../assets/global/icon-left-font-monochrome-white.png";
 
-/* Hooks */
-import Regex from "../utils/regex";
+// Provider
+import { UserContext } from "../utils/context/user";
+import { ErrorSuccessContext } from "../utils/context/error-success";
 
 function Register() {
-  // State
-  const [name, setName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState();
-  const [success, setSuccess] = useState();
-
-  // When form is submit
-  const handleSubmit = async (e) => {
-    // Reset Error/Success MessageBox
-    setError(null);
-    setSuccess(null);
-
-    e.preventDefault();
-
-    // Verification
-    if (name && lastName && email && password) {
-      if (email.match(Regex.Email)) {
-        if (lastName.match(Regex.lastName)) {
-          if (name.match(Regex.firstName)) {
-            let data = {
-              name: name,
-              lastName: lastName,
-              email: email,
-              password: password,
-            };
-
-            // Register
-            const userRegister = fetch(
-              "http://localhost:3000/api/auth/signup",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              }
-            );
-
-            userRegister
-              .then((response) => {
-                if (response.status === 201) {
-                  setSuccess("Vous pouvez maintenant vous connectez.");
-                }
-              })
-              .then((data) => {
-                // Other
-              });
-          } else {
-            setError("Veuillez entrer un prénom valide.");
-          }
-        } else {
-          setError("Veuillez entrer un nom de famille valide.");
-        }
-      } else {
-        setError(`L'adresse Email n'est pas valide.`);
-      }
-    } else {
-      setError("Veuillez remplir tout le formulaire.");
-    }
-  };
+  // Context
+  const { Register } = useContext(UserContext);
+  const { success, error } = useContext(ErrorSuccessContext);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ height: "100vh" }}>
       <div className="wrapper-content">
         <div id="logo">
           <img src={Logo}></img>
@@ -88,39 +29,36 @@ function Register() {
           {error}
         </div>
 
-        <form id="register" onSubmit={handleSubmit}>
+        <form id="register">
           <label for="name">Prénom :</label>
-          <input
-            type="text"
-            placeholder="Doe"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
+          <input id="name" type="text" placeholder="Doe" name="name"></input>
           <label for="lastName">Nom de Famille :</label>
           <input
+            id="lastName"
             type="text"
             placeholder="John"
             name="lastName"
-            onChange={(e) => setLastName(e.target.value)}
           ></input>
           <label for="email">Email d'entreprise :</label>
           <input
+            id="email"
             type="text"
             placeholder="@groupomania.com"
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
           ></input>
           <label for="password">Mot de passe : </label>
           <input
+            id="password"
             type="password"
             placeholder="****"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
           ></input>
           <Link to="/" style={{ textAlign: "right", marginBottom: 10 }}>
             Se connecter
           </Link>
-          <button type="submit">S'inscrire</button>
+          <button type="submit" onClick={(e) => Register(e)}>
+            S'inscrire
+          </button>
         </form>
       </div>
     </div>

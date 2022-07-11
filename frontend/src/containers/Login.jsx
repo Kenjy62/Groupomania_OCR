@@ -1,51 +1,27 @@
-// TODO Rework Design
-// TODO Move Login function into context
+// Dependencies
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-
+// Style and assets
 import "../styles/login.css";
 import Logo from "../assets/global/icon-left-font-monochrome-white.png";
 
+// Provider
+import { UserContext } from "../utils/context/user";
+import { ErrorSuccessContext } from "../utils/context/error-success";
+import { useEffect } from "react";
+
 function Login() {
-  let navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState();
+  useEffect(() => {
+    document.body.style.height = "100%";
+  }, []);
 
-  const handleSubmit = async (e) => {
-    let data = {
-      email: email,
-      password: password,
-    };
-    e.preventDefault();
-
-    const userLogin = fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    userLogin
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (data.userId) {
-          localStorage.setItem("token", data.token);
-          navigate("/dashboard", {
-            state: { data },
-          });
-        } else {
-          setError("La combinaison Email/Mot de passe est incorrect.");
-        }
-      });
-  };
+  // Context
+  const { Login } = useContext(UserContext);
+  const { error } = useContext(ErrorSuccessContext);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ height: "100vh" }}>
       <div className="wrapper-content">
         <div id="logo">
           <img src={Logo}></img>
@@ -55,25 +31,27 @@ function Login() {
           {error}
         </div>
 
-        <form id="login" onSubmit={handleSubmit}>
+        <form id="login">
           <label for="email">Votre Email d'entreprise</label>
           <input
+            id="email"
             type="text"
             placeholder="@groupomania.com"
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
           ></input>
           <label for="password">Votre mot de passe</label>
           <input
+            id="password"
             type="Password"
             placeholder="*****"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
           ></input>
           <Link to="/register" style={{ textAlign: "right", marginBottom: 10 }}>
-            S'inscrire
+            <span>S'inscrire</span>
           </Link>
-          <button type="submit">Se Connecter</button>
+          <button type="submit" onClick={(e) => Login(e)}>
+            Se Connecter
+          </button>
         </form>
       </div>
     </div>

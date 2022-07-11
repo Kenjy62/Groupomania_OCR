@@ -49,6 +49,9 @@ button, .button {
     padding-right: 15px;
     padding-left: 15px;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button:hover, .button:hover {
@@ -181,8 +184,8 @@ span.animated {
 header {
   padding-top: 15px;
   padding-bottom: 15px;
-  float: left;
   width: 230px;
+  float: left;
   height: 100%;
   background-color: #52556b;
   box-shadow: 0px 0px 10px 3px #00000038;
@@ -473,4 +476,118 @@ textarea:focus-visible {
   object-fit: cover;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+
+.desktop{
+  display: flex;
+}
+
+.mobile {
+  display: none;
+}
+
+
+
+@media (max-width: 1750px){
+  .left {
+      display: none;
+  }
+
+  .center {
+      width: 100%;
+      margin-right: 120px;
+  }
+
+}
+
+@media (max-width: 1400px){
+  .right {
+      display: none;
+  }
+  
+  .center {
+      width: 100%;
+      margin-right: 0px;
+  }
+}
+
+@media (max-width: 1080px){
+  main {
+    padding-left: 80px;
+  }
+
+  header {
+    width: 80px;
+  }
+
+  header > .logo > a > img.hight-screen {
+    display: none;
+  }
+
+  header > .logo > a > img.low-screen {
+    display: block;
+  }
+
+  nav > ul > a > li > span {
+    display: none
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    box-sizing: border-box;
+  }
+
+}
+
+@media (max-width: 900px){
+  #main--container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 780px){
+  .post {
+    flex-direction: column;
+  }
+
+  .post--details--user {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    background-color: #52556b;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .post--details--content {
+    box-sizing: border-box;
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+}
+
+@media (max-width: 630px){
+  #main--container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .profil--container {
+    padding: 10px;
+  }
+
+  .post--details--content--details {
+    flex-direction: column;
+  }
+
+  .post--details--content--details > span {
+    margin-bottom: 5px;
+  }
 }

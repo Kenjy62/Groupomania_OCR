@@ -2,6 +2,7 @@
 import { useEffect, useContext } from "react";
 
 // Style
+import "../styles/header.css";
 import "../styles/dashboard.css";
 import "../styles/post.css";
 
@@ -21,7 +22,6 @@ function App(props) {
 
   // Fetch UserData
   useEffect(() => {
-    console.log("here");
     loadUser(token);
   }, [update]);
 

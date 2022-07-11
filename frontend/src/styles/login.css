@@ -40,6 +40,7 @@ html, body {
 form#login, form#register {
     display: flex;
     flex-direction: column;
+    margin-top: 15px;
 }
 
 form#login > input, form#register > input {
@@ -54,9 +55,19 @@ form#login > input, form#register > input {
     width: 100%;
 }
 
-
-
 input::placeholder {
     color: black;
 }
 
+form > a > span:hover {
+    border-bottom: 1px solid #FFD7D7;
+}
+
+
+/* MEDIA QUERY */ 
+
+@media (max-width: 750px) { 
+    .wrapper-content {
+        width: 90%;
+    }
+ }

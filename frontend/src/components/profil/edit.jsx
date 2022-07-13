@@ -7,6 +7,7 @@ import "../../styles/profil.css";
 
 // Provider
 import { UserContext } from "../../utils/context/user";
+import { PopupContext } from "../../utils/context/popup";
 
 function EditProfil(props) {
   console.log(props);
@@ -16,6 +17,7 @@ function EditProfil(props) {
 
   // Context
   const { UpdateProfil } = useContext(UserContext);
+  const { togglePopup } = useContext(PopupContext);
 
   // State
   const [avatar, setAvatar] = useState();
@@ -33,6 +35,14 @@ function EditProfil(props) {
 
   return (
     <div className="editProfil">
+      <div
+        onClick={() => {
+          togglePopup();
+        }}
+        className="popup--close"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </div>
       <div className="editProfil--background--image">
         <div className="postImage--action" style={{ zIndex: "999999" }}>
           <label for="coverImage" className="postImage--action--items">
@@ -52,10 +62,11 @@ function EditProfil(props) {
           ></input>
         </div>
         <img
+          alt="Avatar"
           id="cover"
           src={props.user ? props.user.cover : null}
           onError={(e) => (
-            (e.target.onError = null),
+            e.target.onError == null,
             (e.target.src = "http://localhost:3000/images/default-cover.jpg")
           )}
         ></img>
@@ -84,6 +95,7 @@ function EditProfil(props) {
           ></input>
         </div>
         <img
+          alt="Avatar"
           id="avatar"
           src={props.user ? props.user.avatar : null}
           onError={(e) => (

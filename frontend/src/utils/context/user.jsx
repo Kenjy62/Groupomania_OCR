@@ -2,6 +2,7 @@ import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PopupContext } from "./popup";
 import { ErrorSuccessContext } from "./error-success";
+import burl from "../api";
 
 // Hooks
 import Regex from "../regex";
@@ -10,8 +11,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const { togglePopup, callUpdate } = useContext(PopupContext);
-  const { error, success, setError, setSuccess } =
-    useContext(ErrorSuccessContext);
+  const { setError, setSuccess } = useContext(ErrorSuccessContext);
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [userProfil, setUserProfil] = useState();
@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
   // Load Current User
   const loadUser = (token) => {
     console.log("test");
-    fetch("http://localhost:3000/api/auth/user/" + token, {
+    fetch(burl + "/auth/user/" + token, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -44,16 +44,13 @@ export const UserProvider = ({ children }) => {
   const LoadProfil = (token, username, user) => {
     console.log("LOAD PROFIL");
     // Fetch UserData
-    fetch(
-      "http://localhost:3000/api/auth/profil/" + username + "/" + user.admin,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      }
-    ).then((res) => {
+    fetch(burl + "/auth/profil/" + username + "/" + user.admin, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }).then((res) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((json) => {
@@ -110,7 +107,7 @@ export const UserProvider = ({ children }) => {
     formData.append("_id", user._id);
     formData.append("admin", user.admin);
 
-    fetch("http://localhost:3000/api/auth/profil/" + user.name, {
+    fetch(burl + "/auth/profil/" + user.name, {
       method: "POST",
       body: formData,
       headers: {
@@ -137,7 +134,7 @@ export const UserProvider = ({ children }) => {
       password: password,
     };
 
-    const userLogin = fetch("http://localhost:3000/api/auth/login", {
+    const userLogin = fetch(burl + "/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -190,16 +187,13 @@ export const UserProvider = ({ children }) => {
               password: password,
             };
 
-            const userRegister = fetch(
-              "http://localhost:3000/api/auth/signup",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              }
-            );
+            const userRegister = fetch(burl + "/auth/signup", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
 
             userRegister.then((response) => {
               if (response.status === 201) {
@@ -238,6 +232,23 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const SetAdmin = (username, token) => {
+    console.log(username, token);
+
+    let data = {
+      name: username,
+    };
+
+    fetch(burl + "/admin/setAdmin", {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -250,6 +261,7 @@ export const UserProvider = ({ children }) => {
         Logout,
         Login,
         Register,
+        SetAdmin,
       }}
     >
       {children}

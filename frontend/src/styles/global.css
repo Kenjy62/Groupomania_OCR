@@ -350,7 +350,6 @@ input:focus-visible {
 #main--container {
   padding-left: 70px;
   padding-right: 70px;
-  padding-bottom: 120px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -487,28 +486,108 @@ textarea:focus-visible {
   display: none;
 }
 
+.lo-screen {
+  display: none;
+}
+
+.editProfil {
+  box-sizing: border-box;
+  position: relative
+}
+
+.editProfil > button {
+  margin-top: 30px;
+}
+
+.editProfil--background--image {
+  margin-top: 30px;
+}
+
 
 
 @media (max-width: 1750px){
-  .left {
-      display: none;
-  }
-
   .center {
       width: 100%;
-      margin-right: 120px;
+      margin-left: 30px;
+      margin-right: 30px;
+  }
+
+  #main--container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+  }
+
+  .profil--container {
+    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .lo-screen {
+    display: none;
+  }
+
+  .editProfil {
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+  }
+
+  .editProfil--background--image {
+    margin-top: 30px;
   }
 
 }
 
 @media (max-width: 1400px){
-  .right {
-      display: none;
-  }
   
   .center {
       width: 100%;
       margin-right: 0px;
+      margin-left: 0px;
+  }
+
+  #main--container {
+    padding-bottom: 0px;
+  }
+
+  .profil--container {
+    margin-bottom: 0px;
+  }
+
+  .profil--container {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .lo-screen {
+    display: none;
+  }
+
+  .editProfil {
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+  }
+
+  .editProfil--background--image {
+    margin-top: 30px;
   }
 }
 
@@ -542,6 +621,47 @@ textarea:focus-visible {
     box-sizing: border-box;
   }
 
+  #main--container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+  }
+
+  .profil--container {
+    margin-bottom: 0px;
+  }
+
+  .profil--container {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .lo-screen {
+    display: none;
+  }
+
+  .editProfil {
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+  }
+
+  .editProfil--background--image {
+    margin-top: 30px;
+  }
+
 }
 
 @media (max-width: 900px){
@@ -549,9 +669,70 @@ textarea:focus-visible {
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .profil--container {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .lo-screen {
+    display: none;
+  }
+
+  .editProfil {
+    width: 95%;
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .editProfil--background--image {
+    margin-top: 30px;
+  }
+
+  .postEdit {
+    width: 95%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .postEdit > textarea {
+    margin-top: 30px;
+  }
+
+  .postEdit > button {
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 780px){
+
+  .topBar > .topBar--user {
+    justify-content: right;
+  }
+
+  .topBar > .topBar--user > span {
+    display: none;
+  }
+
+  #main--container {
+    padding-bottom: 0px;
+  }
+
   .post {
     flex-direction: column;
   }
@@ -571,12 +752,69 @@ textarea:focus-visible {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
+
+  .center > .blocks {
+    margin-bottom: 0px;
+  }
+
+  .profil--container {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .editProfil {
+    width: 95%;
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .editProfil--background--image {
+    margin-top: 30px;
+  }
+
+  .lo-screen {
+    display: none;
+  }
+
+  .hi-screen {
+    display: block;
+  }
+
+  .postEdit {
+    width: 95%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .postEdit > textarea {
+    margin-top: 30px;
+  }
+
+  .postEdit > button {
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 630px){
   #main--container {
     padding-left: 5px;
     padding-right: 5px;
+    padding-bottom: 0px;
   }
 
   .profil--container {
@@ -590,4 +828,85 @@ textarea:focus-visible {
   .post--details--content--details > span {
     margin-bottom: 5px;
   }
+
+  .topBar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .topBar--user {
+    justify-content: right;
+  }
+
+  .topBar--links {
+    display: none;
+  }
+
+  .topBar > .topBar--user > span {
+    display: none;
+  }
+
+  .center > .blocks {
+    margin-bottom: 0px;
+  }
+
+  .postEdit {
+    width: 95%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .postEdit > textarea {
+    margin-top: 30px;
+  }
+
+  .postEdit > button {
+    width: 100%;
+  }
+
+  .post--details--comments--list {
+    flex-direction: column;
+  }
+
+  .post--details--comments--list--content {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .post--details--comments--list--user {
+    width: 100%;
+  }
+
+  .hi-screen {
+    display: none;
+  }
+
+  .profil--container {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .editProfil {
+    width: 95%;
+    box-sizing: border-box;
+    position: relative
+  }
+
+  .editProfil > button {
+    margin-top: 30px;
+    width: 100%;
+  }
+  
+  .editProfil--background--image {
+    margin-top: 30px;
+  }
+
 }

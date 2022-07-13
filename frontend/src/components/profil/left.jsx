@@ -7,13 +7,17 @@ import Loader from "../global/loader";
 
 // Provider
 import { PopupContext } from "../../utils/context/popup";
+import { UserContext } from "../../utils/context/user";
 
 function Left(props) {
+  const token = localStorage.getItem("token");
+
   var url = window.location.href;
   url = url.split("/");
   url = url[4];
 
   const { togglePopup } = useContext(PopupContext);
+  const { SetAdmin } = useContext(UserContext);
 
   return props.user ? (
     <div className="left">
@@ -64,7 +68,9 @@ function Left(props) {
           {!props.me ? null : props.me.admin === true ? (
             <>
               <button>Supprimer l'utilisateur</button>
-              <button>Promouvoir Admin</button>
+              <button onClick={() => SetAdmin(props.user.name, token)}>
+                Promouvoir Admin
+              </button>
             </>
           ) : null}
         </div>

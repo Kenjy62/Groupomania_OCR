@@ -11,6 +11,7 @@ const moment = require('moment')
 const userRoads = require('./routes/user')
 const postRoads = require('./routes/post')
 const historyRoads = require('./routes/post_history')
+const adminRoads = require('./routes/admin')
 
 // Connect MongoDB at default port 27017.
 
@@ -42,6 +43,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use('/api/auth', userRoads)
 app.use('/api/post', postRoads)
 app.use('/api/history', historyRoads)
+app.use('/api/admin', adminRoads)
 
 
 // App Listen

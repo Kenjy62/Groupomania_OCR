@@ -38,7 +38,7 @@ function CreateComments(props) {
         className="post--response"
         post-id={props.post._id}
         style={{
-          display: props.post._id == postId && show === true ? "flex" : "none",
+          display: props.post._id === postId && show === true ? "flex" : "none",
         }}
       >
         <input
@@ -48,6 +48,7 @@ function CreateComments(props) {
           onChange={(e) => setResponse(e.target.value)}
         />
         <button
+          className="hi-screen"
           onClick={() =>
             AddComment(
               props.post._id,
@@ -59,6 +60,20 @@ function CreateComments(props) {
           }
         >
           Répondre
+        </button>
+        <button
+          className="lo-screen"
+          onClick={() =>
+            AddComment(
+              props.post._id,
+              props.user.name,
+              response,
+              token,
+              props.user.avatar
+            )
+          }
+        >
+          <i class="fa-solid fa-paper-plane"></i>
         </button>
       </div>
     </>

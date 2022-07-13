@@ -35,7 +35,7 @@ function Create(props) {
 
   return (
     <>
-      <div className="postEdit">
+      <div className="postEdit" style={{ position: "relative" }}>
         <div
           onClick={() => {
             togglePopup();
@@ -47,14 +47,14 @@ function Create(props) {
         <div className="error" style={{ display: error ? "block" : "none" }}>
           {error}
         </div>
-        <textarea
-          style={{ marginTop: 15 }}
-          id="post--text"
-          placeholder="Quoi de neuf?"
-        ></textarea>
+        <textarea id="post--text" placeholder="Quoi de neuf?"></textarea>
         <div className="postImage">
           {postUpdate.imageUrl ? (
-            <img id="post--edit--preview" src={postUpdate.imageUrl}></img>
+            <img
+              id="post--edit--preview"
+              alt="Preview"
+              src={postUpdate.imageUrl}
+            ></img>
           ) : null}
           <div className="postImage--action">
             <label

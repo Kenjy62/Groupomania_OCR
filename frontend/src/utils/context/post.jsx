@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { PopupContext } from "./popup";
+import burl from "../api";
 
 export const PostContext = createContext();
 export const UserContext = createContext();
@@ -15,7 +16,7 @@ export const PostProvider = ({ children }) => {
 
   // Load Feed
   const LoadAllPost = (skipParams) => {
-    fetch("http://localhost:3000/api/post/" + skipParams + "/10", {
+    fetch(burl + "/post/" + skipParams + "/10", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +59,7 @@ export const PostProvider = ({ children }) => {
         avatar: avatar,
       };
 
-      fetch("http://localhost:3000/api/post/comments/add", {
+      fetch(burl + "/post/comments/add", {
         method: "post",
         headers: {
           "Content-type": "application/json",
@@ -88,7 +89,7 @@ export const PostProvider = ({ children }) => {
       id: id,
     };
 
-    fetch("http://localhost:3000/api/post/comments/delete/" + postId, {
+    fetch(burl + "/post/comments/delete/" + postId, {
       method: "post",
       headers: {
         "Content-type": "application/json",
@@ -104,7 +105,7 @@ export const PostProvider = ({ children }) => {
 
   // Get all comments of a specific post
   const GetComments = (postid, token) => {
-    fetch("http://localhost:3000/api/post/test2/details/" + postid, {
+    fetch(burl + "/post/test2/details/" + postid, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -123,7 +124,7 @@ export const PostProvider = ({ children }) => {
 
   // Delete a post (user or admin)
   const DeletePost = (postId) => {
-    fetch("http://localhost:3000/api/post/" + postId + "/delete", {
+    fetch(burl + "/post/" + postId + "/delete", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -156,7 +157,7 @@ export const PostProvider = ({ children }) => {
       formData.append("text", text);
       formData.append("image", file.files[0] ? file.files[0] : null);
 
-      fetch("http://localhost:3000/api/post/add", {
+      fetch(burl + "/post/add", {
         method: "POST",
         body: formData,
         headers: {
@@ -203,16 +204,13 @@ export const PostProvider = ({ children }) => {
           }
 
           // API UPDATE
-          fetch(
-            "http://localhost:3000/api/post/" + originalPost._id + "/update",
-            {
-              method: "POST",
-              body: formData,
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          ).then((res) => {
+          fetch(burl + "/post/" + originalPost._id + "/update", {
+            method: "POST",
+            body: formData,
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }).then((res) => {
             if (res.status === 200) {
               togglePopup(false);
               callUpdate(Math.random());
@@ -233,7 +231,7 @@ export const PostProvider = ({ children }) => {
 
   // Get History Post
   const HistoryPost = (postId) => {
-    fetch("http://localhost:3000/api/history/" + postId, {
+    fetch(burl + "/history/" + postId, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

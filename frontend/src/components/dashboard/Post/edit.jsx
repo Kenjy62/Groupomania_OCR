@@ -46,14 +46,17 @@ function Edit(props) {
           {error}
         </div>
         <textarea
-          style={{ marginTop: 15 }}
           id="textareaPost"
           placeholder={props.originalPost.text}
           defaultValue={props.originalPost.text}
         ></textarea>
         <div className="postImage">
           {postUpdate.imageUrl ? (
-            <img id="post--edit--preview" src={postUpdate.imageUrl}></img>
+            <img
+              alt="Post Pic"
+              id="post--edit--preview"
+              src={postUpdate.imageUrl}
+            ></img>
           ) : null}
           <div className="postImage--action">
             <label

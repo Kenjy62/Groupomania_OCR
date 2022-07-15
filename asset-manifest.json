@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Groupomania_OCR/static/css/main.6611cdd3.css",
+    "main.js": "/Groupomania_OCR/static/js/main.01bc7321.js",
+    "static/media/icon-left-font-monochrome-white.png": "/Groupomania_OCR/static/media/icon-left-font-monochrome-white.a0970c256935e8d9a152.png",
+    "index.html": "/Groupomania_OCR/index.html",
+    "main.6611cdd3.css.map": "/Groupomania_OCR/static/css/main.6611cdd3.css.map",
+    "main.01bc7321.js.map": "/Groupomania_OCR/static/js/main.01bc7321.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6611cdd3.css",
+    "static/js/main.01bc7321.js"
+  ]
+}

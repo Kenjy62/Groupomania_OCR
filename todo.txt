@@ -1,1 +1,0 @@
-//TODO fix span en dessous de l'avatar sur la liste des postes

@@ -33,7 +33,7 @@ const root = ReactDOM.createRoot(
 
 // Roads
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
   <ErrorSuccessProvider>
   <PopupProvider>
   <UserProvider>

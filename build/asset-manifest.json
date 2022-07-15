@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6611cdd3.css",
+    "main.js": "/static/js/main.459b7dd0.js",
+    "static/media/icon-left-font-monochrome-white.png": "/static/media/icon-left-font-monochrome-white.a0970c256935e8d9a152.png",
+    "index.html": "/index.html",
+    "main.6611cdd3.css.map": "/static/css/main.6611cdd3.css.map",
+    "main.459b7dd0.js.map": "/static/js/main.459b7dd0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6611cdd3.css",
+    "static/js/main.459b7dd0.js"
+  ]
+}

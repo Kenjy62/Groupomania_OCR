@@ -47,7 +47,7 @@ app.use('/api/admin', adminRoads)
 
 
 // App Listen
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running at :${port}`);
   console.log(moment().format('DD MMMM HH:mm'))
 });

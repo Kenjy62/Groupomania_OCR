@@ -1,3 +1,3 @@
-const burl = "http://localhost:3000/api";
+const burl = "https://groupomania-kenjy.herokuapp.com/api";
 
 export default burl;

@@ -1,19 +1,23 @@
+//Dependencies
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 // Assets
 import Logo from "../../assets/global/icon-left-font-monochrome-white.png";
 import LogoLowScreen from "../../assets/global/logo-low-screen.png";
 
-// Popup Context
-import { useContext } from "react";
+// Provider
 import { PopupContext } from "../../utils/context/popup";
 
+// Render Page
 function Header(props) {
+  // Logout function
   function Logout() {
     localStorage.clear();
   }
 
+  // Context
   const { togglePopup } = useContext(PopupContext);
 
   return (
@@ -25,40 +29,33 @@ function Header(props) {
             <img class="low-screen" src={LogoLowScreen}></img>
           </Link>
         </div>
-        <nav>
-          <ul>
-            <Link to="/dashboard">
-              <li className={props.option == "home" ? "active" : null}>
-                <i class="fa-solid fa-house"></i> <span>Home</span>
-              </li>
-            </Link>
-            <Link to="">
-              <li className={props.option == "notification" ? "active" : null}>
-                <i class="fa-solid fa-bell"></i> <span>Notifications</span>
-              </li>
-            </Link>
-            {props.user ? (
+
+        {props.user ? (
+          <nav>
+            <ul>
+              <Link to="/dashboard">
+                <li className={props.option == "home" ? "active" : null}>
+                  <i class="fa-solid fa-house"></i> <span>Home</span>
+                </li>
+              </Link>
+
               <Link to={"/user/" + props.user.name} user={props.user}>
                 <li className={props.option == "profil" ? "active" : null}>
                   <i class="fa-solid fa-user"></i> <span>Profil</span>
                 </li>
               </Link>
-            ) : (
-              <Link to={"/user/"}>
-                <li className={props.option == "profil" ? "active" : null}>
-                  <i class="fa-solid fa-user"></i> <span>Profil</span>
+
+              <Link to="/" onClick={() => Logout()}>
+                <li>
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>{" "}
+                  <span>Exit</span>
                 </li>
               </Link>
-            )}
+            </ul>
+          </nav>
+        ) : null}
 
-            <Link to="/" onClick={() => Logout()}>
-              <li>
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>{" "}
-                <span>Exit</span>
-              </li>
-            </Link>
-          </ul>
-        </nav>
+        {/* Desktop Button */}
         <div
           onClick={() => togglePopup("create")}
           style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
@@ -66,6 +63,8 @@ function Header(props) {
         >
           New Post
         </div>
+
+        {/* Mobile Button */}
         <div
           onClick={() => togglePopup("create")}
           style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}

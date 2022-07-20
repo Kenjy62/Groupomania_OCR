@@ -27,6 +27,7 @@ function App(props) {
     loadUser(token);
   }, [update]);
 
+  // Fetch LastUser and LastPost
   useEffect(() => {
     lastUser(token);
     topPost(token);

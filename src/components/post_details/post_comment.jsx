@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { PostContext } from "../../utils/context/post";
 
+import burl from "../../utils/api";
+
 function PostComment(props) {
   // Context
   const { DeleteComment } = useContext(PostContext);
@@ -16,10 +18,10 @@ function PostComment(props) {
       <div className="post--details--comments--list--user">
         <Link to={"/user/" + props.post.author}>
           <img
-            src={props.post.avatar}
+            src={burl + props.post.avatar}
             onError={(e) => (
               (e.target.onError = null),
-              (e.target.src = "http://localhost:3000/images/default.png")
+              (e.target.src = burl + "/images/default-avatar.png")
             )}
           ></img>
         </Link>

@@ -13,6 +13,8 @@ import PostComment from "./post_comment";
 import { PostContext } from "../../utils/context/post";
 import { PopupContext } from "../../utils/context/popup";
 
+import burl from "../../utils/api";
+
 function PostDetails(props) {
   // Context
   const { GetComments, post, newComment } = useContext(PostContext);
@@ -37,10 +39,10 @@ function PostDetails(props) {
           <Link to={"/user/" + post.author}>
             <div className="post--details--user--picture">
               <img
-                src={post.avatar}
+                src={burl + post.avatar}
                 onError={(e) => (
                   (e.target.onError = null),
-                  (e.target.src = "http://localhost:3000/images/default.png")
+                  (e.target.src = burl + "/images/default.png")
                 )}
               ></img>
             </div>
@@ -57,7 +59,7 @@ function PostDetails(props) {
           <div className="post--details--content--text">{post.text}</div>
           {post.imageUrl != "" ? (
             <div className="post--details--content--image">
-              <img src={post.imageUrl}></img>
+              <img src={burl + post.imageUrl}></img>
             </div>
           ) : null}
           <PostActions props={post} user={props.user} option={"details"} />

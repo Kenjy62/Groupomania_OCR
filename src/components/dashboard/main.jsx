@@ -15,13 +15,19 @@ import History from "./Post/history";
 import { PopupContext } from "../../utils/context/popup";
 
 function Main(props) {
+  console.log("Dashboard Main");
+  console.log(props);
+
   // Context
   const { isOpen, option, data } = useContext(PopupContext);
 
   return (
     <>
       {isOpen ? (
-        <div id="voiler" style={{ display: isOpen ? "flex" : "none" }}>
+        <div
+          id="voiler"
+          style={{ display: isOpen ? "flex" : "none", zIndex: "10" }}
+        >
           {option === "create" ? (
             <Create user={props.user} />
           ) : option === "edit_post" ? (
@@ -37,7 +43,12 @@ function Main(props) {
       <main>
         <Topbar user={props.user} />
         {props.user ? (
-          <Global option={props.option} user={props.user} />
+          <Global
+            option={props.option}
+            user={props.user}
+            LastUser={props.LastUser}
+            TopPost={props.TopPost}
+          />
         ) : (
           <Loader />
         )}

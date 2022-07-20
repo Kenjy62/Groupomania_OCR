@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
 
   // Load Current User
   const loadUser = (token) => {
-    console.log("test");
     fetch(burl + "/auth/user/" + token, {
       method: "GET",
       headers: {
@@ -34,8 +33,8 @@ export const UserProvider = ({ children }) => {
           setUser(dataParse);
           return setUser;
         });
-      } else {
-        return "error";
+      } else if (res.status === 400) {
+        setUser(false);
       }
     });
   };
@@ -55,7 +54,7 @@ export const UserProvider = ({ children }) => {
         const data = res.json();
         data.then((json) => {
           let dataParse = json.message;
-          setUserProfil(dataParse);
+          return setUserProfil(dataParse);
         });
       } else {
         return "error";
@@ -73,10 +72,10 @@ export const UserProvider = ({ children }) => {
         const data = res.json();
         data.then((data) => {
           console.log(data);
-          if (data.post != "Aucun post pour le moment") {
+          if (data.post != false) {
             setUserPost(data.post);
             return setUserPost;
-          } else if (data.post == "Aucun post pour le moment") {
+          } else if (data.post === false) {
             setUserPost(false);
             return setUserPost;
           }
@@ -246,7 +245,39 @@ export const UserProvider = ({ children }) => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
+    }).then((res) => {
+      if (res.status === 200) {
+        const data = res.json();
+        data.then((result) => {
+          document.getElementById("isAdmin").textContent = result.isAdmin
+            ? "Retirer Administrateur"
+            : "Passer Administrateur";
+        });
+      }
     });
+  };
+
+  const deleteUser = (me, username, token) => {
+    if (me.admin === true) {
+      let data = {
+        name: username,
+      };
+
+      fetch(burl + "/admin/deleteUser", {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          navigate("/dashboard", {
+            state: { data },
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -262,6 +293,7 @@ export const UserProvider = ({ children }) => {
         Login,
         Register,
         SetAdmin,
+        deleteUser,
       }}
     >
       {children}

@@ -1,0 +1,53 @@
+.topPost--item {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.topPost--item:hover {
+    background-color: #52556b;
+}
+
+.topPost--item--avatar {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.topPost--item--avatar > img {
+    width: 70%;
+    margin: auto;
+    border-radius: 50px;
+}
+
+.topPost--item--content {
+    flex: 2; 
+    box-sizing: border-box;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topPost--item--likes {
+    flex: 0.5; 
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.topPost--item--likes > i {
+    color: white;
+}
+
+.topPost--item--likes > span {
+    font-size: 10px;
+    color: white;
+    margin-left: 5px;
+}

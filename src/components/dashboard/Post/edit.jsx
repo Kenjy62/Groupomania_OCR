@@ -4,6 +4,8 @@ import { useState, useEffect, useContext } from "react";
 import { PopupContext } from "../../../utils/context/popup";
 import { PostContext } from "../../../utils/context/post";
 
+import burl from "../../../utils/api";
+
 function Edit(props) {
   // Close popup
   const { togglePopup } = useContext(PopupContext);
@@ -55,7 +57,7 @@ function Edit(props) {
             <img
               alt="Post Pic"
               id="post--edit--preview"
-              src={postUpdate.imageUrl}
+              src={burl + postUpdate.imageUrl}
             ></img>
           ) : null}
           <div className="postImage--action">

@@ -9,18 +9,22 @@ import PostActions from "./actions";
 import CreateComments from "./create-comments";
 import Loader from "../../global/loader";
 
+import burl from "../../../utils/api";
+
 // Provider
 
 import { PopupContext } from "../../../utils/context/popup";
 
 const PostList = (props) => {
+  console.log(props.item);
+
   // Context
   const { togglePopup } = useContext(PopupContext);
 
   if (!props.item) {
     return <Loader />;
   } else {
-    if (props.item.length === 0) {
+    if (props.item === false) {
       return (
         <h1 style={{ textAlign: "center" }}>Aucun post pour le moment..</h1>
       );
@@ -35,11 +39,10 @@ const PostList = (props) => {
                     <Link to={"/user/" + post.author}>
                       <div className="post--details--user--picture">
                         <img
-                          src={post.userdata[0].avatar}
+                          src={burl + post.userdata[0].avatar}
                           onError={(e) => (
                             (e.target.onError = null),
-                            (e.target.src =
-                              "http://localhost:3000/images/default.png")
+                            (e.target.src = burl + "/images/default-avatar.png")
                           )}
                         ></img>
                       </div>
@@ -60,7 +63,7 @@ const PostList = (props) => {
                     </div>
                     {post.imageUrl != "" ? (
                       <div className="post--details--content--image">
-                        <img src={post.imageUrl}></img>
+                        <img src={burl + post.imageUrl}></img>
                       </div>
                     ) : null}
                     <PostActions props={post} user={props.user} key={key} />

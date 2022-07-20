@@ -4,6 +4,8 @@ import { useContext } from "react";
 
 import { PopupContext } from "../../../../utils/context/popup";
 
+import burl from "../../../../utils/api";
+
 function Item(props) {
   const { togglePopup } = useContext(PopupContext);
 
@@ -17,12 +19,12 @@ function Item(props) {
       >
         <i class="fa-solid fa-xmark"></i>
       </div>
-      <div className="history--item">
+      <div className="history--item" style={{ marginTop: 50 }}>
         <div className="history--item--text">{props.post.text}</div>
 
         {props.post.imageUrl != "" ? (
           <div className="history--item--image">
-            <img src={props.post.imageUrl} />
+            <img src={burl + props.post.imageUrl} />
           </div>
         ) : null}
 

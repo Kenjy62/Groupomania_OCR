@@ -10,6 +10,10 @@ import Item from "../Post/history/item";
 import { PopupContext } from "../../../utils/context/popup";
 import { PostContext } from "../../../utils/context/post";
 
+// Plugins
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
+
 function History(props) {
   // Close popup
   const { togglePopup, data } = useContext(PopupContext);
@@ -22,13 +26,15 @@ function History(props) {
   return (
     <>
       <div className="post--history">
-        {postHistory ? (
-          postHistory.reverse().map((item, key) => {
-            return <Item post={item} />;
-          })
-        ) : (
-          <Loader />
-        )}
+        <SimpleBar style={{ maxHeight: 500 }}>
+          {postHistory ? (
+            postHistory.reverse().map((item, key) => {
+              return <Item post={item} />;
+            })
+          ) : (
+            <Loader />
+          )}
+        </SimpleBar>
       </div>
     </>
   );

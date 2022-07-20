@@ -14,6 +14,9 @@ import PostDetails from "../../post_details/post-details";
 import Loader from "../../global/loader";
 
 function Posts(props) {
+  console.log("POST");
+  console.log(props);
+
   // Context
   const { update } = useContext(PopupContext);
   const { LoadAllPost, feed } = useContext(PostContext);
@@ -24,12 +27,13 @@ function Posts(props) {
   // Load Feed (10 by 10)
   useEffect(() => {
     LoadAllPost(skip);
+    console.log(feed);
   }, [skip, update]);
 
   return (
     <>
       <div id="post--feed">
-        {feed ? (
+        {feed || (!feed && props.option == "profil") ? (
           // If Load Profil
           props.option == "profil" ? (
             <PostList key={Math.random()} item={props.post} user={props.user} />

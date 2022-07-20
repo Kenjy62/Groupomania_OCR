@@ -27,7 +27,7 @@ function Header(props) {
         </div>
         <nav>
           <ul>
-            <Link to="/">
+            <Link to="/dashboard">
               <li className={props.option == "home" ? "active" : null}>
                 <i class="fa-solid fa-house"></i> <span>Home</span>
               </li>

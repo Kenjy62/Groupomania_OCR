@@ -76,6 +76,7 @@ export const PostProvider = ({ children }) => {
           setTimeout(() => {
             setSuccess(undefined);
           }, 3000);
+          callUpdate(Math.random());
         } else {
           // error
         }

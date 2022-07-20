@@ -5,6 +5,8 @@ import { useEffect, useContext } from "react";
 // Components
 import Posts from "../components/dashboard/Post/posts";
 import Left from "../components/profil/left";
+import LastUser from "../components/global/lastUser";
+import TopPost from "../components/global/topPost";
 
 // Style
 
@@ -14,7 +16,12 @@ import "../styles/profil.css";
 import { UserContext } from "../utils/context/user";
 import { PopupContext } from "../utils/context/popup";
 
+import burl from "../utils/api";
+
 function Global(props) {
+  console.log("GLOBAL");
+  console.log(props);
+
   const { LoadProfil, userProfil, userPost } = useContext(UserContext);
   const { update } = useContext(PopupContext);
 
@@ -30,7 +37,6 @@ function Global(props) {
   useEffect(() => {
     if (props.option === "profil") {
       LoadProfil(token, url, props.user);
-      console.log(userProfil);
     }
   }, [update]);
 
@@ -41,12 +47,12 @@ function Global(props) {
           <img
             src={
               userProfil
-                ? userProfil.cover
-                : "http://localhost:3000/images/default-cover.jpg"
+                ? burl + userProfil.cover
+                : burl + `images/default-cover.jpg`
             }
             onError={(e) => (
               (e.target.onError = null),
-              (e.target.src = "http://localhost:3000/images/default-cover.jpg")
+              (e.target.src = burl + `images/default-cover.jpg`)
             )}
           />
         </div>
@@ -80,7 +86,14 @@ function Global(props) {
         </div>
 
         <div className="right">
-          <div className="blocks"></div>
+          <div className="blocks">
+            <div className="blocks--title">Derniers Inscrits</div>
+            <LastUser data={props.LastUser} />
+          </div>
+          <div className="blocks">
+            <div className="blocks--title">Top Posts</div>
+            <TopPost data={props.TopPost} />
+          </div>
         </div>
       </div>
     </div>

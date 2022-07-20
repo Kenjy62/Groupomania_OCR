@@ -3,37 +3,38 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Provider
+import { PopupProvider } from './utils/context/popup'
+import { UserProvider } from './utils/context/user';
+import { PostProvider } from './utils/context/post';
+import { InputCommentProvider } from './utils/context/input_comment';
+import { ErrorSuccessProvider } from './utils/context/error-success';
+import { SystemProvider } from './utils/context/system';
 
-/* Roads */
+// Roads 
 import Login from './containers/Login';
 import Register from './containers/Register'
 import Dashboard from './containers/Dashboard'
 import Profil from './containers/Profil'
 import Post from './containers/Post.jsx'
 
-
-/* CSS */
+// CSS
 import './styles/normalize.css'
 import './styles/icons.css'
 import './styles/global.css'
 
-/* Provider */
-import { PopupProvider } from './utils/context/popup'
-import { UserProvider } from './utils/context/user';
-import { PostProvider } from './utils/context/post';
-import { InputCommentProvider } from './utils/context/input_comment';
-import { ErrorSuccessProvider } from './utils/context/error-success';
-
 // Protected
 import { Protected } from './utils/context/auth';
 
+// Root
 const root = ReactDOM.createRoot(
   document.getElementById("root")
 );
 
 // Roads
 root.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter>
+  <SystemProvider>
   <ErrorSuccessProvider>
   <PopupProvider>
   <UserProvider>
@@ -51,5 +52,6 @@ root.render(
   </UserProvider>
   </PopupProvider>
   </ErrorSuccessProvider>
+  </SystemProvider>
   </BrowserRouter>
 );

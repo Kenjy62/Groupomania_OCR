@@ -909,4 +909,26 @@ textarea:focus-visible {
     margin-top: 30px;
   }
 
+  .hi-screen {
+    display: none;
+  }
+
+  .lo-screen {
+    display: block;
+  }
+
+}
+
+button {
+  cursor: pointer;
+}
+
+.blocks--title {
+  width: 100%;
+  background-color: #52556b;
+  box-sizing: border-box;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }

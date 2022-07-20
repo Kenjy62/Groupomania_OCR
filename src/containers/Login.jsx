@@ -2,20 +2,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
+// Provider
+import { UserContext } from "../utils/context/user";
+import { ErrorSuccessContext } from "../utils/context/error-success";
+
 // Style and assets
 import "../styles/login.css";
 import Logo from "../assets/global/icon-left-font-monochrome-white.png";
 
-// Provider
-import { UserContext } from "../utils/context/user";
-import { ErrorSuccessContext } from "../utils/context/error-success";
-import { useEffect } from "react";
-
 function Login() {
-  useEffect(() => {
-    document.body.style.height = "100%";
-  }, []);
-
   // Context
   const { Login } = useContext(UserContext);
   const { error } = useContext(ErrorSuccessContext);

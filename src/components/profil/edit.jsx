@@ -9,6 +9,8 @@ import "../../styles/profil.css";
 import { UserContext } from "../../utils/context/user";
 import { PopupContext } from "../../utils/context/popup";
 
+import burl from "../../utils/api";
+
 function EditProfil(props) {
   console.log(props);
 
@@ -64,10 +66,10 @@ function EditProfil(props) {
         <img
           alt="Avatar"
           id="cover"
-          src={props.user ? props.user.cover : null}
+          src={props.user ? burl + props.user.cover : null}
           onError={(e) => (
             e.target.onError == null,
-            (e.target.src = "http://localhost:3000/images/default-cover.jpg")
+            (e.target.src = burl + `images/default-cover.jpg`)
           )}
         ></img>
       </div>
@@ -97,10 +99,10 @@ function EditProfil(props) {
         <img
           alt="Avatar"
           id="avatar"
-          src={props.user ? props.user.avatar : null}
+          src={props.user ? burl + props.user.avatar : null}
           onError={(e) => (
             (e.target.onError = null),
-            (e.target.src = "http://localhost:3000/images/default.png")
+            (e.target.src = burl + `/images/default-avatar.png`)
           )}
         ></img>
       </div>

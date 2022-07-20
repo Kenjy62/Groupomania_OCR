@@ -132,7 +132,14 @@ function Main(props) {
             </div>
           </div>
           <div className="right">
-            <div className="blocks"></div>
+            <div className="blocks">
+              <div className="blocks--title">Derniers Inscrits</div>
+              <LastUser data={props.LastUser} />
+            </div>
+            <div className="blocks">
+              <div className="blocks--title">Top Posts</div>
+              <TopPost data={props.TopPost} />
+            </div>
           </div>
         </div>
       </div>

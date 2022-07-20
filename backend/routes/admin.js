@@ -10,5 +10,6 @@ const adminController = require('../controllers/admin')
 
 // History Post
 router.post('/setAdmin', auth, adminController.setAdmin)
+router.post('/deleteUser', auth, adminController.deleteUser)
 
 module.exports = router

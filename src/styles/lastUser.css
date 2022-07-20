@@ -1,0 +1,31 @@
+.lastUser--item {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    justify-content: left;
+}
+
+.lastUser--item:hover {
+    background-color: #52556b;
+}
+
+.lastUser--item:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.lastUser--item--avatar, .lastUser--item--avatar > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.lastUser--item--name {
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 15px;
+}

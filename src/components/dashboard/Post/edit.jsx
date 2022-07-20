@@ -1,14 +1,19 @@
+// Dependencies
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 
-import { PopupContext } from "../../../utils/context/popup";
+// Provider
 import { PostContext } from "../../../utils/context/post";
 
+// Utils
 import burl from "../../../utils/api";
 
+// Components
+import ClosePopup from "../../global/close-popup";
+
+// Render Page
 function Edit(props) {
   // Close popup
-  const { togglePopup } = useContext(PopupContext);
   const { EditPost, error } = useContext(PostContext);
 
   // Edit Popup
@@ -36,22 +41,18 @@ function Edit(props) {
   return (
     <>
       <div className="postEdit">
-        <div
-          onClick={() => {
-            togglePopup();
-          }}
-          className="popup--close"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </div>
+        <ClosePopup />
+
         <div className="error" style={{ display: error ? "block" : "none" }}>
           {error}
         </div>
+
         <textarea
           id="textareaPost"
           placeholder={props.originalPost.text}
           defaultValue={props.originalPost.text}
         ></textarea>
+
         <div className="postImage">
           {postUpdate.imageUrl ? (
             <img

@@ -2,14 +2,16 @@
 import React from "react";
 import { useState, useContext } from "react";
 
-// Context
+// Provider
 import { InputCommentContext } from "../../../utils/context/input_comment";
 import { PostContext } from "../../../utils/context/post";
 
+// Render Page/Component
 function CreateComments(props) {
+  // Token
   const token = localStorage.getItem("token");
 
-  // Context hide/show response input
+  // Context
   const { show, postId } = useContext(InputCommentContext);
   const { AddComment, success, error } = useContext(PostContext);
 

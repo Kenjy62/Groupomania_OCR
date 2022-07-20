@@ -14,11 +14,12 @@ import { PostContext } from "../../../utils/context/post";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
-function History(props) {
+function History() {
   // Close popup
-  const { togglePopup, data } = useContext(PopupContext);
+  const { data } = useContext(PopupContext);
   const { postHistory, HistoryPost } = useContext(PostContext);
 
+  // Load History Post
   useEffect(() => {
     HistoryPost(data);
   }, []);

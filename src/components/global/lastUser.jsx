@@ -1,10 +1,14 @@
+// Dependencies
 import React from "react";
 
+// Style
 import "../../styles/lastUser.css";
+
+// Utils
 import burl from "../../utils/api";
 
+// Render Page/Component
 function LastUser(props) {
-  console.log(props);
   return props.data
     ? props.data.map((data) => {
         return (

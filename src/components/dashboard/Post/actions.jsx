@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import { PopupContext } from "../../../utils/context/popup";
 import { InputCommentContext } from "../../../utils/context/input_comment";
 import { PostContext } from "../../../utils/context/post";
 
+// Render Page/Component
 function PostActions(props) {
   let post = props.props;
 
@@ -23,7 +25,7 @@ function PostActions(props) {
   const [countLikes, setCountLikes] = useState(post.likes);
   const [countDislikes, setCountDislikes] = useState(post.dislikes);
 
-  // Verify if already reaction by user
+  // Verify if already liked/disliked by user
   useEffect(() => {
     if (props.user) {
       let alreadyLiked = post.usersLiked.indexOf(props.user.name) > -1;
@@ -36,7 +38,7 @@ function PostActions(props) {
     }
   }, []);
 
-  // Post a reaction (MOVE TO POST CONTEXT)
+  // Set Reaction
   const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
@@ -110,12 +112,11 @@ function PostActions(props) {
             setPostId(post._id);
           }}
         >
-          {" "}
           {alreadyLiked == 1 ? (
             <i className="fa-solid fa-heart" style={{ color: "green" }}></i>
           ) : (
             <i className="fa-regular fa-heart"></i>
-          )}{" "}
+          )}
           ({countLikes})
         </span>
         <span
@@ -125,12 +126,11 @@ function PostActions(props) {
             setPostId(post._id);
           }}
         >
-          {" "}
           {alreadyDisliked == 1 ? (
             <i style={{ color: "red" }} className="fa-solid fa-heart-crack"></i>
           ) : (
             <i className="fa-solid fa-heart-crack"></i>
-          )}{" "}
+          )}
           ({countDislikes})
         </span>
         {props.user ? (

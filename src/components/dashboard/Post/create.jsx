@@ -3,12 +3,14 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 
 // Provider
-import { PopupContext } from "../../../utils/context/popup";
 import { PostContext } from "../../../utils/context/post";
 
+// Components
+import ClosePopup from "../../global/close-popup";
+
+// Render Page
 function Create(props) {
   // Close popup
-  const { togglePopup } = useContext(PopupContext);
   const { CreatePost, error } = useContext(PostContext);
 
   // Edit Popup
@@ -35,19 +37,15 @@ function Create(props) {
 
   return (
     <>
-      <div className="postEdit" style={{ position: "relative" }}>
-        <div
-          onClick={() => {
-            togglePopup();
-          }}
-          className="popup--close"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </div>
+      <div className="postEdit">
+        <ClosePopup />
+
         <div className="error" style={{ display: error ? "block" : "none" }}>
           {error}
         </div>
+
         <textarea id="post--text" placeholder="Quoi de neuf?"></textarea>
+
         <div className="postImage">
           {postUpdate.imageUrl ? (
             <img
@@ -56,6 +54,7 @@ function Create(props) {
               src={postUpdate.imageUrl}
             ></img>
           ) : null}
+
           <div className="postImage--action">
             <label
               style={{ color: "black" }}
@@ -85,6 +84,7 @@ function Create(props) {
             ></input>
           </div>
         </div>
+
         <button
           style={{ marginTop: 15 }}
           onClick={(e) => CreatePost(e, props.user)}

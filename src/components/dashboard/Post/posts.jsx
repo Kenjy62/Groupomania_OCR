@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 // Style
 import "../../../styles/dashboard.css";
 
-// Context
+// Provider
 import { PopupContext } from "../../../utils/context/popup";
 import { PostContext } from "../../../utils/context/post";
 
@@ -13,10 +13,8 @@ import PostList from "./items";
 import PostDetails from "../../post_details/post-details";
 import Loader from "../../global/loader";
 
+// Render Page/Component
 function Posts(props) {
-  console.log("POST");
-  console.log(props);
-
   // Context
   const { update } = useContext(PopupContext);
   const { LoadAllPost, feed } = useContext(PostContext);

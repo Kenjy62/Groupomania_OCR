@@ -13,14 +13,16 @@ import PostComment from "./post_comment";
 import { PostContext } from "../../utils/context/post";
 import { PopupContext } from "../../utils/context/popup";
 
+// Utils
 import burl from "../../utils/api";
 
+// Render Page/Component
 function PostDetails(props) {
   // Context
   const { GetComments, post, newComment } = useContext(PostContext);
   const { update } = useContext(PopupContext);
 
-  // Convert URL for getting user profil name
+  // URL Converter
   var url = window.location.href;
   url = url.split("/");
   url = url[4];
@@ -28,6 +30,7 @@ function PostDetails(props) {
   // Token
   const token = localStorage.getItem("token");
 
+  // Get List of comments
   useEffect(() => {
     GetComments(url, token);
   }, [update, newComment]);

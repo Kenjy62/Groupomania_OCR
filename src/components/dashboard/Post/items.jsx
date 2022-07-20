@@ -9,10 +9,10 @@ import PostActions from "./actions";
 import CreateComments from "./create-comments";
 import Loader from "../../global/loader";
 
+// Utils
 import burl from "../../../utils/api";
 
 // Provider
-
 import { PopupContext } from "../../../utils/context/popup";
 
 const PostList = (props) => {

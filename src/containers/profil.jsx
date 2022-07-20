@@ -1,5 +1,4 @@
-// Import dependances
-
+// Dependencies
 import { useContext, useEffect } from "react";
 
 // Style
@@ -15,8 +14,9 @@ import { UserContext } from "../utils/context/user";
 import { PopupContext } from "../utils/context/popup";
 import { SystemContext } from "../utils/context/system";
 
+// Render Page
 function App(props) {
-  // Tokenn
+  // Token
   const token = localStorage.getItem("token");
   const { loadUser, user } = useContext(UserContext);
   const { update } = useContext(PopupContext);
@@ -27,6 +27,7 @@ function App(props) {
     loadUser(token);
   }, [update]);
 
+  // Fetch LastUser, TopPost (5)
   useEffect(() => {
     lastUser(token);
     topPost(token);

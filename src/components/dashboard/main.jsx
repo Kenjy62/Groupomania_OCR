@@ -14,15 +14,14 @@ import History from "./Post/history";
 // Provider
 import { PopupContext } from "../../utils/context/popup";
 
+// Render Page
 function Main(props) {
-  console.log("Dashboard Main");
-  console.log(props);
-
   // Context
   const { isOpen, option, data } = useContext(PopupContext);
 
   return (
     <>
+      {/* Voiler, Popup Center Screen (z-index -> 99999999) */}
       {isOpen ? (
         <div
           id="voiler"

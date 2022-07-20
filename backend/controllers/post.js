@@ -25,7 +25,12 @@ exports.add = (req, res, next) => {
         message: "Post Create",
         imageUrl: req.file ? `${req.file.filename}` : "",
       });
-      User.updateOne({ name: req.body.author }, { $inc: { postsCount: 1 } });
+      User.updateOne(
+        { name: req.body.author },
+        { $inc: { postsCount: 1 } }
+      ).then(() => {
+        console.log("Post +1");
+      });
     })
     .catch((error) => res.status(400).json({ error: "Post sans contenue!" }));
 };
@@ -126,7 +131,10 @@ exports.delete = (req, res, next) => {
     Post.deleteOne({ _id: postId })
       .then(() => {
         res.status(200).json({ message: "Post delete!" });
-        User.updateOne({ name: post.author }, { $inc: { postsCount: -1 } });
+        User.updateOne(
+          { name: post.author },
+          { $inc: { postsCount: -1 } }
+        ).then(() => console.log("post +1"));
       })
       .catch((error) => res.status(400).json({ error: error }))
       .catch((error) => res.status(400).json({ error: error }));

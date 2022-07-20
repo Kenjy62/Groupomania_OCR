@@ -9,19 +9,17 @@ import LastUser from "../components/global/lastUser";
 import TopPost from "../components/global/topPost";
 
 // Style
-
 import "../styles/profil.css";
 
-// Context
+// Provider
 import { UserContext } from "../utils/context/user";
 import { PopupContext } from "../utils/context/popup";
 
+// Utils
 import burl from "../utils/api";
 
 function Global(props) {
-  console.log("GLOBAL");
-  console.log(props);
-
+  // Context
   const { LoadProfil, userProfil, userPost } = useContext(UserContext);
   const { update } = useContext(PopupContext);
 

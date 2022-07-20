@@ -9,15 +9,20 @@ import Loader from "../global/loader";
 import { PopupContext } from "../../utils/context/popup";
 import { UserContext } from "../../utils/context/user";
 
+// Utils
 import burl from "../../utils/api";
 
+// Render Page
 function Left(props) {
+  // Token
   const token = localStorage.getItem("token");
 
+  // Url Converter
   var url = window.location.href;
   url = url.split("/");
   url = url[4];
 
+  // Context
   const { togglePopup } = useContext(PopupContext);
   const { SetAdmin, deleteUser } = useContext(UserContext);
 
@@ -54,14 +59,15 @@ function Left(props) {
 
       {!props ? null : (props.user.name === props.me.name &&
           props.option === "profil") ||
-        (props.me.admin === true && props.option != "feed") ? (
+        (props.me.admin === true && props.option === "profil") ? (
         <div className="blocks">
           <button
             onClick={() => togglePopup("edit_profil", props.user, props.me)}
           >
             Modifier le profil
           </button>
-          {!props.me ? null : props.me.admin === true ? (
+          {!props.me ? null : props.me.admin === true &&
+            props.me.name != url ? (
             <>
               <button
                 onClick={() => deleteUser(props.me, props.user.name, token)}

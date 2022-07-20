@@ -1,4 +1,4 @@
-// Import dependances
+// Dependencies
 import { useEffect, useContext } from "react";
 
 // Provider
@@ -26,6 +26,7 @@ function Post(props) {
     loadUser();
   }, [update]);
 
+  // Fetch LastUser, TopPost (5)
   useEffect(() => {
     lastUser(token);
     topPost(token);

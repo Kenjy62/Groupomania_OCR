@@ -1,8 +1,11 @@
+// Dependencies
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Utils
 import burl from "../../utils/api";
 
+// Render Page/Component
 function Topbar(props) {
   return (
     <div className="topBar">

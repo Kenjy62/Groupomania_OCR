@@ -1,24 +1,21 @@
+// Dependencies
 import React from "react";
 import Moment from "react-moment";
 import { useContext } from "react";
 
+// Provider
 import { PopupContext } from "../../../../utils/context/popup";
 
+// Utils
 import burl from "../../../../utils/api";
 
-function Item(props) {
-  const { togglePopup } = useContext(PopupContext);
+// Components
+import ClosePopup from "../../../global/close-popup";
 
+function Item(props) {
   return (
     <>
-      <div
-        onClick={() => {
-          togglePopup();
-        }}
-        className="popup--close"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </div>
+      <ClosePopup />
       <div className="history--item" style={{ marginTop: 50 }}>
         <div className="history--item--text">{props.post.text}</div>
 

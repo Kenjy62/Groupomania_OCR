@@ -9,22 +9,25 @@ import "../../styles/profil.css";
 import { UserContext } from "../../utils/context/user";
 import { PopupContext } from "../../utils/context/popup";
 
+// Utils
 import burl from "../../utils/api";
 
-function EditProfil(props) {
-  console.log(props);
+// Components
+import ClosePopup from "../global/close-popup";
 
+// Render Page
+function EditProfil(props) {
   // Token
   const token = localStorage.getItem("token");
 
   // Context
   const { UpdateProfil } = useContext(UserContext);
-  const { togglePopup } = useContext(PopupContext);
 
   // State
   const [avatar, setAvatar] = useState();
   const [cover, setCover] = useState();
 
+  // Preview Avatar and Cover
   useEffect(() => {
     if (cover) {
       document.getElementById("cover").src = URL.createObjectURL(cover);
@@ -37,14 +40,7 @@ function EditProfil(props) {
 
   return (
     <div className="editProfil">
-      <div
-        onClick={() => {
-          togglePopup();
-        }}
-        className="popup--close"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </div>
+      <ClosePopup />
       <div className="editProfil--background--image">
         <div className="postImage--action" style={{ zIndex: "999999" }}>
           <label for="coverImage" className="postImage--action--items">

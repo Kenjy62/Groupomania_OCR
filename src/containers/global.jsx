@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 // Components
 import Posts from "../components/dashboard/Post/posts";
@@ -31,10 +31,13 @@ function Global(props) {
   // Token
   const token = localStorage.getItem("token");
 
+  // Post State
+  const [skip, setSkip] = useState(0);
+
   // Fetch current profil user data
   useEffect(() => {
     if (props.option === "profil") {
-      LoadProfil(token, url, props.user);
+      LoadProfil(token, url, props.user, skip);
     }
   }, [update]);
 

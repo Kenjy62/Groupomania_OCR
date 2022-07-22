@@ -7,6 +7,7 @@ import "../../../styles/dashboard.css";
 // Provider
 import { PopupContext } from "../../../utils/context/popup";
 import { PostContext } from "../../../utils/context/post";
+import { UserContext } from "../../../utils/context/user";
 
 // Components
 import PostList from "./items";
@@ -18,14 +19,22 @@ function Posts(props) {
   // Context
   const { update } = useContext(PopupContext);
   const { LoadAllPost, feed } = useContext(PostContext);
+  const { LoadProfil, userProfil, userPost } = useContext(UserContext);
+
+  // Token
+  const token = localStorage.getItem("token");
 
   // State
   const [skip, setSkip] = useState(0);
 
+  // Convert URL for getting user profil name
+  var url = window.location.href;
+  url = url.split("/");
+  url = url[4];
+
   // Load Feed (10 by 10)
   useEffect(() => {
     LoadAllPost(skip);
-    console.log(feed);
   }, [skip, update]);
 
   return (
@@ -47,12 +56,24 @@ function Posts(props) {
         )}
       </div>
 
-      {props.option != "details" ? (
+      {props.option === "feed" ? (
         <div id="post--feed--bottom">
           <button
             className="seeMorePost"
             onClick={() => {
               setSkip(skip + 10);
+            }}
+          >
+            Voir plus d'ancien post
+          </button>
+        </div>
+      ) : props.option === "profil" ? (
+        <div id="post--feed--bottom">
+          <button
+            className="seeMorePost"
+            onClick={() => {
+              setSkip(skip + 10);
+              LoadProfil(token, url, props.user, skip);
             }}
           >
             Voir plus d'ancien post

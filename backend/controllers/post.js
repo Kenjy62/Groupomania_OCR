@@ -60,13 +60,12 @@ exports.getAll = (req, res, next) => {
         },
       },
     },
+    { $sort: { createAt: -1 } },
     { $skip: skip },
     { $limit: limit },
-  ])
-    .sort({ createAt: -1 })
-    .then((post) => {
-      res.status(200).json(post);
-    });
+  ]).then((post) => {
+    res.status(200).json(post);
+  });
 };
 
 exports.setReaction = (req, res, next) => {
@@ -198,6 +197,9 @@ exports.update = (req, res, next) => {
 exports.getPostByUser = (req, res, next) => {
   let user = req.params.username;
 
+  let skip = parseInt(req.params.skip);
+  let limit = parseInt(req.params.limit);
+
   Post.aggregate([
     { $match: { author: user } },
     {
@@ -221,9 +223,13 @@ exports.getPostByUser = (req, res, next) => {
         },
       },
     },
+    { $sort: { createAt: -1 } },
+    { $skip: skip },
+    { $limit: limit },
   ])
     .sort({ createAt: -1 })
     .then((post) => {
+      console.log(post);
       if (post.length > 0) {
         res.status(200).json({ post: post });
       } else {

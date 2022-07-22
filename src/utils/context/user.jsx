@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
   };
 
   // Load Profil
-  const LoadProfil = (token, username, user) => {
+  const LoadProfil = (token, username, user, skipParams) => {
     // Fetch UserData
     fetch(burl + "/auth/profil/" + username + "/" + user.admin, {
       method: "GET",
@@ -60,19 +60,27 @@ export const UserProvider = ({ children }) => {
       }
     });
 
-    fetch("http://localhost:3000/api/post/" + username, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    }).then((res) => {
+    fetch(
+      "http://localhost:3000/api/post/" + username + "/" + skipParams + "/10",
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    ).then((res) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((data) => {
           if (data.post != false) {
-            setUserPost(data.post);
-            return setUserPost;
+            if (skipParams > 0) {
+              setUserPost((userPost) => [...userPost, ...data.post]);
+              return setUserPost;
+            } else if (skipParams === 0) {
+              setUserPost(data.post);
+              return setUserPost;
+            }
           } else if (data.post === false) {
             setUserPost(false);
             return setUserPost;

@@ -9,7 +9,6 @@ import "../../styles/topPost.css";
 import burl from "../../utils/api";
 
 function TopPost(props) {
-  console.log(props);
   return props.data
     ? props.data.map((data) => {
         return (

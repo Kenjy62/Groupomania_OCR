@@ -43,6 +43,7 @@ function Main(props) {
         <Topbar user={props.user} />
         {props.user ? (
           <Global
+            key={props.user._id}
             option={props.option}
             user={props.user}
             LastUser={props.LastUser}

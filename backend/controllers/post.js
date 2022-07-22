@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 
 // Functions
 exports.add = (req, res, next) => {
-  console.log(req.body);
   const post = new Post({
     ...req.body,
     imageUrl: req.files.image ? `/images/${req.files.image[0].filename}` : "",
@@ -38,9 +37,6 @@ exports.add = (req, res, next) => {
 exports.getAll = (req, res, next) => {
   let skip = parseInt(req.params.skip);
   let limit = parseInt(req.params.limit);
-
-  console.log(skip);
-  console.log(limit);
 
   Post.aggregate([
     {
@@ -75,7 +71,6 @@ exports.getAll = (req, res, next) => {
 
 exports.setReaction = (req, res, next) => {
   const postId = req.params.postId;
-  console.log(req.body);
 
   switch (req.body.reaction) {
     case 1:
@@ -181,7 +176,6 @@ exports.update = (req, res, next) => {
       { $set: { ...Obj, _id: postId }, $inc: { edit: 1 } }
     )
       .then((result) => {
-        console.log(result);
         const postsave = new PostHistory({
           originalId: postBackup._id,
           text: postBackup.text,
@@ -231,10 +225,8 @@ exports.getPostByUser = (req, res, next) => {
     .sort({ createAt: -1 })
     .then((post) => {
       if (post.length > 0) {
-        console.log(post);
         res.status(200).json({ post: post });
       } else {
-        console.log(post);
         res.status(200).json({ post: false });
       }
     })
@@ -242,8 +234,6 @@ exports.getPostByUser = (req, res, next) => {
 };
 
 exports.addComment = (req, res, next) => {
-  console.log(req.body);
-
   Post.find({ _id: req.body.postId })
     .then((post) => {
       if (post.length > 0) {
@@ -270,19 +260,21 @@ exports.addComment = (req, res, next) => {
 exports.getDetails = async (req, res, next) => {
   const postId = req.params.postId;
 
-  Post.findOne({ _id: postId }).then((data) => {
-    if (data) {
-      User.findOne({ name: data.author })
-        .then((user) => {
-          const obj = {
-            ...data._doc,
-            avatar: user.avatar,
-          };
-          res.status(200).json({ data: obj });
-        })
-        .catch((error) => console.log(error));
-    }
-  });
+  Post.findOne({ _id: postId })
+    .then((data) => {
+      if (data) {
+        User.findOne({ name: data.author })
+          .then((user) => {
+            const obj = {
+              ...data._doc,
+              avatar: user.avatar,
+            };
+            res.status(200).json({ data: obj });
+          })
+          .catch((error) => res.status(400).json(error));
+      }
+    })
+    .catch((error) => res.status(400).json(error));
 };
 
 exports.getHistory = (req, res, next) => {

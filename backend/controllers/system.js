@@ -10,8 +10,6 @@ exports.lastUser = (req, res, next) => {
 };
 
 exports.topPost = (req, res, next) => {
-  console.log("here");
-
   Post.aggregate([
     {
       $lookup: {

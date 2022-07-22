@@ -35,7 +35,11 @@ function PostDetails(props) {
     GetComments(url, token);
   }, [update, newComment]);
 
-  return post ? (
+  return post == "Error" ? (
+    <div style={{ textAlign: "center", color: "white" }}>
+      <h1>Ce poste n'existe pas !</h1>
+    </div>
+  ) : post ? (
     <>
       <div className="post">
         <div className="post--details--user">

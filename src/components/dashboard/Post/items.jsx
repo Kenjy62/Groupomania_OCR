@@ -16,8 +16,6 @@ import burl from "../../../utils/api";
 import { PopupContext } from "../../../utils/context/popup";
 
 const PostList = (props) => {
-  console.log(props.item);
-
   // Context
   const { togglePopup } = useContext(PopupContext);
 

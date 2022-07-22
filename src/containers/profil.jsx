@@ -16,6 +16,8 @@ import { SystemContext } from "../utils/context/system";
 
 // Render Page
 function App(props) {
+  console.log("PROFIL");
+
   // Token
   const token = localStorage.getItem("token");
   const { loadUser, user } = useContext(UserContext);
@@ -24,6 +26,7 @@ function App(props) {
 
   // Fetch UserData
   useEffect(() => {
+    console.log("LoadUser");
     loadUser(token);
   }, [update]);
 
@@ -38,6 +41,7 @@ function App(props) {
     <>
       <Header option={props.option} user={user} />
       <Main
+        key={user ? user._id : 0}
         option={props.option}
         user={user}
         LastUser={LastUser}

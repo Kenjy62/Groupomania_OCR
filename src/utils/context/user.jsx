@@ -41,7 +41,6 @@ export const UserProvider = ({ children }) => {
 
   // Load Profil
   const LoadProfil = (token, username, user) => {
-    console.log("LOAD PROFIL");
     // Fetch UserData
     fetch(burl + "/auth/profil/" + username + "/" + user.admin, {
       method: "GET",
@@ -71,7 +70,6 @@ export const UserProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((data) => {
-          console.log(data);
           if (data.post != false) {
             setUserPost(data.post);
             return setUserPost;
@@ -87,8 +85,6 @@ export const UserProvider = ({ children }) => {
   // Update Profil
   const UpdateProfil = (e, user, token) => {
     e.preventDefault();
-
-    console.log(user);
 
     let fileAvatar = document.getElementById("avatarImage");
     let fileCover = document.getElementById("coverImage");
@@ -232,8 +228,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const SetAdmin = (username, token) => {
-    console.log(username, token);
-
     let data = {
       name: username,
     };

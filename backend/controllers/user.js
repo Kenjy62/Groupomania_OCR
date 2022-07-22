@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 // Functions
 exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, salt).then((hash) => {
-    console.log(hash);
     const user = new User({
       ...req.body,
       avatar: "/images/default.png",
@@ -25,19 +24,15 @@ exports.signup = (req, res, next) => {
       .save()
       .then(() => res.status(201).json({ message: "User Created" }))
       .catch((error) => {
-        res
-          .status(400)
-          .json({
-            error: `Problème d'inscription, contacter l'administrateur`,
-          });
+        res.status(400).json({
+          error: `Problème d'inscription, contacter l'administrateur`,
+        });
         console.log(error);
       })
       .catch((error) =>
-        res
-          .status(500)
-          .json({
-            error: `Erreur d'encryptage du mot de passe, contacter l'administrateur`,
-          })
+        res.status(500).json({
+          error: `Erreur d'encryptage du mot de passe, contacter l'administrateur`,
+        })
       );
   });
 };
@@ -76,7 +71,6 @@ exports.login = (req, res, next) => {
 };
 
 exports.getData = (req, res, next) => {
-  console.log(req.userId);
   User.findOne({
     _id: req.userId,
   })
@@ -104,8 +98,6 @@ exports.getProfil = (req, res, next) => {
 };
 
 exports.updateProfil = (req, res, next) => {
-  console.log(req.body);
-
   User.findOne({ _id: mongoose.Types.ObjectId(req.body._id) })
     .then((user) => {
       const Obj = req.files

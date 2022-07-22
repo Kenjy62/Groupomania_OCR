@@ -38,8 +38,12 @@ function Global(props) {
     }
   }, [update]);
 
-  return (
-    <div id="main--container">
+  return !userProfil && props.option == "profil" ? (
+    <div style={{ textAlign: "center", marginTop: 100 }}>
+      <h1 style={{ color: "white" }}>Cette utilisateur n'existe pas !</h1>
+    </div>
+  ) : (
+    <div id="main--container" key={userProfil ? userProfil._id : 0}>
       {props.option === "profil" && userProfil ? (
         <div className="profil--cover">
           <img
@@ -55,6 +59,7 @@ function Global(props) {
           />
         </div>
       ) : null}
+
       <div
         className="profil--container"
         style={{
@@ -63,7 +68,12 @@ function Global(props) {
       >
         <div className="left">
           {props.option === "profil" && userProfil && props.user ? (
-            <Left me={props.user} user={userProfil} option={props.option} />
+            <Left
+              key={Math.random()}
+              me={props.user}
+              user={userProfil}
+              option={props.option}
+            />
           ) : props.option === "feed" ? (
             <Left option={props.option} me={props.user} user={props.user} />
           ) : props.option === "details" ? (
@@ -74,7 +84,7 @@ function Global(props) {
         <div className="center">
           <div className="blocks">
             {props.option === "details" ? (
-              <Posts option="details" user={props.user} />
+              <Posts key={Math.random()} option="details" user={props.user} />
             ) : props.option === "profil" ? (
               <Posts option={"profil"} user={props.user} post={userPost} />
             ) : props.option === "feed" ? (

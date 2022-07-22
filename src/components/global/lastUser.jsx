@@ -1,5 +1,6 @@
 // Dependencies
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Style
 import "../../styles/lastUser.css";
@@ -15,13 +16,15 @@ function LastUser(props) {
           <>
             <div className="lastUser--item">
               <div className="lastUser--item--avatar">
-                <img
-                  src={burl + data.avatar}
-                  onError={(e) => (
-                    (e.target.onError = null),
-                    (e.target.src = burl + `/images/default-avatar.png`)
-                  )}
-                />
+                <Link to={"/user/" + data.name}>
+                  <img
+                    src={burl + data.avatar}
+                    onError={(e) => (
+                      (e.target.onError = null),
+                      (e.target.src = burl + `/images/default-avatar.png`)
+                    )}
+                  />
+                </Link>
               </div>
               <div className="lastUser--item--name">
                 {data.name} {data.lastName}

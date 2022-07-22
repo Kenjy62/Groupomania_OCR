@@ -23,7 +23,7 @@ function Topbar(props) {
       <div className="topBar--user">
         <span>Hey, {!props.user ? null : props.user.name} !</span>
         {!props.user ? null : (
-          <Link to={"/user/" + props.user.name}>
+          <Link to={"/user/" + props.user.name} replace={true}>
             <img
               src={!props.user ? null : burl + props.user.avatar}
               onError={(e) => (

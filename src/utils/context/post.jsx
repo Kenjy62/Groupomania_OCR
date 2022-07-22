@@ -115,10 +115,12 @@ export const PostProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((item) => {
-          console.log(item);
           setPost(item.data);
           return post;
         });
+      } else if (res.status === 400) {
+        setPost("Error");
+        return post;
       }
     });
   };

@@ -42,6 +42,14 @@ var userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  socket: {
+    type: String,
+    required: false,
+  },
+  unreadNotify: {
+    type: Number,
+    required: true,
+  },
 });
 
 //Export the model

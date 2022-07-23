@@ -3,6 +3,8 @@ const User = require("../models/user");
 const PostHistory = require("../models/post_history");
 const mongoose = require("mongoose");
 
+const { Socket } = require("./socket");
+
 // Functions
 exports.add = (req, res, next) => {
   const post = new Post({
@@ -250,7 +252,24 @@ exports.addComment = (req, res, next) => {
             },
           }
         )
-          .then(() => res.status(200).json({ message: "Add comments" }))
+          .then(() => {
+            User.findOne({ name: post[0].author })
+              .then((result) => {
+                if (result.name != req.body.author) {
+                  Socket.to(result.socket, "notify", "newComment");
+                  User.updateOne(
+                    { name: result.name },
+                    { $inc: { unreadNotify: 1 } }
+                  ).then((result) => {
+                    console.log(result);
+                    res.status(200).json({ message: "Add comments" });
+                  });
+                } else {
+                  res.status(200).json({ message: "Add comments" });
+                }
+              })
+              .catch((error) => res.status(400).json({ error: error }));
+          })
           .catch((error) => res.status(400).json({ error: error }));
       }
     })

@@ -1,7 +1,8 @@
 //Dependencies
 import React from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { io } from "socket.io-client";
 
 // Assets
 import Logo from "../../assets/global/icon-left-font-monochrome-white.png";
@@ -9,9 +10,24 @@ import LogoLowScreen from "../../assets/global/logo-low-screen.png";
 
 // Provider
 import { PopupContext } from "../../utils/context/popup";
+import { UserContext } from "../../utils/context/user";
 
 // Render Page
 function Header(props) {
+  console.log(props);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3000/");
+    if (props?.user?._id) {
+      socket.emit("init", props.user._id);
+    }
+
+    socket.on("notify", (data) => {
+      console.log("new Notif");
+      newNotification();
+    });
+  }, [props?.user?._id]);
+
   // Logout function
   function Logout() {
     localStorage.clear();
@@ -19,6 +35,7 @@ function Header(props) {
 
   // Context
   const { togglePopup } = useContext(PopupContext);
+  const { notifyCount, newNotification } = useContext(UserContext);
 
   return (
     <>
@@ -45,9 +62,26 @@ function Header(props) {
                 </li>
               </Link>
 
+              <Link to={"/user/" + props.user.name} user={props.user}>
+                <li className={props.option == "profil" ? "active" : null}>
+                  <i class="fa-solid fa-user"></i> <span>Notifications</span>
+                  <span
+                    style={{
+                      padding: 10,
+                      backgroundColor: "#FFD7D7",
+                      borderRadius: 100,
+                      marginLeft: 5,
+                      color: "black",
+                    }}
+                  >
+                    {notifyCount}
+                  </span>
+                </li>
+              </Link>
+
               <Link to="/" onClick={() => Logout()}>
                 <li>
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>{" "}
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
                   <span>Exit</span>
                 </li>
               </Link>

@@ -1,0 +1,2 @@
+- Field UnreadNotificationCount = total
+  Set Default notificationCount react context when loadUser

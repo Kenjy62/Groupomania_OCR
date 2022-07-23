@@ -16,6 +16,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [userProfil, setUserProfil] = useState();
   const [userPost, setUserPost] = useState();
+  const [notifyCount, setNotifyCount] = useState();
 
   // Load Current User
   const loadUser = (token) => {
@@ -31,6 +32,7 @@ export const UserProvider = ({ children }) => {
         data.then((json) => {
           let dataParse = json.data;
           setUser(dataParse);
+          setNotifyCount(dataParse.unreadNotify);
           return setUser;
         });
       } else if (res.status === 400) {
@@ -274,6 +276,10 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const newNotification = () => {
+    setNotifyCount(notifyCount + 1);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -288,6 +294,8 @@ export const UserProvider = ({ children }) => {
         Register,
         SetAdmin,
         deleteUser,
+        notifyCount,
+        newNotification,
       }}
     >
       {children}

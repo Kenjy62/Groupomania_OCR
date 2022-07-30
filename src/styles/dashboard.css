@@ -1,71 +1,68 @@
 .user {
+    align-items: center;
+    display: flex;
     height: 80px;
     margin-right: 25px;
-    display: flex;
-    align-items: center;
 }
 
 .user > a > img {
-    height: 50px;
-    width: 50px;
     border-radius: 50%;
-    margin-left: 30px;
     cursor: pointer;
+    height: 50px;
+    margin-left: 30px;
+    width: 50px;
 }
 
 .user > a > img:hover {
     border: 2px #FFD7D7 solid;
 }
 
-/* */
-
 .post--write {
-    margin-top: 10px;
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 .post--write > form {
-    margin: 0;
-    padding: 0;
-    display: block;
-    border-radius: 10px;
     background-color: transparent;
+    border-radius: 10px;
     box-shadow: none;
     display: flex;
     flex-direction: row;
+    margin: 0;
+    padding: 0;
 }
 
 
 .post--details {
-    padding-left: 15px;
     display: flex;
-    justify-content: space-between;
     flex: 1;
+    justify-content: space-between;
+    padding-left: 15px;
 }
 
 .post--details--image {
-    width: 150px;
     height: 150px;
     margin-top: 10px;
+    width: 150px;
 }
 
 .post--details--image > img {
     height: 150px;
-    width: 150px;
     object-fit: contain;
+    width: 150px;
 }
 
 .post--details--action {
     display: flex;
+    flex: 1;
     flex-direction: row;
     width: 150px;
-    flex: 1;
 }
 
 .post--details--action > button {
+    flex: 1;
     margin-left: 5px;
     margin-right: 5px;
-    flex: 1;
 }
 
 .post--details--action > button > label {
@@ -73,113 +70,114 @@
 }
 
 .post--details--action > label {
-    text-align: right;
     margin-bottom: 15px;
+    text-align: right;
 }
 
 
 #post--feed {
-    padding: 10px;
     border-radius: 10px;
+    padding: 10px;
 }
 
 #post {
-    display: flex;
-    padding: 15px;
-    box-shadow: 0px 0px 10px 3px #00000038;
-    margin-top: 10px;
-    margin-bottom: 10px;
     border-radius: 10px;
+    box-shadow: 0px 0px 10px 3px #00000038;
+    display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 15px;
 }
 
 .post--user--infos {
     display: flex;
-    width: 100px;
     padding: 5px;
+    width: 100px;
 }
 
 .post--user--infos > img {
-    width: 60px;
+    border-radius: 50%;
     height: 60px;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 50%;
+    width: 60px;
 }
 
 .post--content {
-    display: flex;
     color: white;
-    width: calc(100% - 100px);
-    padding: 5px;
+    display: flex;
     flex-direction: column;
+    padding: 5px;
+    width: calc(100% - 100px);
 }
 
 .post--content--infos--image > div > img  {
-    width: 250px;
     height: 250px;
+    width: 250px;
 }
 
 .post--content--actions {
-    margin-top: 15px;
     display: flex;
     justify-content: right;
+    margin-top: 15px;
 }
 
 .post--content--actions > span {
-    margin-left: 10px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 #voiler {
+    background-color: #0000007a;
+    display: none;
+    height: 100%;
+    overflow: hidden;
     position: fixed;
     width: 100%;
-    height: 100%;
-    background-color: #0000007a;
-    overflow: hidden;
-    display: none;
+    z-index: 100;
 }
 
 .postEdit {
-    width: 700px;
-    padding: 35px;
-    margin: auto;
     background-color: #4b4d61;
     border-radius: 10px;
+    margin: auto;
+    padding: 35px;
     position: relative;
+    width: 700px;
 }
 
 .postImage {
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
-    position: relative;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
     min-height: 70px;
+    position: relative;
+    width: 100%;
 }
 
 .postImage > img {
-    width: 100%;
     border-radius: 10px;
     object-fit: cover;
+    width: 100%;
 }
 
 .postImage--action {
-    position: absolute;
-    margin: auto;
     display: flex;
+    margin: auto;
+    position: absolute;
 }
 
 .postImage--action--items {
-    height: 60px;
-    width: 60px;
     background-color: rgba(0, 0, 0, 0.315);
     border-radius: 50%;
+    cursor: pointer;
     display: flex;
+    height: 60px;
     margin-left: 10px;
     margin-right: 10px;
-    cursor: pointer;
+    width: 60px;
 }
 
 .postImage--action--items > i {

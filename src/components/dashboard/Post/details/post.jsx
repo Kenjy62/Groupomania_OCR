@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 
 import PostList from "./items";
 
+import burl from "../../../../utils/api";
+
 function Posts(props) {
   const user = props.data;
   const [skip, setSkip] = useState(0);
@@ -19,7 +21,7 @@ function Posts(props) {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/post/" + skip + "/10", {
+    fetch(burl + "/post/" + skip + "/10", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

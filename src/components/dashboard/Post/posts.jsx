@@ -25,8 +25,12 @@ function Posts(props) {
   // Load Feed (10 by 10)
   useEffect(() => {
     LoadAllPost(skip);
-    console.log(feed);
   }, [skip, update]);
+
+  useEffect(() => {
+    console.log("topTop");
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

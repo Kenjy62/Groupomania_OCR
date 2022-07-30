@@ -23,8 +23,6 @@ export const PopupProvider = ({ children }) => {
   // When post is create / update / delete
   const [update, setUpdate] = useState();
   const callUpdate = (data) => {
-    console.log("Update");
-    console.log(data);
     setUpdate(data);
   };
 

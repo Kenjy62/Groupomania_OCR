@@ -1,3 +1,3 @@
-const burl = "http://localhost:3000/api";
+const burl = "http://192.168.1.19:3000/api";
 
 export default burl;

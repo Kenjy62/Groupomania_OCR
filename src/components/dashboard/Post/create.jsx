@@ -61,7 +61,7 @@ function Create(props) {
               for="postImageFile"
               className="postImage--action--items"
             >
-              <i class="fa-solid fa-image"></i>
+              <i className="fa-solid fa-image"></i>
             </label>
             {!postUpdate.imageUrl ? null : (
               <label
@@ -70,7 +70,7 @@ function Create(props) {
                 }}
                 className="postImage--action--items"
               >
-                <i class="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"></i>
               </label>
             )}
             <input

@@ -1,10 +1,11 @@
 .topPost--item {
     border-radius: 10px;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
     padding: 10px;
-    cursor: pointer;
 }
 
 .topPost--item:hover {
@@ -12,34 +13,47 @@
 }
 
 .topPost--item--avatar {
-    flex: 1;
+    align-items: center;
     box-sizing: border-box;
     display: flex;
+    height: 60px;
+    justify-content: center;
+    width: 60px;
 }
 
 .topPost--item--avatar > img {
-    width: 70%;
-    margin: auto;
     border-radius: 50px;
+    height: 40px;
+    width: 40px;
 }
 
 .topPost--item--content {
-    flex: 2; 
+    align-items: center;
     box-sizing: border-box;
-    font-size: 14px;
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 14px;
+    height: 60px;
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 100%;
 }
 
+.topPost--item--content > span {
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .topPost--item--likes {
-    flex: 0.5; 
+    align-items: center;
     box-sizing: border-box;
     display: flex;
+    height: 60px;
     justify-content: center;
-    align-items: center;
     position: relative;
+    width: 60px;
 }
 
 .topPost--item--likes > i {
@@ -47,7 +61,7 @@
 }
 
 .topPost--item--likes > span {
-    font-size: 10px;
     color: white;
+    font-size: 10px;
     margin-left: 5px;
 }

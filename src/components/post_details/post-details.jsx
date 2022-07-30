@@ -59,7 +59,7 @@ function PostDetails(props) {
           <div className="post--details--content--details">
             <span>{post.author}</span>{" "}
             <span>
-              <i class="fa-solid fa-hourglass"></i>{" "}
+              <i classNames="fa-solid fa-hourglass"></i>{" "}
               <Moment format="DD/MM/YYYY à HH:mm:ss">{post.createAt}</Moment>
             </span>
           </div>
@@ -73,7 +73,14 @@ function PostDetails(props) {
           <CreateComments post={post} user={props.user} />
 
           {post.comments.reverse().map((data) => {
-            return <PostComment post={data} id={post._id} user={props.user} />;
+            return (
+              <PostComment
+                key={Math.random()}
+                post={data}
+                id={post._id}
+                user={props.user}
+              />
+            );
           })}
         </div>
       </div>

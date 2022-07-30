@@ -1,6 +1,6 @@
 // Required
 const mongoose = require("mongoose");
-const hostname = "127.0.0.1";
+const hostname = "192.168.1.19";
 const port = 3000;
 const express = require("express");
 const app = express();
@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const { io } = require("./controllers/socket");
 io.attach(server, {
-  cors: { origin: `http://localhost:3001` },
+  cors: { origin: "*" },
 });
 
 // Roads
@@ -22,6 +22,7 @@ const postRoads = require("./routes/post");
 const historyRoads = require("./routes/post_history");
 const adminRoads = require("./routes/admin");
 const systemRoads = require("./routes/system");
+const notificationsRoads = require("./routes/notifications");
 
 // Connect MongoDB at default port 27017.
 
@@ -52,7 +53,7 @@ app.use(function (req, res, next) {
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+  res.setHeader("Cross-Origin-Resource-Policy", "*");
   next();
 });
 
@@ -67,6 +68,7 @@ app.use("/api/post", postRoads);
 app.use("/api/history", historyRoads);
 app.use("/api/admin", adminRoads);
 app.use("/api/system", systemRoads);
+app.use("/api/notifications", notificationsRoads);
 
 // App Listen
 server.listen(port, hostname, () => {

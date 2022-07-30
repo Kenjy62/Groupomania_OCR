@@ -8,6 +8,8 @@ import { PopupContext } from "../../../utils/context/popup";
 import { InputCommentContext } from "../../../utils/context/input_comment";
 import { PostContext } from "../../../utils/context/post";
 
+import burl from "../../../utils/api";
+
 // Render Page/Component
 function PostActions(props) {
   let post = props.props;
@@ -56,7 +58,7 @@ function PostActions(props) {
         reaction: action,
       };
 
-      fetch("http://localhost:3000/api/post/test/" + postId, {
+      fetch(burl + "/post/test/" + postId, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,18 +93,18 @@ function PostActions(props) {
     <>
       <div id={post._id} className="post--details--content--actions">
         <span onClick={() => toggleInput(post._id)}>
-          <i class="fa-solid fa-comment"></i>
+          <i className="fa-solid fa-comment"></i>
         </span>
         {props.option != "details" ? (
           <Link to={"/post/" + post._id}>
             <span>
-              <i class="fa-solid fa-comments"></i> ({post.comments.length})
+              <i className="fa-solid fa-comments"></i> ({post.comments.length})
             </span>
           </Link>
         ) : (
           <span>
-            <i class="fa-solid fa-comments" style={{ color: "white" }}></i> (
-            {post.comments.length})
+            <i className="fa-solid fa-comments" style={{ color: "white" }}></i>{" "}
+            ({post.comments.length})
           </span>
         )}
         <span
@@ -138,7 +140,7 @@ function PostActions(props) {
             <span>
               <i
                 onClick={() => togglePopup("edit_post", post)}
-                class="fa-solid fa-pen"
+                className="fa-solid fa-pen"
               ></i>
             </span>
           ) : null
@@ -148,7 +150,7 @@ function PostActions(props) {
         {props.user ? (
           post.author == props.user.name || props.user.admin == true ? (
             <span onClick={() => DeletePost(post._id)}>
-              <i class="fa-solid fa-trash"></i>
+              <i className="fa-solid fa-trash"></i>
             </span>
           ) : null
         ) : (

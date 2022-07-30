@@ -4,6 +4,8 @@ import { PopupContext } from "./popup";
 import { ErrorSuccessContext } from "./error-success";
 import burl from "../api";
 
+import $ from "jquery";
+
 // Hooks
 import Regex from "../regex";
 
@@ -17,6 +19,8 @@ export const UserProvider = ({ children }) => {
   const [userProfil, setUserProfil] = useState();
   const [userPost, setUserPost] = useState();
   const [notifyCount, setNotifyCount] = useState();
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+  const [notificationList, setNotificationList] = useState();
 
   // Load Current User
   const loadUser = (token) => {
@@ -43,6 +47,7 @@ export const UserProvider = ({ children }) => {
 
   // Load Profil
   const LoadProfil = (token, username, user) => {
+    console.log("here");
     // Fetch UserData
     fetch(burl + "/auth/profil/" + username + "/" + user.admin, {
       method: "GET",
@@ -54,6 +59,7 @@ export const UserProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((json) => {
+          console.log(json);
           let dataParse = json.message;
           return setUserProfil(dataParse);
         });
@@ -62,7 +68,7 @@ export const UserProvider = ({ children }) => {
       }
     });
 
-    fetch("http://localhost:3000/api/post/" + username, {
+    fetch(burl + "/post/" + username, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -277,7 +283,58 @@ export const UserProvider = ({ children }) => {
   };
 
   const newNotification = () => {
-    setNotifyCount(notifyCount + 1);
+    setNotifyCount((prev) => prev + 1);
+  };
+
+  const openNotificationSidebar = (userId, token) => {
+    setToggleSidebar(toggleSidebar ? false : true);
+    $("#Notifications").animate(
+      {
+        opacity: toggleSidebar ? "0" : "1",
+        height: toggleSidebar ? "0%" : "85%",
+      },
+      300,
+      function () {
+        GetNotifications(userId, token);
+        $("body").css("overflow-y", toggleSidebar ? "scroll" : "hidden");
+      }
+    );
+  };
+
+  const MakeAsRead = (userId, token) => {
+    let data = {
+      userId: userId,
+    };
+
+    fetch(burl + "/notifications/markasread", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status === 200) {
+        setNotifyCount(0);
+      }
+    });
+  };
+
+  const GetNotifications = (userId, token) => {
+    fetch(burl + "/notifications/all/" + userId, {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    }).then((res) => {
+      if (res.status == 200) {
+        const data = res.json();
+        data.then((item) => {
+          setNotificationList(item);
+        });
+      }
+    });
   };
 
   return (
@@ -296,6 +353,11 @@ export const UserProvider = ({ children }) => {
         deleteUser,
         notifyCount,
         newNotification,
+        openNotificationSidebar,
+        MakeAsRead,
+        notificationList,
+        toggleSidebar,
+        setToggleSidebar,
       }}
     >
       {children}

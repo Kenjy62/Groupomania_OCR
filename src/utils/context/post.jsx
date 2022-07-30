@@ -45,7 +45,6 @@ export const PostProvider = ({ children }) => {
 
   // Add a comment
   const AddComment = (postId, user, data, token, avatar) => {
-    console.log("here");
     if (!data) {
       setError(`Impossible d'envoyer un message vide.`);
       setTimeout(() => {
@@ -136,8 +135,6 @@ export const PostProvider = ({ children }) => {
     }).then((res) => {
       if (res.status === 200) {
         callUpdate(Math.random());
-      } else {
-        console.log("error");
       }
     });
   };
@@ -182,8 +179,6 @@ export const PostProvider = ({ children }) => {
   const EditPost = (postUpdate, originalPost, user) => {
     let textareaPost = document.getElementById("textareaPost");
     postUpdate.text = textareaPost.value;
-
-    console.log(postUpdate);
 
     if (postUpdate) {
       if (
@@ -243,7 +238,6 @@ export const PostProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((item) => {
-          console.log(item);
           setPostHistory(item.result);
           return postHistory;
         });

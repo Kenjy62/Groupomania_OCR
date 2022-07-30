@@ -16,7 +16,11 @@ function Item(props) {
   return (
     <>
       <ClosePopup />
-      <div className="history--item" style={{ marginTop: 50 }}>
+      <div
+        key={Math.random()}
+        className="history--item"
+        style={{ marginTop: 50 }}
+      >
         <div className="history--item--text">{props.post.text}</div>
 
         {props.post.imageUrl != "" ? (

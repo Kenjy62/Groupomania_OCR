@@ -6,21 +6,21 @@ html, body {
 .error {
     background-color: #f8d7da;
     border: 1px solid #f5c2c7;
-    color: #842029;
-    margin-top: 15px;
     border-radius: 10px;
-    padding: 10px;
+    color: #842029;
     display: none;
+    margin-top: 15px;
+    padding: 10px;
 }
 
 .success {
     background-color: #d1e7dd;
     border: 1px solid #badbcc;
-    color: #0f5132;
     border-radius: 10px;
-    padding: 10px;
-    margin-top: 15px;
+    color: #0f5132;
     display: none;
+    margin-top: 15px;
+    padding: 10px;
 }
 
 /* Link */
@@ -32,32 +32,32 @@ a {
 
 /* Label */
 label {
-    font-size: 14px;
     color: white;
     cursor: pointer;
+    font-size: 14px;
 }
 
 /* Button w/ effect */
 
 button, .button {
-    transition-duration: 200ms;
-    cursor: pointer;
-    border: none;
+    align-items: center;
     background-color: #FFD7D7;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 15px;
-    padding-left: 15px;
+    border: none;
     border-radius: 20px;
+    cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    transition-duration: 200ms;
 }
 
 button:hover, .button:hover {
-    transition-duration: 200ms;
-    color: black;
     background-color: #d3afaf;
+    color: black;
+    transition-duration: 200ms;
 }
 
 button:hover > label, .button:hover > label {
@@ -69,9 +69,9 @@ button > i.gg-pen {
 }
 
 .button {
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .button > label {
@@ -81,79 +81,79 @@ button > i.gg-pen {
 /* Spinner */
 .lds-roller {
     display: inline-block;
+    height: 80px;
     position: relative;
     width: 80px;
-    height: 80px;
   }
   .lds-roller div {
     animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     transform-origin: 40px 40px;
   }
   .lds-roller div:after {
+    background: #fff;
+    border-radius: 50%;
     content: " ";
     display: block;
+    height: 7px;
+    margin: -4px 0 0 -4px;
     position: absolute;
     width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #fff;
-    margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
     animation-delay: -0.036s;
   }
   .lds-roller div:nth-child(1):after {
-    top: 63px;
     left: 63px;
+    top: 63px;
   }
   .lds-roller div:nth-child(2) {
     animation-delay: -0.072s;
   }
   .lds-roller div:nth-child(2):after {
-    top: 68px;
     left: 56px;
+    top: 68px;
   }
   .lds-roller div:nth-child(3) {
     animation-delay: -0.108s;
   }
   .lds-roller div:nth-child(3):after {
-    top: 71px;
     left: 48px;
+    top: 71px;
   }
   .lds-roller div:nth-child(4) {
     animation-delay: -0.144s;
   }
   .lds-roller div:nth-child(4):after {
-    top: 72px;
     left: 40px;
+    top: 72px;
   }
   .lds-roller div:nth-child(5) {
     animation-delay: -0.18s;
   }
   .lds-roller div:nth-child(5):after {
-    top: 71px;
     left: 32px;
+    top: 71px;
   }
   .lds-roller div:nth-child(6) {
     animation-delay: -0.216s;
   }
   .lds-roller div:nth-child(6):after {
-    top: 68px;
     left: 24px;
+    top: 68px;
   }
   .lds-roller div:nth-child(7) {
     animation-delay: -0.252s;
   }
   .lds-roller div:nth-child(7):after {
-    top: 63px;
     left: 17px;
+    top: 63px;
   }
   .lds-roller div:nth-child(8) {
     animation-delay: -0.288s;
   }
   .lds-roller div:nth-child(8):after {
-    top: 56px;
     left: 12px;
+    top: 56px;
   }
   @keyframes lds-roller {
     0% {
@@ -168,37 +168,38 @@ button > i.gg-pen {
 /* Label Display on/off */
 
 span.animated {
-  display: none;
   background-color: #FFD7D7;
-  padding-top: 3px;
+  border-radius: 10px;
+  color: black;
+  display: none;
+  font-size: 15px;
   padding-bottom: 3px;
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 15px;
-  border-radius: 10px;
-  color: black;
+  padding-top: 3px;
 }
 
 /* Header */
 
 header {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  width: 230px;
-  float: left;
-  height: 100%;
   background-color: #52556b;
   box-shadow: 0px 0px 10px 3px #00000038;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  float: left;
+  height: 100%;
   justify-content: space-between;
-  box-sizing: border-box;
+  padding-bottom: 15px;
+  padding-top: 15px;
   position: fixed;
+  width: 230px;
+  z-index: 99;
 }
 
 header > .logo {
-  height: 80px;
   display: flex;
+  height: 80px;
   width: 100%;
 }
 
@@ -215,151 +216,151 @@ header > .logo > a > img {
 
 main {
   box-sizing: border-box;
-  width: 100%;
   display: block;
   padding-left: 230px;
+  width: 100%;
 }
 
 /* Wrapper */
 
 #wrapper {
-  padding-left: 35px;
-  padding-right: 35px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 /* Ul Li Nav */
 
 ul {
+  color: white;
   list-style: none;
   margin: 0;
   padding: 0;
-  color: white;
 }
 
-nav > ul > a > li {
-  padding: 20px;
+nav > ul > a > li, nav > ul > li {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
   cursor: pointer;
   margin-left: 15px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  padding: 20px;
 }
 
-nav > ul > a > li:hover {
+nav > ul > a > li:hover, nav > ul > li:hover {
   background-color: #f5c2c793;
   color: black;
 }
 
-nav > ul > a > li.active {
+nav > ul > a > li.active, nav > ul > li.active {
   border-right: 2px solid #FFD7D7;
   color: #FFD7D7;
 }
 
-nav > ul > a > li.active > i {
+nav > ul > a > li.active > i, nav > ul > li.active > i {
   color: #FFD7D7;
 }
 
-nav > ul > a > li > i {
+nav > ul > a > li > i, nav > ul > li > i {
   margin-right: 25px;
 }
 
 /* topbar */
 
 .topBar {
-  box-sizing: border-box;
-  height: 95px;
-  width: 100%;
-  padding-left: 35px;
-  padding-right: 35px;
   background-color: #4b4d61;
   box-shadow: 10px 0px 10px 1px #00000038;
+  box-sizing: border-box;
   display: flex;
+  height: 95px;
   justify-content: space-around;
+  padding-left: 35px;
+  padding-right: 35px;
+  width: 100%;
 }
 
 .topBar--links {
-  width: 250px;
   height: 100%;
+  width: 250px;
 }
 
 .topBar--search {
-  width: 500px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 500px;
 }
 
 .topBar--search--icon {
-  height: 50px;
-  width: 50px;
-  background-color: #52556b;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  display: flex;
-  color: #4b4d61;
-  font-size: 17px;
-  justify-content: center;
   align-items: center;
+  background-color: #52556b;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  color: #4b4d61;
+  display: flex;
+  font-size: 17px;
+  height: 50px;
+  justify-content: center;
+  width: 50px;
 }
 
 .topBar--search--input {
-  height: 50px;
-  width: 100%;
   background-color: #52556b;
+  border: none;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  color: white;
+  height: 50px;
   margin: 0;
   padding: 0;
-  border: none;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  color: white;
+  width: 100%;
 }
 
 input:focus-visible {
-  outline: none;
   border: 1px solid #FFD7D7;
+  outline: none;
 }
 
 .topBar--user {
-  width: 250px;
-  height: 100%;
+  align-items: center;
   display: flex;
   flex-direction: row;
+  height: 100%;
   justify-content: center;
-  align-items: center;
+  width: 250px;
 }
 
 .topBar--user > a > img {
+  border-radius: 50%;
   height: 50px;
   width: 50px;
-  border-radius: 50%;
 }
 
 .topBar--user > a > img:hover {
-  cursor: pointer;
   border: 2px solid #FFD7D7;
+  cursor: pointer;
 }
 
 .topBar--user > span {
   color: white;
-  margin-right: 10px;
   font-size: 15px;
+  margin-right: 10px;
 }
 
 #main--container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   padding-left: 70px;
   padding-right: 70px;
   width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
 }
 
 .left {
-  width: 250px;
   height: fit-content;
+  width: 250px;
 }
 
 .center {
@@ -367,68 +368,68 @@ input:focus-visible {
 }
 
 .right {
-  width: 250px;
   height: fit-content;
+  width: 250px;
 }
 
 .blocks {
-  box-sizing: border-box;
-  padding: 15px;
-  width: 100%;
-  height: fit-content;
   background-color: #4b4d61;
   border-radius: 10px;
   box-shadow: 0px -3px 10px 3px #00000038;
+  box-sizing: border-box;
+  height: fit-content;
   margin-bottom: 30px;
+  padding: 15px;
+  width: 100%;
 }
 
 .blocks--user--infos {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .blocks--user--infos > span {
-  margin-top: 5px;
   margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .blocks--user--infos > img {
-  width: 70px;
-  height: 70px;
   border-radius: 50%;
+  height: 70px;
   margin-bottom: 10px;
   object-fit: cover;
+  width: 70px;
 }
 
 .blocks--user--infos > img:hover {
-  cursor: pointer;
   border: 2px solid #FFD7D7;
+  cursor: pointer;
 }
 
 .blocks--user--stats {
-  margin-top: 10px;
+  color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-top: 10px;
   text-align: center;
-  color: white;
 }
 
 
 /* Textarea */ 
 
 textarea {
-  width: 100%;
-  resize: none;
   background-color: #52556b;
-  border-radius: 10px;
-  padding: 10px;
   border: none;
-  color: white;
+  border-radius: 10px;
   box-sizing: border-box;
+  color: white;
+  padding: 10px;
+  resize: none;
+  width: 100%;
 }
 
 textarea:active{
@@ -452,29 +453,29 @@ textarea:focus-visible {
 /* Popup Edit */
 
 .popup--close {
+  cursor: pointer;
   position: absolute;
   right: 15px;
   top: 15px;
-  cursor: pointer;
 }
 
 
 /* Profil Cover */
 
 .profil--cover {
-  height: 400px;
+  background-Position: center;
   background-size: cover;
   border-Bottom-Left-Radius: 10px;
   border-Bottom-Right-Radius: 10px;
-  background-Position: center;
+  height: 400px;
 }
 
 .profil--cover > img {
-  height: 400px;
-  width: 100%;
-  object-fit: cover;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
 }
 
 
@@ -507,15 +508,15 @@ textarea:focus-visible {
 
 @media (max-width: 1750px){
   .center {
-      width: 100%;
       margin-left: 30px;
       margin-right: 30px;
+      width: 60%;
   }
 
   #main--container {
+    padding-bottom: 0px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 0px;
   }
 
   .profil--container {
@@ -546,9 +547,9 @@ textarea:focus-visible {
 @media (max-width: 1400px){
   
   .center {
-      width: 100%;
-      margin-right: 0px;
       margin-left: 0px;
+      margin-right: 0px;
+      width: 100%;
   }
 
   #main--container {
@@ -569,8 +570,8 @@ textarea:focus-visible {
   }
 
   .right {
-    width: 100%;
     margin-top: 30px;
+    width: 100%;
   }
 
   .lo-screen {
@@ -591,13 +592,9 @@ textarea:focus-visible {
   }
 }
 
-@media (max-width: 1080px){
+@media (max-width: 1023px){
   main {
     padding-left: 80px;
-  }
-
-  header {
-    width: 80px;
   }
 
   header > .logo > a > img.hight-screen {
@@ -608,7 +605,7 @@ textarea:focus-visible {
     display: block;
   }
 
-  nav > ul > a > li > span {
+  nav > ul > a > li > span, nav > ul > li > span {
     display: none
   }
 
@@ -617,14 +614,14 @@ textarea:focus-visible {
   }
 
   .mobile {
-    display: flex;
     box-sizing: border-box;
+    display: flex;
   }
 
   #main--container {
+    padding-bottom: 0px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 0px;
   }
 
   .profil--container {
@@ -641,8 +638,8 @@ textarea:focus-visible {
   }
 
   .right {
-    width: 100%;
     margin-top: 30px;
+    width: 100%;
   }
 
   .lo-screen {
@@ -680,8 +677,8 @@ textarea:focus-visible {
   }
 
   .right {
-    width: 100%;
     margin-top: 30px;
+    width: 100%;
   }
 
   .lo-screen {
@@ -689,9 +686,9 @@ textarea:focus-visible {
   }
 
   .editProfil {
-    width: 95%;
     box-sizing: border-box;
-    position: relative
+    position: relative;
+    width: 95%
   }
 
   .editProfil > button {
@@ -704,9 +701,9 @@ textarea:focus-visible {
   }
 
   .postEdit {
-    width: 95%;
-    padding: 10px;
     box-sizing: border-box;
+    padding: 10px;
+    width: 95%;
   }
 
   .postEdit > textarea {
@@ -738,19 +735,19 @@ textarea:focus-visible {
   }
 
   .post--details--user {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 20px;
     background-color: #52556b;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 100%;
   }
 
   .post--details--content {
-    box-sizing: border-box;
-    width: 100%;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   .center > .blocks {
@@ -767,14 +764,14 @@ textarea:focus-visible {
   }
 
   .right {
-    width: 100%;
     margin-top: 30px;
+    width: 100%;
   }
 
   .editProfil {
-    width: 95%;
     box-sizing: border-box;
-    position: relative
+    position: relative;
+    width: 95%
   }
 
   .editProfil > button {
@@ -795,9 +792,9 @@ textarea:focus-visible {
   }
 
   .postEdit {
-    width: 95%;
-    padding: 10px;
     box-sizing: border-box;
+    padding: 10px;
+    width: 95%;
   }
 
   .postEdit > textarea {
@@ -812,9 +809,9 @@ textarea:focus-visible {
 
 @media (max-width: 630px){
   #main--container {
+    padding-bottom: 0px;
     padding-left: 5px;
     padding-right: 5px;
-    padding-bottom: 0px;
   }
 
   .profil--container {
@@ -851,9 +848,9 @@ textarea:focus-visible {
   }
 
   .postEdit {
-    width: 95%;
-    padding: 10px;
     box-sizing: border-box;
+    padding: 10px;
+    width: 95%;
   }
 
   .postEdit > textarea {
@@ -890,14 +887,14 @@ textarea:focus-visible {
   }
 
   .right {
-    width: 100%;
     margin-top: 30px;
+    width: 100%;
   }
 
   .editProfil {
-    width: 95%;
     box-sizing: border-box;
-    position: relative
+    position: relative;
+    width: 95%
   }
 
   .editProfil > button {
@@ -924,11 +921,114 @@ button {
 }
 
 .blocks--title {
-  width: 100%;
   background-color: #52556b;
+  border-radius: 10px;
   box-sizing: border-box;
   color: white;
-  padding: 10px;
-  border-radius: 10px;
   margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+
+/* Mobile */
+
+@media (max-width: 1023px) {
+  header {
+    bottom: 0;
+    height: 50px;
+    padding: 0;
+    width: 100%;
+  }
+
+  header > nav {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  header > nav > ul {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  header > nav > ul > a > li,  header > nav > ul > li{
+    align-items: center;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  header > nav > ul > a > li > i, header > nav > ul > li > i {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 20px;
+  }
+
+  header > nav > ul > li.active, header > nav > ul > a > li.active {
+    border: none;
+    border-radius: 0;
+    border-top: 2px solid #f5c2c7;
+  }
+
+  header > nav > ul > li:hover, header > nav > ul > a > li:hover {
+    border-radius: 0px;
+  }
+
+  header > .logo {
+    display: none;
+  }
+
+  .button.animated.mobile {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    display: block;
+    display: flex;
+    height: 100%;
+    padding: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: absolute;
+    right: 0;
+    width: fit-content;
+  }
+
+  main {
+    padding-bottom: 30px;
+    padding-left: 0;
+  }
+
+  #main--container {
+    padding: 0;
+  }
+
+  .post--history {
+    bottom: 0;
+    height: 90%;
+    margin: none;
+    max-height: 90%;
+  }
+
+  #voiler {
+    align-items: end;
+    justify-content: end;
+    z-index: 101;
+  }
+
+  .editProfil {
+    margin: inherit;
+    width: 100%;
+  }
+
+  .postEdit {
+    margin: inherit;
+    width: 100%;
+  }
 }

@@ -1,6 +1,8 @@
 //Models
 const User = require("../models/user");
 const Post = require("../models/post");
+const Notifications = require("../models/notifications");
+
 // Required
 const bcrypt = require("bcrypt");
 const salt = 10;
@@ -12,12 +14,13 @@ exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, salt).then((hash) => {
     const user = new User({
       ...req.body,
-      avatar: "/images/default.png",
+      avatar: "/images/default-avatar.png",
       cover: "/images/default-cover.jpg",
       password: hash,
       admin: false,
       registerAt: new Date(),
       postsCount: 0,
+      unreadNotify: 0,
     });
 
     user
@@ -141,4 +144,62 @@ exports.updateProfil = (req, res, next) => {
       console.log(error);
       res.status(400).json({ error: error });
     });
+};
+
+exports.markAsRead = (req, res, next) => {
+  Notifications.updateMany(
+    { receiver: req.body.userId },
+    { $set: { isRead: true } }
+  )
+    .then(() => {
+      User.updateOne({ name: req.body.userId }, { $set: { unreadNotify: 0 } })
+        .then(() => res.status(200).json({ message: "ok" }))
+        .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
+
+exports.getNotifications = (req, res, next) => {
+  console.log(req.params.userId);
+
+  Notifications.aggregate([
+    {
+      $match: {
+        receiver: req.params.userId,
+        isRead: false,
+        sender: { $ne: req.params.userId },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "sender",
+        foreignField: "name",
+        as: "senderdata",
+      },
+    },
+    {
+      $project: {
+        senderdata: {
+          _id: 0,
+          name: 0,
+          lastName: 0,
+          password: 0,
+          admin: 0,
+          email: 0,
+          __v: 0,
+          registeredAt: 0,
+          socket: 0,
+          postsCount: 0,
+          unreadNotify: 0,
+        },
+      },
+    },
+  ])
+    .sort({ createAt: -1 })
+    .then((result) => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch((error) => console.log(error));
 };

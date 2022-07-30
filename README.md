@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# C'est quoi Groupomania ?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Groupomania est un réseau social d'entreprise réaliser dans le cadre d'une formation che OpenClassRooms
 
-## Available Scripts
+## Technologies Utilisées
 
-In the project directory, you can run:
+### React ### Socket.IO ### NodeJS #MongoDB
 
-### `npm start`
+## Démarrer le projet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Cloner le projet avec :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### git clone
 
-### `npm test`
+Déplacer vous dans le dossier cloner et installer les dépendances avec :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### npm install
 
-### `npm run build`
+Déplacer vous ensuite dans le dossier backend et installer les dépendances avec :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ouvrer maintenant le fichier .env est configurer de la façon suivante
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+IP > localhost ou votre adresse IP local si vous souhaitez tester le projet sur plusieurs appareils connecter au même réseau
+DBUSER > Votre nom d'utilisateur de base de donnée Mongo (nécessite son installation si ce n'est pas déjà fait)
+DBPWD > Votre mot de passe de base de donnée Mongo
+DBCLUSTER > L'adresse url de la base de donnée (local ou distante)
+DBNAME > Nom de la base de donnée (Groupomania en l'occurence)
 
-### `npm run eject`
+Sauvegarder!
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+En étant dans le dossier backend taper la commande :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Maintenant, en étant à la racine du projet tapper la commande :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### npm start
 
-## Learn More
+Votre navigateur ouvrira automatiquement le projet (ou taper simplement dans un navigation localhost:3001 ou VOTREIPLOCAL:3001)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Enjoy!

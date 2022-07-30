@@ -5,7 +5,11 @@
 /backend/node_modules/
 
 # Other
-
 todo.txt
 /backend/images/
 /build/
+
+# Expect
+
+!/backend/images/default-cover.jpg
+!/backend/images/default-avatar.png

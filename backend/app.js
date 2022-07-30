@@ -29,7 +29,7 @@ const notificationsRoads = require("./routes/notifications");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  "mongodb+srv://genji:061297301277@cluster0.qunncwa.mongodb.net/groupomania?retryWrites=true&w=majority",
+  `mongodb+srv://${process.env.DBUSER}:${process.env.DBPWD}@${process.env.DBCLUSTER}/${process.env.DBNAME}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
   },
@@ -74,7 +74,9 @@ app.use("/api/system", systemRoads);
 app.use("/api/notifications", notificationsRoads);
 
 // App Listen
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(process.env.PORT, process.env.IP, () => {
+  console.log(
+    `Server running at http://${process.env.IP}:${process.env.PORT}/`
+  );
   console.log(moment().format("DD MMMM HH:mm"));
 });

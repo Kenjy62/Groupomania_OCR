@@ -65,7 +65,7 @@ function EditProfil(props) {
           src={props.user ? burl + props.user.cover : null}
           onError={(e) => (
             e.target.onError == null,
-            (e.target.src = burl + `images/default-cover.jpg`)
+            (e.target.src = burl + `/images/default-cover.jpg`)
           )}
         ></img>
       </div>

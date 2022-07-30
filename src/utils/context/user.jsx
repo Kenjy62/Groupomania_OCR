@@ -46,12 +46,7 @@ export const UserProvider = ({ children }) => {
   };
 
   // Load Profil
-<<<<<<< HEAD
   const LoadProfil = (token, username, user, skipParams) => {
-=======
-  const LoadProfil = (token, username, user) => {
-    console.log("here");
->>>>>>> notifySystem
     // Fetch UserData
     fetch(burl + "/auth/profil/" + username + "/" + user.admin, {
       method: "GET",
@@ -72,26 +67,13 @@ export const UserProvider = ({ children }) => {
       }
     });
 
-<<<<<<< HEAD
-    fetch(
-      "http://localhost:3000/api/post/" + username + "/" + skipParams + "/10",
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      }
-    ).then((res) => {
-=======
-    fetch(burl + "/post/" + username, {
+    fetch(burl + "/post/" + username + "/" + skipParams + "/10", {
       method: "GET",
       headers: {
         "content-type": "application/json",
         Authorization: "Bearer " + token,
       },
     }).then((res) => {
->>>>>>> notifySystem
       if (res.status === 200) {
         const data = res.json();
         data.then((data) => {

@@ -1,6 +1,7 @@
 // Dependencies
 import React from "react";
 import { useEffect, useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Components
 import Posts from "../components/dashboard/Post/posts";
@@ -60,11 +61,11 @@ function Global(props) {
               src={
                 userProfil
                   ? burl + userProfil.cover
-                  : burl + `images/default-cover.jpg`
+                  : burl + `/images/default-cover.jpg`
               }
               onError={(e) => (
                 (e.target.onError = null),
-                (e.target.src = burl + `images/default-cover.jpg`)
+                (e.target.src = burl + `/images/default-cover.jpg`)
               )}
             />
           </div>

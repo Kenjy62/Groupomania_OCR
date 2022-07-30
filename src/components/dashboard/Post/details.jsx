@@ -11,6 +11,8 @@ import "../../../styles/post.css";
 import Header from "../../../components/global/header";
 import Main from "../../../components/dashboard/main";
 
+import burl from "../../../utils/api";
+
 function Details() {
   const [callOpenCreatePost, setcallOpenCreatePost] = useState();
 
@@ -29,7 +31,7 @@ function Details() {
   // Fetch UserData
   useEffect(() => {
     if (!user) {
-      fetch("http://localhost:3000/api/auth/user/" + token, {
+      fetch(burl + "/auth/user/" + token, {
         method: "GET",
         headers: {
           "content-type": "application/json",

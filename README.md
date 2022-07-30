@@ -46,6 +46,19 @@ DBNAME > Nom de la base de donnée (Groupomania en l'occurence)
 ## Sauvegarder !
 
 \
+\
+
+## Définir l'adresse de l'API pour le frontend
+
+Rendez vous dans src/utils/api.jsx et définir burl avec :
+\
+\
+http://localhost:3000/api si vous avez choisie de définir localhost comme adresse pour le backend
+\
+\
+http://IPLOCAL:3000/api si vous avez définit une adresse IP local
+
+\
 En étant dans le dossier backend taper la commande :
 
 ### `npm start`

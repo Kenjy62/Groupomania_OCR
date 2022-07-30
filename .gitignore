@@ -6,7 +6,7 @@
 
 # Other
 todo.txt
-/backend/images/
+/backend/images/*
 /build/
 
 # Expect

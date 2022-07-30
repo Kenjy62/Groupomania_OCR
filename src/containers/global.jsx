@@ -1,11 +1,6 @@
 // Dependencies
 import React from "react";
-<<<<<<< HEAD
 import { useEffect, useContext, useState } from "react";
-=======
-import { useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
->>>>>>> notifySystem
 
 // Components
 import Posts from "../components/dashboard/Post/posts";

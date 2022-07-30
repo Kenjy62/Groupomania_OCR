@@ -11,5 +11,5 @@ todo.txt
 
 # Expect
 
-!/backend/images/default-cover.jpg
-!/backend/images/default-avatar.png
+!backend/images/default-cover.jpg
+!backend/images/default-avatar.png

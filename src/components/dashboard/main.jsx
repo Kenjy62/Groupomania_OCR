@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 // Components
 import Edit from "./Post/edit";
@@ -23,10 +23,7 @@ function Main(props) {
     <>
       {/* Voiler, Popup Center Screen (z-index -> 99999999) */}
       {isOpen ? (
-        <div
-          id="voiler"
-          style={{ display: isOpen ? "flex" : "none", zIndex: "10" }}
-        >
+        <div id="voiler" style={{ display: isOpen ? "flex" : "none" }}>
           {option === "create" ? (
             <Create user={props.user} />
           ) : option === "edit_post" ? (

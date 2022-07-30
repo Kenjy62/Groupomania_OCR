@@ -30,7 +30,7 @@ function PostComment(props) {
         <div className="post--details--content--details">
           <span>{props.post.author}</span>{" "}
           <span>
-            <i class="fa-solid fa-hourglass"></i>{" "}
+            <i className="fa-solid fa-hourglass"></i>{" "}
             <Moment format="DD/MM/YYYY à HH:mm:ss">
               {props.post.createAt}
             </Moment>

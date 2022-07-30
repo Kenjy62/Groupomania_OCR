@@ -1,76 +1,76 @@
 .camera.icon {
+    border: solid 1px currentColor;
+    border-radius: 1px;
     color: #000;
-    position: absolute;
+    height: 10px;
     margin-left: 2px;
     margin-top: 5px;
+    position: absolute;
     width: 16px;
-    height: 10px;
-    border-radius: 1px;
-    border: solid 1px currentColor;
   }
   
   .camera.icon:before {
+    border: solid 1px currentColor;
+    border-radius: 3px;
     content: '';
-    position: absolute;
+    height: 4px;
     left: 5px;
+    position: absolute;
     top: 2px;
     width: 4px;
-    height: 4px;
-    border-radius: 3px;
-    border: solid 1px currentColor;
   }
   
   .camera.icon:after {
+    background-color: currentColor;
+    border-radius: 1px 1px 0 0;
     content: '';
+    height: 1px;
     position: absolute;
     right: 2px;
     top: -2px;
     width: 4px;
-    height: 1px;
-    border-radius: 1px 1px 0 0;
-    background-color: currentColor;
   }
   
   .gg-pen {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    transform: rotate(-45deg) scale(var(--ggs,1));
-    width: 14px;
-    height: 4px;
+    border-bottom-right-radius: 1px;
     border-right: 2px solid transparent;
+    border-top-right-radius: 1px;
     box-shadow:
     0 0 0 2px,
     inset -2px 0 0;
-    border-top-right-radius: 1px;
-    border-bottom-right-radius: 1px;
-    margin-right: -2px
+    box-sizing: border-box;
+    display: block;
+    height: 4px;
+    margin-right: -2px;
+    position: relative;
+    transform: rotate(-45deg) scale(var(--ggs,1));
+    width: 14px
    }
    
    .gg-pen::after,
    .gg-pen::before {
+    box-sizing: border-box;
     content: "";
     display: block;
-    box-sizing: border-box;
     position: absolute
    }
    
    .gg-pen::before {
     background: currentColor;
     border-left: 0;
-    right: -6px;
-    width: 3px;
-    height: 4px;
     border-radius: 1px;
-    top: 0
+    height: 4px;
+    right: -6px;
+    top: 0;
+    width: 3px
    }
    
    .gg-pen::after {
-    width: 8px;
-    height: 7px;
-    border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
     border-right: 7px solid;
+    border-top: 4px solid transparent;
+    height: 7px;
     left: -11px;
-    top: -2px
+    top: -2px;
+    width: 8px
    } 

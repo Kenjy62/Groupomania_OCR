@@ -1,59 +1,59 @@
 /* Edit Profil */
 
 .editProfil {
-    width: 600px;
-    padding: 10px;
     background-color: #4b4d61;
     border-radius: 10px;
     margin: auto;
+    padding: 10px;
+    width: 600px;
 }
 
 .editProfil--background--image {
-    height: 200px;
+    align-items: center;
     background-color: red;
     border-radius: 10px;
-    z-index: 9997;
-    position: relative;
     display: flex;
+    height: 200px;
     justify-content: center;
-    align-items: center;
+    position: relative;
+    z-index: 9997;
 }
 
 .editProfil--background--image > img {
-    width: 100%;
-    object-fit: cover;
-    height: 200px;
     border-radius: 10px;
-    z-index: 9998;
+    height: 200px;
+    object-fit: cover;
     position: relative;
+    width: 100%;
+    z-index: 9998;
 }
 
 .editProfil--background--image > .editProfil--background--image--actions {
-    position: absolute;
-    z-index: 9999999;
-    margin: auto;
     display: flex;
     flex-direction: row;
+    margin: auto;
+    position: absolute;
+    z-index: 9999999;
 }
 
 .editProfil--avatar {
-    position: relative;
-    height: 100px;
-    width: 100px;
-    margin: auto;
+    align-items: center;
     background-color: white;
-    margin-top: -50px;
-    z-index: 9999;
     border-radius: 10px;
     display: flex;
+    height: 100px;
     justify-content: center;
-    align-items: center;
+    margin: auto;
+    margin-top: -50px;
+    position: relative;
+    width: 100px;
+    z-index: 9999;
 }
 
 .editProfil--avatar > img {
+    border-radius: 10px;
     height: 100px;
     width: 100px;
-    border-radius: 10px;
 }
 
 /* Profil Container */

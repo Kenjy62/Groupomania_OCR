@@ -1,7 +1,10 @@
 const Post = require("../models/post");
 const User = require("../models/user");
+const Notifications = require("../models/notifications");
 const PostHistory = require("../models/post_history");
 const mongoose = require("mongoose");
+
+const { Socket } = require("./socket");
 
 // Functions
 exports.add = (req, res, next) => {
@@ -73,11 +76,39 @@ exports.setReaction = (req, res, next) => {
 
   switch (req.body.reaction) {
     case 1:
-      Post.updateOne(
+      Post.findOneAndUpdate(
         { _id: postId },
         { $inc: { likes: 1 }, $push: { usersLiked: req.body.name } }
       )
-        .then(() => res.status(200).json({ message: "Liked" }))
+        .then((result) => {
+          User.findOne({ name: result.author }).then((data) => {
+            if (data.name != req.body.name) {
+              console.log("here");
+              let id = data._id.toString();
+              Socket.to(id, "notify", "newLike");
+              User.updateOne(
+                { name: data.name },
+                { $inc: { unreadNotify: 1 } }
+              ).then(() => {
+                console.log("Post +1");
+              });
+            } else {
+              console.log("same");
+            }
+          });
+          const Notification = new Notifications({
+            receiver: result.author,
+            sender: req.body.name,
+            type: "newLike",
+            isRead: false,
+            when: new Date(),
+            postId: postId,
+          });
+
+          Notification.save()
+            .then((success) => res.status(200).json({ message: "Like added" }))
+            .catch((error) => console.log(error));
+        })
         .catch((error) => res.status(400).json({ error: error }));
       break;
 
@@ -108,11 +139,38 @@ exports.setReaction = (req, res, next) => {
       break;
 
     case -1:
-      Post.updateOne(
+      Post.findOneAndUpdate(
         { _id: postId },
         { $inc: { dislikes: 1 }, $push: { usersDisliked: req.body.name } }
       )
-        .then(() => res.status(200).json({ message: "Disliked" }))
+        .then((result) => {
+          User.findOne({ name: result.author }).then((data) => {
+            if (data.name != req.body.name) {
+              console.log("here");
+              let id = data._id.toString();
+              Socket.to(id, "notify", "newLike");
+              User.updateOne(
+                { name: data.name },
+                { $inc: { unreadNotify: 1 } }
+              ).then(() => {
+                console.log("Post +1");
+              });
+            } else {
+              console.log("same");
+            }
+          });
+          const Notification = new Notifications({
+            receiver: result.author,
+            sender: req.body.name,
+            type: "newDislike",
+            isRead: false,
+            when: new Date(),
+            postId: postId,
+          });
+          Notification.save()
+            .then(() => res.status(200).json({ message: "Added dislike" }))
+            .catch((error) => console.log(error));
+        })
         .catch((error) => res.status(400).json({ error: error }));
       break;
   }
@@ -252,11 +310,42 @@ exports.addComment = (req, res, next) => {
                 text: req.body.text,
                 createAt: Date(),
                 avatar: req.body.avatar,
+                isRead: false,
               },
             },
           }
         )
-          .then(() => res.status(200).json({ message: "Add comments" }))
+          .then(() => {
+            User.findOne({ name: post[0].author })
+              .then((result) => {
+                if (result.name != req.body.author) {
+                  let id = result._id.toString();
+                  Socket.to(id, "notify", "newComment");
+                  User.updateOne(
+                    { name: result.name },
+                    { $inc: { unreadNotify: 1 } }
+                  ).then(() => {
+                    const Notification = new Notifications({
+                      receiver: result.name,
+                      sender: req.body.author,
+                      type: "newComment",
+                      isRead: false,
+                      when: new Date(),
+                      postId: req.body.postId,
+                    });
+
+                    Notification.save()
+                      .then((success) =>
+                        res.status(200).json({ message: "Add comments" })
+                      )
+                      .catch((error) => console.log(error));
+                  });
+                } else {
+                  res.status(200).json({ message: "Add comments" });
+                }
+              })
+              .catch((error) => res.status(400).json({ error: error }));
+          })
           .catch((error) => res.status(400).json({ error: error }));
       }
     })

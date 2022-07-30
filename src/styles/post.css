@@ -3,29 +3,29 @@
 }
 
 .post {
-    width: 100%;
     border-radius: 10px;
     display: flex;
+    width: 100%;
 }
 
 .post--details--user {
-    width: 100px;
     display: flex;
+    width: 100px;
 }
 
 .post--details--user > a {
     border-radius: 50%;
+    height: fit-content;
     margin-left: auto;
     margin-right: auto;
-    height: fit-content;
 }
 
 .post--details--user > a > .post--details--user--picture > img {
-    height: 50px;
-    width: 50px;
     border-radius: 50%;
+    height: 50px;
     margin-left: auto;
     margin-right: auto;
+    width: 50px;
 }
 
 .post--details--user--picture:hover > span {
@@ -39,22 +39,22 @@
 }
 
 .post--details--content {
-    width: calc(100% - 140px);
-    padding: 15px;
-    justify-content: space-between;
+    background-color: #52556b;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
     display: flex;
     flex-direction: column;
-    background-color: #52556b;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    justify-content: space-between;
     margin-bottom: 15px;
+    padding: 15px;
+    width: calc(100% - 140px);
 }
 
 .post--details--content--details {
+    color: white;
     display: flex;
     justify-content: space-between;
-    color: white;
 }
 
 .post--details--content--text {
@@ -68,17 +68,17 @@
 }
 
 .post--details--content--image > img {
-    width: 100%;
     border-radius: 10px;
     cursor: pointer;
     object-fit: contain;
+    width: 100%;
 }
 
 .post--details--content--actions {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     margin-top: 40px;
+    width: 100%;
 }
 
 .post--details--content--actions > span {
@@ -87,8 +87,8 @@
 }
 
 .post--details--content--actions > span > i {
-    font-size: 20px;
     color: grey;
+    font-size: 20px;
 }
 
 .post--details--content--actions > span > i:hover {
@@ -100,15 +100,15 @@
 }
 
 .post--details--comments {
+    display: none;
     margin-top: 5px;
     width: 100%;
-    display: none;
 }
 
 .post--details--comments > div {
-    width: 100%;
-    padding: 5px;
     display: flex;
+    padding: 5px;
+    width: 100%;
 }
 
 .post--details--comments > div > form {
@@ -129,53 +129,53 @@
 }
 
 .post--response {
-    margin-top: 15px;
-    display: flex;
-    padding: 10px;
-    box-sizing: border-box;
     border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
     display: none;
+    margin-top: 15px;
+    padding: 10px;
 }
 
 .post--response > input {
+    border: none;
+    border-radius: 15px;
     flex: 2;
     margin-right: 15px;
-    border-radius: 15px;
     outline: none;
-    border: none;
 }
 
 .post--details--comments--list {
-    margin-top: 40px;
-    padding: 15px;
     background-color: #4b4d61;
     border-radius: 5px;
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
+    padding: 15px;
 }
 
 .post--details--comments--list--user {
-    width: 80px;
     display: flex;
     justify-content: center;
+    width: 80px;
 }
 
 .post--details--comments--list--user > a > img {
+    border-radius: 50%;
     height: 40px;
     width: 40px;
-    border-radius: 50%;
 }
 
 .post--details--comments--list--content {
-    width: calc(100% - 80px);
     padding: 10px;
+    width: calc(100% - 80px);
 }
 
 .post--edit {
+    color: white;
+    font-size: 14px;
     margin-top: 25px;
     text-align: right;
-    font-size: 14px;
-    color: white;
 }
 
 .post--edit > span {
@@ -187,20 +187,20 @@
 }
 
 .post--history {
-    margin: auto;
-    width: 750px;
-    padding: 10px;
     background-color: #4b4d61;
     border-radius: 10px;
+    margin: auto;
     max-height: 75%;
+    padding: 10px;
     position: relative;
+    width: 750px;
 }
 
 .history--item {
     background-color: #52556b;
-    padding: 10px;
     border-radius: 10px;
     margin-top: 30px;
+    padding: 10px;
     width: 95%;
 }
 
@@ -209,13 +209,33 @@
 }
 
 .history--item--image > img {
-    width: 100%;
     border-radius: 10px;
     margin-top: 15px;
+    width: 100%;
 }
 
 .history--item--infos {
+    color: white;
     margin-top: 15px;
-    text-align: right;
-    color: white
+    text-align: right
 }
+
+/* Mobile */
+
+@media (max-width: 850px) { 
+
+    #voiler {
+        align-items: end;
+    }
+
+    .post--history {
+      bottom: 0;
+      height: 90%;
+      margin: inherit;
+      max-height: 90%;
+    }
+    
+    .history--item {
+        width: calc(100% - 50px);
+    }
+  }

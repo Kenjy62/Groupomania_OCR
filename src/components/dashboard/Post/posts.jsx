@@ -37,6 +37,11 @@ function Posts(props) {
     LoadAllPost(skip);
   }, [skip, update]);
 
+  useEffect(() => {
+    console.log("topTop");
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <div id="post--feed">

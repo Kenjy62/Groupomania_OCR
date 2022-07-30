@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import Posts from "../dashboard/Post/posts";
 import Topbar from "../global/topbar";
 
+import burl from "../../utils/api";
+
 import { PopupContext } from "../../utils/context/popup";
 
 function Main(props) {
@@ -21,7 +23,7 @@ function Main(props) {
   // Fetch UserData
   useEffect(() => {
     if (!user) {
-      fetch("http://localhost:3000/api/auth/profil/" + url, {
+      fetch(burl + "/auth/profil/" + url, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -41,7 +43,7 @@ function Main(props) {
 
   useEffect(() => {
     if (!post) {
-      fetch("http://localhost:3000/api/post/" + url, {
+      fetch(burl + "/post/" + url, {
         method: "GET",
         headers: {
           "content-type": "application/json",

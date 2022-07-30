@@ -40,3 +40,10 @@ exports.topPost = (req, res, next) => {
     })
     .catch((error) => res.status(400).json(error));
 };
+
+exports.liveSearchUser = (req, res, next) => {
+  User.find({ name: { $regex: req.body.value, $options: "/" } })
+    .limit(5)
+    .then((result) => res.status(200).json(result))
+    .catch((error) => console.log(error));
+};

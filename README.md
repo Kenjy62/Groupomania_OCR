@@ -54,6 +54,6 @@ Maintenant, en étant à la racine du projet tapper la commande :
 
 ### `npm start`
 
-Votre navigateur ouvrira automatiquement le projet (ou taper simplement dans un navigation localhost:3001 ou VOTREIPLOCAL:3001)
+Votre navigateur ouvrira automatiquement le projet (ou taper simplement dans un navigateur localhost:3001 ou VOTREIPLOCAL:3001)
 
 ## Enjoy!

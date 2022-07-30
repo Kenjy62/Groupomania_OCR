@@ -13,7 +13,7 @@ function NotFound() {
         flexDirection: "column",
       }}
     >
-      <h1>Oups.. Cette page n'existe pas!</h1>
+      <h1>Oups... Cette page n'existe pas!</h1>
       <a href="/dashboard">Revenir à l'accueil</a>
     </div>
   );

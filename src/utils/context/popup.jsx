@@ -3,6 +3,8 @@
 import { createContext } from "react";
 import { useState } from "react";
 
+import $ from "jquery";
+
 export const PopupContext = createContext();
 
 export const PopupProvider = ({ children }) => {
@@ -13,7 +15,7 @@ export const PopupProvider = ({ children }) => {
   const togglePopup = (action, data, me) => {
     setOption(action);
     setIsOpen(isOpen === false ? true : false);
-
+    $("body").css("overflow-y", isOpen ? "scroll" : "hidden");
     if (data) {
       setData(data);
     }

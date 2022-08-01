@@ -27,15 +27,13 @@ function History() {
   return (
     <>
       <div className="post--history">
-        <SimpleBar style={{ maxHeight: "100%" }}>
-          {postHistory ? (
-            postHistory.reverse().map((item, key) => {
-              return <Item post={item} />;
-            })
-          ) : (
-            <Loader />
-          )}
-        </SimpleBar>
+        {postHistory ? (
+          postHistory.reverse().map((item, key) => {
+            return <Item post={item} />;
+          })
+        ) : (
+          <Loader />
+        )}
       </div>
     </>
   );

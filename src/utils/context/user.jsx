@@ -291,7 +291,10 @@ export const UserProvider = ({ children }) => {
   };
 
   const openNotificationSidebar = (userId, token) => {
-    setToggleSidebar(toggleSidebar ? false : true);
+    if (!toggleSidebar) {
+      setToggleSidebar(true);
+    }
+
     $("#Notifications").animate(
       {
         opacity: toggleSidebar ? "0" : "1",
@@ -299,6 +302,9 @@ export const UserProvider = ({ children }) => {
       },
       300,
       function () {
+        if (toggleSidebar) {
+          setToggleSidebar(false);
+        }
         GetNotifications(userId, token);
         $("body").css("overflow-y", toggleSidebar ? "scroll" : "hidden");
       }

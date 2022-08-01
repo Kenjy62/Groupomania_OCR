@@ -56,8 +56,12 @@ function Posts(props) {
             // If Load Feed
             <PostList key={Math.random()} item={feed} user={props.user} />
           )
-        ) : (
+        ) : feed != false ? (
           <Loader />
+        ) : (
+          <center>
+            <h1 style={{ color: "white" }}>Aucun post pour le moment!</h1>
+          </center>
         )}
       </div>
 

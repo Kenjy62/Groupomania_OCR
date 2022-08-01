@@ -34,9 +34,11 @@ export const PostProvider = ({ children }) => {
               return setFeed;
             }
           } else {
+            setFeed(false);
             document.querySelector(
               "button.seeMorePost"
             ).textContent = `Fin de l'historique`;
+            return setFeed;
           }
         });
       }

@@ -145,6 +145,8 @@
     padding: 35px;
     position: relative;
     width: 700px;
+    overflow-y: scroll;
+    max-height: 70%;
 }
 
 .postImage {

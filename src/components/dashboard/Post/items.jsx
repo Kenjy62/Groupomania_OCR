@@ -19,12 +19,14 @@ const PostList = (props) => {
   // Context
   const { togglePopup } = useContext(PopupContext);
 
-  if (!props.item) {
+  if (!props.item && props.item != false) {
     return <Loader />;
   } else {
     if (props.item === false) {
       return (
-        <h1 style={{ textAlign: "center" }}>Aucun post pour le moment..</h1>
+        <h1 style={{ textAlign: "center", color: "white" }}>
+          Aucun post pour le moment!
+        </h1>
       );
     } else {
       return (

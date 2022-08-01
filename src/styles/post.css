@@ -194,6 +194,7 @@
     padding: 10px;
     position: relative;
     width: 750px;
+    overflow-y: scroll;
 }
 
 .history--item {

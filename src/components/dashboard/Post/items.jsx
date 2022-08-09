@@ -19,7 +19,7 @@ const PostList = (props) => {
   // Context
   const { togglePopup } = useContext(PopupContext);
 
-  if (!props.item && props.item != false) {
+  if (!props.item && props.item !== false) {
     return <Loader />;
   } else {
     if (props.item === false) {
@@ -38,6 +38,7 @@ const PostList = (props) => {
                   <Link to={"/user/" + post.author}>
                     <div className="post--details--user--picture">
                       <img
+                        alt={post.author + " Avatar"}
                         src={burl + post.userdata[0].avatar}
                         onError={(e) => (
                           (e.target.onError = null),
@@ -51,7 +52,6 @@ const PostList = (props) => {
                   <div className="post--details--content--details">
                     <span>{post.author}</span>
                     <span>
-                      <i className="fa-solid fa-hourglass"></i>
                       <Moment format="DD/MM/YYYY à HH:mm:ss">
                         {post.createAt}
                       </Moment>
@@ -60,9 +60,9 @@ const PostList = (props) => {
                   <div className="post--details--content--text">
                     {post.text}
                   </div>
-                  {post.imageUrl != "" ? (
+                  {post.imageUrl !== "" ? (
                     <div className="post--details--content--image">
-                      <img src={burl + post.imageUrl}></img>
+                      <img src={burl + post.imageUrl} alt={post._id}></img>
                     </div>
                   ) : null}
                   <PostActions props={post} user={props.user} key={key} />

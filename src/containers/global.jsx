@@ -109,7 +109,7 @@ function Global(props) {
               <div className="blocks--title">Derniers Inscrits</div>
               <LastUser data={props.LastUser} />
             </div>
-            {props.TopPost.length > 0 ? (
+            {props?.TopPost?.length > 0 ? (
               <div className="blocks">
                 <div className="blocks--title">Top Posts</div>
                 <TopPost data={props.TopPost} />

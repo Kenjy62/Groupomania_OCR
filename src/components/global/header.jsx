@@ -18,8 +18,20 @@ import Notifications from "./notifications";
 
 // Render Page
 function Header(props) {
+  // Logout function
+  function Logout() {
+    localStorage.clear();
+  }
+
+  const token = localStorage.getItem("token");
+
+  // Context
+  const { togglePopup } = useContext(PopupContext);
+  const { notifyCount, newNotification, openNotificationSidebar } =
+    useContext(UserContext);
+
   useEffect(() => {
-    const socket = io("http://192.168.1.19:3000/");
+    const socket = io("http://localhost:3000/");
     if (props?.user?._id) {
       socket.emit("init", props.user._id, props.user.name);
     }
@@ -32,25 +44,13 @@ function Header(props) {
     });
   }, [props?.user?._id]);
 
-  // Logout function
-  function Logout() {
-    localStorage.clear();
-  }
-
-  const token = localStorage.getItem("token");
-
-  // Context
-  const { togglePopup } = useContext(PopupContext);
-  const { notifyCount, newNotification, openNotificationSidebar, MakeAsRead } =
-    useContext(UserContext);
-
   return (
     <>
       <header>
         <div className="logo">
           <Link to="/dashboard">
-            <img className="hight-screen" src={Logo}></img>
-            <img className="low-screen" src={LogoLowScreen}></img>
+            <img className="hight-screen" alt="Logo" src={Logo}></img>
+            <img className="low-screen" alt="Logo" src={LogoLowScreen}></img>
           </Link>
         </div>
 
@@ -58,19 +58,19 @@ function Header(props) {
           <nav>
             <ul>
               <Link to="/dashboard">
-                <li className={props.option == "home" ? "active" : null}>
+                <li className={props.option === "home" ? "active" : null}>
                   <i className="fa-solid fa-house"></i> <span>Home</span>
                 </li>
               </Link>
 
               <Link to={"/user/" + props.user.name} user={props.user}>
-                <li className={props.option == "profil" ? "active" : null}>
+                <li className={props.option === "profil" ? "active" : null}>
                   <i className="fa-solid fa-user"></i> <span>Profil</span>
                 </li>
               </Link>
 
               <li
-                className={props.option == "notification" ? "active" : null}
+                className={props.option === "notification" ? "active" : null}
                 onClick={() => {
                   openNotificationSidebar(props.user.name, token);
                 }}

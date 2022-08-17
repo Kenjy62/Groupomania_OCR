@@ -67,7 +67,7 @@ const PostList = (props) => {
                         alt={post._id}
                         onError={(e) => (
                           (e.target.onError = null),
-                          (e.target.src = burl + "/images/img-404.png")
+                          (e.target.src = burl + "/images/img_404.png")
                         )}
                       ></img>
                     </div>

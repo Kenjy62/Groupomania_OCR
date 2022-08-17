@@ -1,0 +1,7 @@
+header > .logo > a > img.hight-screen {
+    display: block;
+}
+
+header > .logo > a > img.low-screen {
+    display: none;
+}

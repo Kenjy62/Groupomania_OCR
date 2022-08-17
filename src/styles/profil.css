@@ -1,0 +1,75 @@
+/* Edit Profil */
+
+.editProfil {
+    background-color: #4b4d61;
+    border-radius: 10px;
+    margin: auto;
+    padding: 10px;
+    width: 600px;
+}
+
+.editProfil--background--image {
+    align-items: center;
+    background-color: red;
+    border-radius: 10px;
+    display: flex;
+    height: 200px;
+    justify-content: center;
+    position: relative;
+    z-index: 9997;
+}
+
+.editProfil--background--image > img {
+    border-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+    position: relative;
+    width: 100%;
+    z-index: 9998;
+}
+
+.editProfil--background--image > .editProfil--background--image--actions {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    position: absolute;
+    z-index: 9999999;
+}
+
+.editProfil--avatar {
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    margin: auto;
+    margin-top: -50px;
+    position: relative;
+    width: 100px;
+    z-index: 9999;
+}
+
+.editProfil--avatar > img {
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+}
+
+/* Profil Container */
+
+.profil--container {
+    display: flex;
+    justify-Content: space-between;
+    padding: 50px;
+}
+
+/* Left */
+
+.blocks > button {
+    width: 100%;
+}
+
+.blocks > button:not(:last-child){
+    margin-bottom: 15px;
+}

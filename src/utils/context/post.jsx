@@ -166,7 +166,7 @@ export const PostProvider = ({ children }) => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }).then((res) => {
-        if (res.status == 201) {
+        if (res.status === 201) {
           const data = res.json();
           data.then(() => {
             togglePopup(false);
@@ -184,8 +184,8 @@ export const PostProvider = ({ children }) => {
 
     if (postUpdate) {
       if (
-        postUpdate.text != originalPost.text ||
-        postUpdate.imageUrl != originalPost.imageUrl
+        postUpdate.text !== originalPost.text ||
+        postUpdate.imageUrl !== originalPost.imageUrl
       ) {
         if (postUpdate.text) {
           let file = document.getElementById("postImageFile");

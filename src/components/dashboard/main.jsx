@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 // Components
 import Edit from "./Post/edit";

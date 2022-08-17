@@ -18,7 +18,7 @@ function Register() {
     <div className="wrapper" style={{ height: "100vh" }}>
       <div className="wrapper-content">
         <div id="logo">
-          <img src={Logo}></img>
+          <img alt="Logo" src={Logo}></img>
         </div>
         <Link to="/">
           <div class="success" style={{ display: success ? "block" : "none" }}>

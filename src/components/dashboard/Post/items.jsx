@@ -62,7 +62,14 @@ const PostList = (props) => {
                   </div>
                   {post.imageUrl !== "" ? (
                     <div className="post--details--content--image">
-                      <img src={burl + post.imageUrl} alt={post._id}></img>
+                      <img
+                        src={burl + post.imageUrl}
+                        alt={post._id}
+                        onError={(e) => (
+                          (e.target.onError = null),
+                          (e.target.src = burl + "/images/img-404.png")
+                        )}
+                      ></img>
                     </div>
                   ) : null}
                   <PostActions props={post} user={props.user} key={key} />

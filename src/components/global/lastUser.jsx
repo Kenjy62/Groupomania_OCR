@@ -29,6 +29,7 @@ function LastUser(props) {
                 }}
               >
                 <img
+                  alt={data.name + " Avatar"}
                   src={burl + data.avatar}
                   onError={(e) => (
                     (e.target.onError = null),

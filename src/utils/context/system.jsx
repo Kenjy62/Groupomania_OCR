@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import burl from "../api";
 
 export const SystemContext = createContext();
@@ -61,7 +61,7 @@ export const SystemProvider = ({ children }) => {
         },
         body: JSON.stringify(data),
       }).then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           const data = res.json();
           data.then((item) => setSearchResult(item));
         }

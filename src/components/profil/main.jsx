@@ -18,7 +18,7 @@ function Main(props) {
   const token = localStorage.getItem("token");
   const [user, setUser] = useState();
   const [post, setPost] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);
 
   // Fetch UserData
   useEffect(() => {

@@ -15,7 +15,10 @@ function TopPost(props) {
           <Link to={"/post/" + data._id} key={data._id}>
             <div className="topPost--item">
               <div className="topPost--item--avatar">
-                <img src={burl + data.userdata[0].avatar} />
+                <img
+                  alt={data.userdata[0].name + " Avatar"}
+                  src={burl + data.userdata[0].avatar}
+                />
               </div>
               <div className="topPost--item--content">
                 <span>{data.text}</span>

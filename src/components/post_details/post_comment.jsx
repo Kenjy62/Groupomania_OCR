@@ -18,6 +18,7 @@ function PostComment(props) {
       <div className="post--details--comments--list--user">
         <Link to={"/user/" + props.post.author}>
           <img
+            alt={props.post.author + " Avatar"}
             src={burl + props.post.avatar}
             onError={(e) => (
               (e.target.onError = null),

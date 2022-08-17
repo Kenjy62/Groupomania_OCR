@@ -36,7 +36,7 @@ function Global(props) {
   const token = localStorage.getItem("token");
 
   // Post State
-  const [skip, setSkip] = useState(0);
+  const [skip] = useState(0);
 
   // Fetch current profil user data
   useEffect(() => {
@@ -45,7 +45,7 @@ function Global(props) {
     }
   }, [update]);
 
-  return !userProfil && props.option == "profil" ? (
+  return !userProfil && props.option === "profil" ? (
     <div style={{ textAlign: "center", marginTop: 100 }}>
       <h1 style={{ color: "white" }}>Cette utilisateur n'existe pas !</h1>
     </div>
@@ -58,6 +58,7 @@ function Global(props) {
         {props.option === "profil" && userProfil ? (
           <div className="profil--cover">
             <img
+              alt={userProfil.name + " Cover"}
               src={
                 userProfil
                   ? burl + userProfil.cover
@@ -134,10 +135,16 @@ function Global(props) {
               >
                 <div className="searchResult--item">
                   <div className="searchResult--item--cover">
-                    <img src={burl + item.cover}></img>
+                    <img
+                      alt={item.name + " Cover"}
+                      src={burl + item.cover}
+                    ></img>
                   </div>
                   <div className="searchResult--item--avatar">
-                    <img src={burl + item.avatar}></img>
+                    <img
+                      alt={item.name + " Avatar"}
+                      src={burl + item.avatar}
+                    ></img>
                   </div>
                   <div className="searchResult--item--infos">
                     <span>

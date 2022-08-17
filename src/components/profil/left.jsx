@@ -31,6 +31,7 @@ function Left(props) {
       <div className="blocks">
         <div className="blocks--user--infos">
           <img
+            alt={props.user.name + " Avatar"}
             src={props.user ? burl + props.user.avatar : <Loader />}
             onError={(e) => (
               (e.target.onError = null),
@@ -67,7 +68,7 @@ function Left(props) {
             Modifier le profil
           </button>
           {!props.me ? null : props.me.admin === true &&
-            props.me.name != url ? (
+            props.me.name !== url ? (
             <>
               <button
                 onClick={() => deleteUser(props.me, props.user.name, token)}

@@ -35,7 +35,7 @@ function PostDetails(props) {
     GetComments(url, token);
   }, [update, newComment]);
 
-  return post == "Error" ? (
+  return post === "Error" ? (
     <div style={{ textAlign: "center", color: "white" }}>
       <h1>Ce poste n'existe pas !</h1>
     </div>
@@ -46,6 +46,7 @@ function PostDetails(props) {
           <Link to={"/user/" + post.author}>
             <div className="post--details--user--picture">
               <img
+                alt={post.author + " Avatar"}
                 src={burl + post.avatar}
                 onError={(e) => (
                   (e.target.onError = null),
@@ -64,9 +65,9 @@ function PostDetails(props) {
             </span>
           </div>
           <div className="post--details--content--text">{post.text}</div>
-          {post.imageUrl != "" ? (
+          {post.imageUrl !== "" ? (
             <div className="post--details--content--image">
-              <img src={burl + post.imageUrl}></img>
+              <img alt={post._id + " Image"} src={burl + post.imageUrl}></img>
             </div>
           ) : null}
           <PostActions props={post} user={props.user} option={"details"} />

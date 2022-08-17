@@ -59,7 +59,7 @@ function Header(props) {
             <ul>
               <Link to="/dashboard">
                 <li className={props.option === "home" ? "active" : null}>
-                  <i className="fa-solid fa-house"></i> <span>Home</span>
+                  <i className="fa-solid fa-house"></i> <span>Accueil</span>
                 </li>
               </Link>
 
@@ -93,7 +93,7 @@ function Header(props) {
               <Link to="/" onClick={() => Logout()}>
                 <li>
                   <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                  <span>Exit</span>
+                  <span>Se déconnecter</span>
                 </li>
               </Link>
             </ul>
@@ -106,7 +106,7 @@ function Header(props) {
           style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}
           className="button animated desktop"
         >
-          New Post
+          Nouveau Post
         </div>
 
         {/* Mobile Button */}

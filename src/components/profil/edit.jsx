@@ -7,7 +7,6 @@ import "../../styles/profil.css";
 
 // Provider
 import { UserContext } from "../../utils/context/user";
-import { PopupContext } from "../../utils/context/popup";
 
 // Utils
 import burl from "../../utils/api";

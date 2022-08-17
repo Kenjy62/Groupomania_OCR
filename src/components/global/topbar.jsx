@@ -37,6 +37,7 @@ function Topbar(props) {
         {!props.user ? null : (
           <Link to={"/user/" + props.user.name} replace={true}>
             <img
+              alt={props.user.name + " Avatar"}
               src={!props.user ? null : burl + props.user.avatar}
               onError={(e) => (
                 (e.target.onError = null),

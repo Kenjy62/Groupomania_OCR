@@ -19,15 +19,15 @@ function Login() {
     <div className="wrapper" style={{ height: "100vh" }}>
       <div className="wrapper-content">
         <div id="logo">
-          <img src={Logo}></img>
+          <img alt="Logo" src={Logo}></img>
         </div>
 
-        <div class="error" style={{ display: error ? "block" : "none" }}>
+        <div className="error" style={{ display: error ? "block" : "none" }}>
           {error}
         </div>
 
         <form id="login">
-          <label for="email">Votre Email d'entreprise</label>
+          <label htmlFor="email">Votre Email d'entreprise</label>
           <input
             id="email"
             type="text"

@@ -19,7 +19,7 @@ function Posts(props) {
   // Context
   const { update } = useContext(PopupContext);
   const { LoadAllPost, feed } = useContext(PostContext);
-  const { LoadProfil, userProfil, userPost } = useContext(UserContext);
+  const { LoadProfil } = useContext(UserContext);
 
   // Token
   const token = localStorage.getItem("token");
@@ -38,25 +38,24 @@ function Posts(props) {
   }, [skip, update]);
 
   useEffect(() => {
-    console.log("topTop");
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <>
       <div id="post--feed">
-        {feed || (!feed && props.option == "profil") ? (
+        {feed || (!feed && props.option === "profil") ? (
           // If Load Profil
-          props.option == "profil" ? (
+          props.option === "profil" ? (
             <PostList key={Math.random()} item={props.post} user={props.user} />
           ) : // If Load Details of Post
-          props.option == "details" ? (
+          props.option === "details" ? (
             <PostDetails user={props.user} />
           ) : (
             // If Load Feed
             <PostList key={Math.random()} item={feed} user={props.user} />
           )
-        ) : feed != false ? (
+        ) : feed !== false ? (
           <Loader />
         ) : (
           <center>

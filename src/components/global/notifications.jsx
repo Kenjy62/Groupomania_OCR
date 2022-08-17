@@ -22,7 +22,6 @@ function Notifications(props) {
     MakeAsRead,
     notificationList,
     toggleSidebar,
-    setToggleSidebar,
   } = useContext(UserContext);
 
   // Token
@@ -55,16 +54,19 @@ function Notifications(props) {
             >
               <div className="notification--item">
                 <div className="notification--item--avatar">
-                  <img src={burl + item.senderdata[0].avatar}></img>
+                  <img
+                    alt={item.senderdata[0].name + " Avatar"}
+                    src={burl + item.senderdata[0].avatar}
+                  ></img>
                 </div>
                 <div className="notification--item--content">
                   <span>
                     {item.sender}
-                    {item.type == "newComment"
+                    {item.type === "newComment"
                       ? ` à commenter votre poste`
-                      : item.type == "newLike"
+                      : item.type === "newLike"
                       ? ` à aimer votre poste`
-                      : item.type == "newDislike"
+                      : item.type === "newDislike"
                       ? ` n'aime pas votre poste`
                       : null}
                   </span>

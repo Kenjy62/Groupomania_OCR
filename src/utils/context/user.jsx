@@ -58,7 +58,6 @@ export const UserProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((json) => {
-          console.log(json);
           let dataParse = json.message;
           return setUserProfil(dataParse);
         });
@@ -77,7 +76,7 @@ export const UserProvider = ({ children }) => {
       if (res.status === 200) {
         const data = res.json();
         data.then((data) => {
-          if (data.post != false) {
+          if (data.post !== false) {
             if (skipParams > 0) {
               setUserPost((userPost) => [...userPost, ...data.post]);
               return setUserPost;
@@ -121,7 +120,7 @@ export const UserProvider = ({ children }) => {
         Authorization: "Bearer " + token,
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         togglePopup(false);
         callUpdate(Math.random());
       }
@@ -338,7 +337,7 @@ export const UserProvider = ({ children }) => {
         Authorization: "Bearer " + token,
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         const data = res.json();
         data.then((item) => {
           setNotificationList(item);

@@ -51,6 +51,13 @@ io.on("connection", function (socket) {
   socket.on("disconnect", (reason) => {
     console.log("User disconnected => " + reason);
   });
+
+  socket.on("ForceDisconnect", (sid) => {
+    console.log("User disconnected => " + sid);
+    let index = SocketList.findIndex((key) => key.socketId === sid);
+    SocketList.splice(index, 1);
+    console.log(SocketList);
+  });
 });
 
 exports.Socket = Socket;

@@ -18,6 +18,10 @@ function TopPost(props) {
                 <img
                   alt={data.userdata[0].name + " Avatar"}
                   src={burl + data.userdata[0].avatar}
+                  onError={(e) => (
+                    (e.target.onError = null),
+                    (e.target.src = burl + "/images/default-avatar.png")
+                  )}
                 />
               </div>
               <div className="topPost--item--content">

@@ -1,7 +1,7 @@
 //Dependencies
 import React from "react";
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 // Assets
@@ -18,10 +18,7 @@ import Notifications from "./notifications";
 
 // Render Page
 function Header(props) {
-  // Logout function
-  function Logout() {
-    localStorage.clear();
-  }
+  const [sid, setSid] = useState();
 
   const token = localStorage.getItem("token");
 
@@ -32,6 +29,7 @@ function Header(props) {
 
   useEffect(() => {
     const socket = io("http://localhost:3000/");
+    setSid(socket);
     if (props?.user?._id) {
       socket.emit("init", props.user._id, props.user.name);
     }
@@ -43,6 +41,12 @@ function Header(props) {
       newNotification();
     });
   }, [props?.user?._id]);
+
+  // Logout function
+  function Logout() {
+    localStorage.clear();
+    sid.emit("ForceDisconnect", sid.id);
+  }
 
   return (
     <>

@@ -367,6 +367,8 @@ exports.getDetails = async (req, res, next) => {
             res.status(200).json({ data: obj });
           })
           .catch((error) => res.status(400).json(error));
+      } else {
+        res.status(400).json("Error");
       }
     })
     .catch((error) => res.status(400).json(error));

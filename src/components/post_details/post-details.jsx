@@ -50,7 +50,7 @@ function PostDetails(props) {
                 src={burl + post.avatar}
                 onError={(e) => (
                   (e.target.onError = null),
-                  (e.target.src = burl + "/images/default.png")
+                  (e.target.src = burl + "/images/default-avatar.png")
                 )}
               ></img>
             </div>

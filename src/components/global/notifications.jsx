@@ -57,6 +57,10 @@ function Notifications(props) {
                   <img
                     alt={item.senderdata[0].name + " Avatar"}
                     src={burl + item.senderdata[0].avatar}
+                    onError={(e) => (
+                      (e.target.onError = null),
+                      (e.target.src = burl + `/images/default-avatar.png`)
+                    )}
                   ></img>
                 </div>
                 <div className="notification--item--content">

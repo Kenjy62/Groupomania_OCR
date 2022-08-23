@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Post = require("../models/post");
+const Notification = require("../models/notifications");
 
 exports.setAdmin = (req, res, next) => {
   User.findOne({ name: req.body.name })
@@ -23,7 +24,11 @@ exports.deleteUser = (req, res, next) => {
       Post.deleteMany({ author: req.body.name })
         .then(() => {
           Post.updateMany({ $pull: { comments: { author: req.body.name } } })
-            .then((result) => res.status(200).json({ message: "User Delete" }))
+            .then((result) => {
+              Notification.deleteMany({ sender: req.body.name }).then(() =>
+                res.status(200).json({ message: "User Delete" })
+              );
+            })
             .catch((error) => res.status(400).json({ error: error }));
         })
         .catch((error) => console.log(error));

@@ -138,12 +138,20 @@ function Global(props) {
                     <img
                       alt={item.name + " Cover"}
                       src={burl + item.cover}
+                      onError={(e) => (
+                        (e.target.onError = null),
+                        (e.target.src = burl + `/images/default-cover.jpg`)
+                      )}
                     ></img>
                   </div>
                   <div className="searchResult--item--avatar">
                     <img
                       alt={item.name + " Avatar"}
                       src={burl + item.avatar}
+                      onError={(e) => (
+                        (e.target.onError = null),
+                        (e.target.src = burl + `/images/default-avatar.png`)
+                      )}
                     ></img>
                   </div>
                   <div className="searchResult--item--infos">

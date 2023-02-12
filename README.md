@@ -1,41 +1,59 @@
-# C'est quoi Groupomania ?
+<p align="center"><img height="200px" src="https://weeking.fr/images/icon-above-font-dec.png"></img></p>
 
-Groupomania est un réseau social d'entreprise réaliser dans le cadre d'une formation che OpenClassRooms
+<br>
 
-## Technologies Utilisées
+# Groupomania
+Last Project for **OpenClassrooms Developer Web Formation**
 
-### `React`
+<br>
 
-### `Socket.IO`
+# Assignment
+Create a corporate social network
 
-### `NodeJS`
+<br>
 
-### `MongoDB`
+# Features
+> - Signup / Signin
+> - View/Edit Profil
+> - View all Posts
+> - Like/Dislike/Comment Post/Comment
+> - Create/Update/Delete Post/Comment
+> - Search user
+> - Admin system (Update/Delete User/Post/Comment)
+> - Live Notification System
 
-## Démarrer le projet
+<br>
 
-\
-Cloner le projet avec :
+# Languages Used
+> React for frontend
+>
+> Socket.IO for live notification system
+>
+> NodeJS for backend
+>
+> MongoDB for database
+
+<br>
+
+# Demonstration
+You can't download a project. (you need MongoDB start, the database is automatically create.)
 
 ### `git clone`
 
-Déplacer vous dans le dossier cloner et installer les dépendances avec :
+Go to project folder
 
 ### `npm install`
 
-Déplacer vous ensuite dans le dossier backend et installer les dépendances avec :
+Go to backend folder
 
 ### `npm install`
 
-\
-En étant dans le dossier backend taper la commande :
+Run a backend
 
 ### `npm start`
 
-Maintenant, en étant à la racine du projet tapper la commande :
+Start a frontend
 
 ### `npm start`
 
-Votre navigateur ouvrira automatiquement le projet (ou taper simplement dans un navigateur localhost:3001)
-
-## Enjoy!
+Open in browser localhost:3001
